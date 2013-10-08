@@ -3,7 +3,10 @@ package cz.muni.fi.pa165.deliveryservice;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -76,6 +79,7 @@ public class Delivery implements Serializable {
         this.additionalInformation = additionalInformation;
     }
 
+    @Enumerated(EnumType.STRING)
     public DeliveryStatus getStatus() {
         return status;
     }
@@ -84,7 +88,7 @@ public class Delivery implements Serializable {
         this.status = status;
     }
 
-    @OneToMany(mappedBy = "delivery")
+    @OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL)
     public List<DeliveryItem> getItems() {
         return items;
     }
