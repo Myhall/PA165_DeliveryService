@@ -15,12 +15,28 @@ import java.util.List;
  */
 public interface CourierDAO {
 
+    /**
+     * Creates courier in a database
+     * @param courier - courier object to be persisted 
+     */
     void createCourier(Courier courier);
 
+    /**
+     * Removes courier from a database
+     * @param courier - courier object to be removed
+     */
     void deleteCourier(Courier courier);
 
+    /**
+     * Updates courier object
+     * @param courier - courier object to be updated
+     */
     void updateCourier(Courier courier);
 
+    /**
+     * Get all existing couriers
+     * @return list of all courier objects
+     */
     List<Courier> getAllCouriers();
 
 }

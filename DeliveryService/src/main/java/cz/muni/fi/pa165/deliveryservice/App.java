@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.deliveryservice;
 
+import cz.muni.fi.pa165.deliveryservice.dao.CourierDAO;
+import cz.muni.fi.pa165.deliveryservice.dao.jpa.JPACourierDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -18,6 +20,14 @@ public class App {
         EntityManager em = emf.createEntityManager();
 
         Courier courier = new Courier("Jan", "Vorcak", "vorcak@gmail.com");
+        CourierDAO courierDAO = new JPACourierDAO(em);
+        courierDAO.createCourier(courier);
+        
+        courier.setFirstName("Peter");
+        
+        courierDAO.updateCourier(courier);
+        
+        
         Delivery delivery = new Delivery();
         
         DeliveryItem item = new DeliveryItem();
@@ -29,7 +39,7 @@ public class App {
 
         em.getTransaction().begin();
 
-        em.persist(courier);
+       
         em.persist(delivery);
 
         em.getTransaction().commit();
@@ -40,6 +50,10 @@ public class App {
         courier.deliver(delivery);
 
         em.getTransaction().commit();
+        
+        for(Courier c : courierDAO.getAllCouriers()) {
+            System.out.println(c);
+        }
 
     }
 }

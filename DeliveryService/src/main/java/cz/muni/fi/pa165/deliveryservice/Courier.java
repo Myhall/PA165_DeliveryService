@@ -10,8 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 /**
- *
- * @author
+ * Courier entity class
+ * @author Jan Vorcak
  */
 @Entity
 public class Courier implements Serializable {
@@ -123,5 +123,10 @@ public class Courier implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Courier{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + '}';
     }
 }
