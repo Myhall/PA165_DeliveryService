@@ -22,10 +22,10 @@ public class JPACustomerDAO implements CustomerDAO {
 
     public void createCustomer(Customer customer) {
         if (customer == null) {
-            throw new NullPointerException("customer is null");
+            throw new IllegalArgumentException("customer is null");
         }
         if (customer.getId() != null) {
-            throw new NullPointerException("customer.id is not null");
+            throw new IllegalArgumentException("customer.id is not null");
         }
         em.getTransaction().begin();
         em.persist(customer);
@@ -34,10 +34,10 @@ public class JPACustomerDAO implements CustomerDAO {
 
     public void deleteCustomer(Customer customer) {
         if (customer == null) {
-            throw new NullPointerException("customer is null");
+            throw new IllegalArgumentException("customer is null");
         }
         if (customer.getId() == null) {
-            throw new NullPointerException("customer.id is null");
+            throw new IllegalArgumentException("customer.id is null");
         }
         Customer c = em.find(Customer.class, customer.getId());
         if (c != null) {
@@ -49,10 +49,10 @@ public class JPACustomerDAO implements CustomerDAO {
 
     public void updateCustomer(Customer customer) {
         if (customer == null) {
-            throw new NullPointerException("customer is null");
+            throw new IllegalArgumentException("customer is null");
         }
         if (customer.getId() == null) {
-            throw new NullPointerException("customer.id is null");
+            throw new IllegalArgumentException("customer.id is null");
         }
         em.getTransaction().begin();
         em.merge(customer);
