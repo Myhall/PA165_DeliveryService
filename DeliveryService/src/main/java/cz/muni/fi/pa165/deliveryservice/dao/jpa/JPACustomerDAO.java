@@ -4,13 +4,12 @@ import cz.muni.fi.pa165.deliveryservice.Customer;
 import cz.muni.fi.pa165.deliveryservice.dao.CustomerDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 /**
  * DAO implementation for Customer entity
  *
- * @author Bufo
+ * @author Tomáš Frkáň
  */
 public class JPACustomerDAO implements CustomerDAO {
 

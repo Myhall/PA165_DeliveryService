@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 
 /**
  * Customer entity class 
- * @author Bufo
+ * @author Tomáš Frkáň
  */
 @Entity
 public class Customer implements Serializable {
@@ -22,6 +22,9 @@ public class Customer implements Serializable {
     private String telephoneNumber;
     private Long id;
 
+    public Customer() {
+    }
+    
     public Customer(String firstName, String lastName, String email, 
             String address, String telephoneNumber){
         this.firstName=firstName;
@@ -110,17 +113,4 @@ public class Customer implements Serializable {
         }
         return true;
     }
-    
-    /*
-     * TODO
-     * Create delivery
-     * @throws
-     * @return
-     */
-    public boolean createDelivery(){
-        Delivery delivery = new Delivery();
-        //set delivery items
-        delivery.setStatus(DeliveryStatus.CREATED);
-    return true;
-    } 
 }
