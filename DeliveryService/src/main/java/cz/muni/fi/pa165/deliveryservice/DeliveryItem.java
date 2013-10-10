@@ -11,12 +11,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author Filip Volner <volner@mail.muni.cz>
  */
 @Entity
+@Table(name="delivery_items")
 public class DeliveryItem implements Serializable {
     private Delivery delivery;
     private String name;
