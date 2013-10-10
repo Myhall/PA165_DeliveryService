@@ -9,8 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 /**
- *
- * @author Tomáš Frkáň
+ * Customer entity class 
+ * @author Bufo
  */
 @Entity
 public class Customer implements Serializable {
@@ -115,9 +115,12 @@ public class Customer implements Serializable {
      * TODO
      * Create delivery
      * @throws
+     * @return
      */
     public boolean createDelivery(){
         Delivery delivery = new Delivery();
+        //set delivery items
+        delivery.setStatus(DeliveryStatus.CREATED);
     return true;
     } 
 }
