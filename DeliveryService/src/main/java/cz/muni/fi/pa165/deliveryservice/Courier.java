@@ -22,6 +22,9 @@ public class Courier implements Serializable {
     private String email;
     private List<Delivery> deliveries;
 
+    public Courier() {
+    }
+    
     public Courier(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
