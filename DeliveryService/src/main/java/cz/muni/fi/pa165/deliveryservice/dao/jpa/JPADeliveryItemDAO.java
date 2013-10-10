@@ -4,10 +4,8 @@
  */
 package cz.muni.fi.pa165.deliveryservice.dao.jpa;
 
-import cz.muni.fi.pa165.deliveryservice.Delivery;
 import cz.muni.fi.pa165.deliveryservice.DeliveryItem;
 import cz.muni.fi.pa165.deliveryservice.dao.DeliveryItemDAO;
-import java.util.List;
 import javax.persistence.EntityManager;
 
 /**
@@ -24,17 +22,26 @@ public class JPADeliveryItemDAO implements DeliveryItemDAO {
     }        
 
     public void createDeliveryItem(DeliveryItem deliveryItem) {
-        if (deliveryItem == null || deliveryItem.getId() != null) {
-            throw new IllegalArgumentException("Delivery item is null or is already present in DB.");
+        if (deliveryItem == null) {
+            throw new NullPointerException("Delivery item is null.");
         }
+        
+        if (deliveryItem.getId() != null) {
+            throw new IllegalArgumentException("Delivery item is already present in DB.");
+        }
+        
         em.getTransaction().begin();
         em.persist(deliveryItem);
         em.getTransaction().commit();
     }
 
     public void deleteDeliveryItem(DeliveryItem deliveryItem) {
-        if (deliveryItem == null || deliveryItem.getId() == null) {
-            throw new IllegalArgumentException("Delivery item is null or has null ID.");
+        if (deliveryItem == null) {
+            throw new NullPointerException("Delivery item is null.");
+        }
+        
+        if (deliveryItem.getId() == null) {
+            throw new NullPointerException("Delivery item ID is null.");
         }
         DeliveryItem toRemove = em.find(DeliveryItem.class, deliveryItem.getId());
         if (toRemove != null) {
@@ -45,29 +52,20 @@ public class JPADeliveryItemDAO implements DeliveryItemDAO {
     }
 
     public void updateDeliveryItem(DeliveryItem deliveryItem) {
-        if (deliveryItem == null || deliveryItem.getId() == null) {
-            throw new IllegalArgumentException("Delivery item is null or has null ID.");
+        if (deliveryItem == null) {
+            throw new NullPointerException("Delivery item is null.");
+        }
+        
+        if (deliveryItem.getId() == null) {
+            throw new NullPointerException("Delivery item ID is null.");
         }
         
         if (em.find(DeliveryItem.class, deliveryItem.getId()) == null) {
-            throw new IllegalArgumentException("Delivery item was not found in DB.");
+            throw new NullPointerException("Delivery item was not found in DB."); //NullPointer or IllegalArgument?
         }
         
         em.getTransaction().begin();
         em.merge(deliveryItem);
         em.getTransaction().commit();
-    }
-
-    public List<DeliveryItem> getDeliveryItemsByDelivery(Delivery delivery) {
-        if(delivery == null || delivery.getId() == null) {
-            throw new IllegalArgumentException("Delivery is null or delivery id is null.");
-        }                
-        
-        Delivery result = em.find(Delivery.class, delivery.getId());
-        if (result == null) {
-            throw new IllegalArgumentException("Delivery is not in DB.");
-        }
-        
-        return result.getItems();
     }
 }
