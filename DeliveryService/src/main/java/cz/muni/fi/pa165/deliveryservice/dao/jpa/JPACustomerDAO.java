@@ -14,7 +14,7 @@ import javax.persistence.Query;
  */
 public class JPACustomerDAO implements CustomerDAO {
 
-    @PersistenceContext
+    //@PersistenceContext
     private EntityManager em;
 
     public JPACustomerDAO(EntityManager em) {
@@ -41,9 +41,11 @@ public class JPACustomerDAO implements CustomerDAO {
             throw new IllegalArgumentException("customer.id is null");
         }
         Customer c = em.find(Customer.class, customer.getId());
-        em.getTransaction().begin();
-        em.remove(c);
-        em.getTransaction().commit();
+        if (c != null) {
+            em.getTransaction().begin();
+            em.remove(c);
+            em.getTransaction().commit();
+        }
     }
 
     public void updateCustomer(Customer customer) {
