@@ -33,4 +33,10 @@ public interface CustomerDAO {
      * @return List<Customer> list of all customers.
      */
     List<Customer> getAllCustomers();
+    /*
+     * Returns specific customer by given id from database.
+     * @param id Customer's id
+     * @return Customer with given id
+     */
+    Customer findCustomer(Long id);
 }
