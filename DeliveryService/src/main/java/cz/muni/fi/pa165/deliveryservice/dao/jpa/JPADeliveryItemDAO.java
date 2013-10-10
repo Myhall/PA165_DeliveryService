@@ -9,7 +9,6 @@ import cz.muni.fi.pa165.deliveryservice.DeliveryItem;
 import cz.muni.fi.pa165.deliveryservice.dao.DeliveryItemDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 /**
  * JPA implementation of DeliveryItemDAO interface.
@@ -18,8 +17,11 @@ import javax.persistence.PersistenceContext;
  */
 public class JPADeliveryItemDAO implements DeliveryItemDAO {
 
-    @PersistenceContext
-    EntityManager em;
+    private EntityManager em;
+
+    public JPADeliveryItemDAO(EntityManager em) {
+        this.em = em;
+    }        
 
     public void createDeliveryItem(DeliveryItem deliveryItem) {
         if (deliveryItem == null || deliveryItem.getId() != null) {
