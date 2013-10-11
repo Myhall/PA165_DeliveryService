@@ -34,21 +34,18 @@ public class JPACustomerDAO implements CustomerDAO {
         if (customer.getId() == null) {
             throw new IllegalStateException("customer.id is null");
         }
-        
+
         Customer c = em.find(Customer.class, customer.getId());
-        if(c!=null){
-        em.remove(c);
+        if (c != null) {
+            em.remove(c);
         }
     }
 
-    public void updateCustomer(Customer customer) {
+    public Customer updateCustomer(Customer customer) {
         if (customer == null) {
             throw new NullPointerException("customer is null");
         }
-         if (em.find(Customer.class, customer.getId()) == null) {
-            throw new NullPointerException("customer was not found in DB."); 
-        }
-        customer=em.merge(customer);
+        return em.merge(customer);
     }
 
     public List<Customer> getAllCustomers() {

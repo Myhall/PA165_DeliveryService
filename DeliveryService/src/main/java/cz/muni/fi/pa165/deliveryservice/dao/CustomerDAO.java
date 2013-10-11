@@ -27,16 +27,16 @@ public interface CustomerDAO {
      * Updates customer in database.
      * @param customer Customer to update from database.
      * @throws NullPointerException if customer is null.
-     * @throws NullPointerException if cusomer was not found in db.
+     * @return Customer Customer to update
      */
-    void updateCustomer(Customer customer);
+    Customer updateCustomer(Customer customer);
     /*
      * Returns list of all customers.
      * @return List<Customer> list of all customers.
      */
     List<Customer> getAllCustomers();
     /*
-     * Returns specific customer by given id from db.
+     * Returns specific customer by given id from database.
      * @param id Customer's id
      * @return Customer with given id
      * @throws NullPointerException id is null
