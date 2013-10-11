@@ -80,14 +80,6 @@ public class JPACourierDAOTest {
     @Test(expected = NullPointerException.class)
     public void testPassingNullToUpdateCourier()
     {
-//        Courier c = CourierTestBase.getTestCourierInstance("");
-//        
-//        em.getTransaction().begin();
-//        dao.createCourier(c);
-//        em.getTransaction().commit();
-//        
-//        c = null;
-        
         em.getTransaction().begin();
         dao.updateCourier(null);
         em.getTransaction().commit();
@@ -98,7 +90,7 @@ public class JPACourierDAOTest {
     {
         Courier c = getTestCourierInstance("");
         em.getTransaction().begin();
-        dao.updateCourier(c);
+        c = dao.updateCourier(c);
         em.getTransaction().commit();
         
         Courier fromDB = em.find(Courier.class, c.getId());
