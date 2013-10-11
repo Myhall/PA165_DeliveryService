@@ -47,7 +47,7 @@ public class JPADeliveryItemDAO implements DeliveryItemDAO {
         
         DeliveryItem toRemove = em.find(DeliveryItem.class, deliveryItem.getId());
         if (toRemove != null) {            
-            em.remove(em);            
+            em.remove(deliveryItem);            
         }
     }
 
