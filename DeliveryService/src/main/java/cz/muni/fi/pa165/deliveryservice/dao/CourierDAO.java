@@ -6,6 +6,7 @@
 package cz.muni.fi.pa165.deliveryservice.dao;
 
 import cz.muni.fi.pa165.deliveryservice.Courier;
+import cz.muni.fi.pa165.deliveryservice.Customer;
 import java.util.List;
 
 /**
@@ -38,5 +39,12 @@ public interface CourierDAO {
      * @return list of all courier objects
      */
     List<Courier> getAllCouriers();
-
+    
+    /*
+     * Returns specific Courier by id from database.
+     * @param id Courier's id
+     * @return Courier with given id
+     * @throws NullPointerException id is null
+     */
+    Courier findCourier(Long id);
 }

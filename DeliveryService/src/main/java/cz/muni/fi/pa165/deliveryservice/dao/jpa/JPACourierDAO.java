@@ -7,6 +7,7 @@
 package cz.muni.fi.pa165.deliveryservice.dao.jpa;
 
 import cz.muni.fi.pa165.deliveryservice.Courier;
+import cz.muni.fi.pa165.deliveryservice.Customer;
 import cz.muni.fi.pa165.deliveryservice.dao.CourierDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -65,6 +66,13 @@ public class JPACourierDAO implements CourierDAO {
         CriteriaQuery<Courier> query = cb.createQuery(Courier.class);
         query.from(Courier.class);
         return em.createQuery(query).getResultList();
+    }
+
+    public Courier findCourier(Long id) {
+        if (id == null) {
+            throw new NullPointerException("ID is null.");
+        }
+        return em.find(Courier.class, id);
     }
     
 }
