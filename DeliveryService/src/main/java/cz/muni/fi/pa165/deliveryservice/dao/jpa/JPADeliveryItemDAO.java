@@ -50,16 +50,13 @@ public class JPADeliveryItemDAO implements DeliveryItemDAO {
     }
 
     @Override
-    public void updateDeliveryItem(DeliveryItem deliveryItem) {
+    public DeliveryItem updateDeliveryItem(DeliveryItem deliveryItem) {
         if (deliveryItem == null) {
             throw new NullPointerException("Delivery item is null.");
         }
-        
-        if (em.find(DeliveryItem.class, deliveryItem.getId()) == null) {
-            throw new NullPointerException("Delivery item was not found in DB."); //NullPointer or IllegalArgument?
-        }
-                
-        deliveryItem = em.merge(deliveryItem);        
+
+        return em.merge(deliveryItem);
+
     }
 
     @Override
