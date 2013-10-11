@@ -89,12 +89,13 @@ public class JPACourierDAOTest {
     @Test
     public void testDeleteCourier() {
         Courier courier = getTestCourierInstance("");
+        Courier fromDB = null;
         try {
             em.getTransaction().begin();
             dao.createCourier(courier);
             em.getTransaction().commit();
 
-            Courier fromDB = em.find(Courier.class, courier.getId());
+            fromDB = em.find(Courier.class, courier.getId());
             assertNotNull("Courier was inserted into DB",fromDB);
 
             fromDB = null;
