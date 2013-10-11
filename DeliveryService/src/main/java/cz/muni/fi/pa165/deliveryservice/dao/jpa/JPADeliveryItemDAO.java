@@ -18,6 +18,9 @@ public class JPADeliveryItemDAO implements DeliveryItemDAO {
     private EntityManager em;
 
     public JPADeliveryItemDAO(EntityManager em) {
+        if (em == null) {
+            throw new NullPointerException("Entity manager is null.");
+        }
         this.em = em;
     }        
 
@@ -29,10 +32,8 @@ public class JPADeliveryItemDAO implements DeliveryItemDAO {
         if (deliveryItem.getId() != null) {
             throw new IllegalArgumentException("Delivery item is already present in DB.");
         }
-        
-        em.getTransaction().begin();
-        em.persist(deliveryItem);
-        em.getTransaction().commit();
+                
+        em.persist(deliveryItem);        
     }
 
     public void deleteDeliveryItem(DeliveryItem deliveryItem) {
@@ -43,11 +44,10 @@ public class JPADeliveryItemDAO implements DeliveryItemDAO {
         if (deliveryItem.getId() == null) {
             throw new NullPointerException("Delivery item ID is null.");
         }
+        
         DeliveryItem toRemove = em.find(DeliveryItem.class, deliveryItem.getId());
-        if (toRemove != null) {
-            em.getTransaction().begin();
-            em.remove(em);
-            em.getTransaction().commit();
+        if (toRemove != null) {            
+            em.remove(em);            
         }
     }
 
@@ -63,9 +63,20 @@ public class JPADeliveryItemDAO implements DeliveryItemDAO {
         if (em.find(DeliveryItem.class, deliveryItem.getId()) == null) {
             throw new NullPointerException("Delivery item was not found in DB."); //NullPointer or IllegalArgument?
         }
-        
-        em.getTransaction().begin();
-        em.merge(deliveryItem);
-        em.getTransaction().commit();
+                
+        deliveryItem = em.merge(deliveryItem);        
     }
+
+    public DeliveryItem findDeliveryItem(Long id) {
+        if (id == null) {
+            throw new NullPointerException("ID is null.");
+        }
+        
+        DeliveryItem result;
+        result = em.find(DeliveryItem.class, id);
+        
+        return result;
+    }
+    
+    
 }

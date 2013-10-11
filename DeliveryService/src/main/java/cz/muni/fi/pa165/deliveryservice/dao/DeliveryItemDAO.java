@@ -41,4 +41,12 @@ public interface DeliveryItemDAO {
      */
     void updateDeliveryItem(DeliveryItem deliveryItem);
     
+    /**
+     * Find delivery item in database.
+     * 
+     * @param id ID of delivery item to be found
+     * @return delivery item with specified ID from DB or null if no such item is found
+     * @throws NullPointerException id is null
+     */
+    DeliveryItem findDeliveryItem(Long id);
 }
