@@ -28,6 +28,7 @@ public class JPADeliveryDAO implements DeliveryDAO{
     }
 
     
+    @Override
     public void createDelivery(Delivery delivery) {
         if (delivery == null) {
             throw new NullPointerException("delivery cannot be null");
@@ -35,6 +36,7 @@ public class JPADeliveryDAO implements DeliveryDAO{
         em.persist(delivery);
     }
 
+    @Override
     public void deleteDelivery(Delivery delivery) {
         if (delivery == null) {
             throw new NullPointerException("delivery cannot be null");
@@ -48,13 +50,15 @@ public class JPADeliveryDAO implements DeliveryDAO{
         }
     }
 
-    public void updateDelivery(Delivery delivery) {
+    @Override
+    public Delivery updateDelivery(Delivery delivery) {
         if (delivery == null) {
             throw new NullPointerException("delivery cannot be null");
         }
-        delivery = em.merge(delivery);
+        return em.merge(delivery);
     }
 
+    @Override
     public Delivery findDelivery(Long id) {
         if (id == null) {
             throw new NullPointerException("id cannot be null");
@@ -64,14 +68,17 @@ public class JPADeliveryDAO implements DeliveryDAO{
     
     
 
+    @Override
     public List<Delivery> getAllDeliveries() {
         return em.createQuery("SELECT d FROM Delivery d").getResultList();
     }
 
+    @Override
     public List<Delivery> getDeliveriesByStatus(DeliveryStatus status) {
         return em.createQuery("SELECT d FROM Delivery d WHERE d.status = :status").setParameter("status", status).getResultList();
     }
 
+    @Override
     public List<Delivery> getDeliveriesByCustomer(Customer customer) {
         return em.createQuery("SELECT d FROM Delivery d WHERE d.customer = :customer").setParameter("customer", customer).getResultList();
     }
