@@ -29,15 +29,14 @@ import org.junit.BeforeClass;
 public class JPADeliveryItemDAOTest {
 
     private DeliveryItemDAO deliveryItemDAO;
-    private EntityManagerFactory emf;
+    private static EntityManagerFactory emf;
     private EntityManager em;
-    private Delivery delivery;
 
     public JPADeliveryItemDAOTest() {
     }
 
     @BeforeClass
-    public void setUpClass() {
+    public static void setUpClass() {
         emf = Persistence.createEntityManagerFactory("DeliveryServicePu");
     }
 
@@ -48,7 +47,7 @@ public class JPADeliveryItemDAOTest {
     }
 
     @AfterClass
-    public void tearDownClass() {
+    public static void tearDownClass() {
         emf.close();
     }
 
