@@ -4,7 +4,6 @@
  */
 package cz.muni.fi.pa165.deliveryservice.dao.jpa;
 
-import cz.muni.fi.pa165.deliveryservice.Delivery;
 import cz.muni.fi.pa165.deliveryservice.DeliveryItem;
 import cz.muni.fi.pa165.deliveryservice.dao.DeliveryItemDAO;
 import java.math.BigDecimal;
@@ -73,6 +72,9 @@ public class JPADeliveryItemDAOTest {
 //                && dbItem.getName().equals(actual.getName())
 //                && dbItem.getWeight() == actual.getWeight();
 //    }
+    /*
+     * Adding null delivery item to DB - test
+     */
     @Test
     public void testCreateNullDeliveryItem() {
         DeliveryItem deliveryItem = null;
@@ -86,6 +88,9 @@ public class JPADeliveryItemDAOTest {
         fail("Inserting null delivery item into DB should fail with NullPointerException.");
     }
 
+    /**
+     * Adding delivery item to DB - test
+     */
     @Test
     public void testCreateDeliveryItem() {
         DeliveryItem deliveryItem = createTestDeliveryItem();
@@ -101,6 +106,9 @@ public class JPADeliveryItemDAOTest {
         assertEquals(deliveryItemFromDB, deliveryItem);
     }
 
+    /**
+     * Deleting null delivery item from DB - test
+     */
     @Test
     public void testDeleteNullDeliveryItem() {
         DeliveryItem deliveryItem = null;
@@ -114,6 +122,9 @@ public class JPADeliveryItemDAOTest {
         fail("Deleting null delivery item from DB should fail with NullPointerException.");
     }
 
+    /**
+     * Deleting delivery item with null ID from DB - test
+     */
     @Test
     public void testDeleteDeliveryItemWithNullID() {
         DeliveryItem deliveryItem = createTestDeliveryItem();
@@ -127,6 +138,9 @@ public class JPADeliveryItemDAOTest {
         fail("Deleting delivery item with null ID should throw an exception.");
     }
 
+    /**
+     * Deleting delivery item from DB - test
+     */
     @Test
     public void testDeleteDeliveryItem() {
         DeliveryItem deliveryItem = createTestDeliveryItem();
@@ -153,6 +167,9 @@ public class JPADeliveryItemDAOTest {
 
     }
 
+    /**
+     * Updating delivery item with null to DB - test
+     */
     @Test
     public void testUpdateNullDeliveryItem() {
         DeliveryItem deliveryItem = null;
@@ -166,6 +183,9 @@ public class JPADeliveryItemDAOTest {
         fail("Updating null delivery item should fail with NullPointerException.");
     }
 
+    /**
+     * Updating delivery item with null ID to DB - test
+     */
     @Test
     public void testUpdateDeliveryItemWithNullID() {
         DeliveryItem deliveryItem = createTestDeliveryItem();
@@ -179,6 +199,9 @@ public class JPADeliveryItemDAOTest {
         fail("Updating delivery item with null ID should throw an exception.");
     }
 
+    /**
+     * Updating delivery item to DB - test
+     */
     @Test
     public void testUpdateDeliveryItem() {
         DeliveryItem deliveryItem = createTestDeliveryItem();
@@ -203,6 +226,9 @@ public class JPADeliveryItemDAOTest {
         assertEquals(deliveryItemFromDB, deliveryItem);
     }
 
+    /**
+     * Locates delivery item in DB - test
+     */
     @Test
     public void testFindDeliveryItem() {
         DeliveryItem deliveryItem = createTestDeliveryItem();
@@ -223,7 +249,6 @@ public class JPADeliveryItemDAOTest {
 
         assertNull("Should not find delivery item by his ID after removing him from DB.",
                 deliveryItemDAO.findDeliveryItem(deliveryItem.getId()));
-
 
     }
 }
