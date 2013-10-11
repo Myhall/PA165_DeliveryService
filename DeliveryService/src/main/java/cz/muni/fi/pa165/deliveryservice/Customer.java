@@ -108,9 +108,10 @@ public class Customer implements Serializable {
             return false;
         }
         final Customer other = (Customer) obj;
-        if ((this.email == null) ? (other.email != null) : !this.email.equals(other.email)) {
+        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }
         return true;
     }
+
 }

@@ -25,7 +25,7 @@ public class JPACustomerDAO implements CustomerDAO {
             throw new NullPointerException("customer is null");
         }
         if (customer.getId() != null) {
-            throw new NullPointerException("customer.id is not null");
+            throw new IllegalArgumentException("customer.id is not null");
         }
         em.persist(customer);
     }
@@ -37,9 +37,10 @@ public class JPACustomerDAO implements CustomerDAO {
         if (customer.getId() == null) {
             throw new NullPointerException("customer.id is null");
         }
+        
         Customer c = em.find(Customer.class, customer.getId());
-        if (c != null) {
-            em.remove(c);
+        if(c!=null){
+        em.remove(c);
         }
     }
 
@@ -50,7 +51,7 @@ public class JPACustomerDAO implements CustomerDAO {
         if (customer.getId() == null) {
             throw new NullPointerException("customer.id is null");
         }
-        em.merge(customer);
+        customer=em.merge(customer);
     }
 
     public List<Customer> getAllCustomers() {
@@ -61,6 +62,9 @@ public class JPACustomerDAO implements CustomerDAO {
     }
 
     public Customer findCustomer(Long id) {
+        if (id == null) {
+            throw new NullPointerException("ID is null.");
+        }
         return em.find(Customer.class, id);
     }
 }

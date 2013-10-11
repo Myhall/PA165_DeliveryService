@@ -13,19 +13,22 @@ public interface CustomerDAO {
     /*
      * Stores new customer into db.
      * @param customer New customer to add into db.
-     * @throws IllegalArgumentException if customer is null.
+     * @throws NullPointerException if customer is null.
+     * @throws IllegalArgumentException if customer's id attribute is not null.
      */
     void createCustomer(Customer customer);
     /*
      * Deletes customer from db.
      * @param customer Customer to remove from db.
-     * @throws IllegalArgumentException if customer is null.
+     * @throws NullPointerException if customer is null.
+     * @throws NullPointerException if customer's id attribute is null.
      */
     void deleteCustomer(Customer customer);
     /*
      * Updates customer in database.
      * @param customer Customer to update from database.
-     * @throws IllegalArgumentException if customer is null.
+     * @throws NullPointerException if customer is null.
+     * @throws NullPointerException if customer's id attribute is null.
      */
     void updateCustomer(Customer customer);
     /*
@@ -37,6 +40,7 @@ public interface CustomerDAO {
      * Returns specific customer by given id from database.
      * @param id Customer's id
      * @return Customer with given id
+     * @throws NullPointerException id is null
      */
     Customer findCustomer(Long id);
 }
