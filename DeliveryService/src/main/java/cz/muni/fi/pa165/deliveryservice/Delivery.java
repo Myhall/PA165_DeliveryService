@@ -33,6 +33,17 @@ public class Delivery implements Serializable {
     private String placeFrom;
     private String placeTo;
 
+    public Delivery() {
+        this.status = DeliveryStatus.CREATED;
+    }
+
+    public Delivery(Customer customer, String placeFrom, String placeTo) {
+        this.customer = customer;
+        this.placeFrom = placeFrom;
+        this.placeTo = placeTo;
+        this.status = DeliveryStatus.CREATED;
+    }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {

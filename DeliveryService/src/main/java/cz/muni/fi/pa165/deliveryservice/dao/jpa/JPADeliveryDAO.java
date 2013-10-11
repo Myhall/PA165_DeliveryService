@@ -66,14 +66,14 @@ public class JPADeliveryDAO implements DeliveryDAO{
     }
 
     public List<Delivery> getDeliveriesByStatus(DeliveryStatus status) {
-        return em.createQuery("SELECT d FROM Delivery d WHERE d.status = :status;").setParameter("status", status).getResultList();
+        return em.createQuery("SELECT d FROM Delivery d WHERE d.status = :status").setParameter("status", status).getResultList();
     }
 
     public List<Delivery> getDeliveriesByCustomer(Customer customer) {
-        return em.createQuery("SELECT d FROM Delivery d WHERE d.customer = :customer;").setParameter("customer", customer).getResultList();
+        return em.createQuery("SELECT d FROM Delivery d WHERE d.customer = :customer").setParameter("customer", customer).getResultList();
     }
 
     public List<Delivery> getDeliveriesByCourier(Courier courier) {
-        return em.createQuery("SELECT d FROM Delivery d WHERE d.status = :courier;").setParameter("courier", courier).getResultList();
+        return em.createQuery("SELECT d FROM Delivery d WHERE d.status = :courier").setParameter("courier", courier).getResultList();
     }    
 }
