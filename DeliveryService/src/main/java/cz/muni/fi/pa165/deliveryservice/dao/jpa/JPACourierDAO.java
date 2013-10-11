@@ -31,10 +31,11 @@ public class JPACourierDAO implements CourierDAO {
         if(courier == null) {
             throw new NullPointerException("Courier argument can't be null");
         }
+        if(courier.getId() != null) {
+            throw new IllegalStateException("Trying to create courier with id assigned");
+        }
         
-        em.getTransaction().begin();
         em.persist(courier);
-        em.getTransaction().commit();
     }
 
     public void deleteCourier(Courier courier) {
@@ -42,9 +43,11 @@ public class JPACourierDAO implements CourierDAO {
             throw new NullPointerException("Courier argument can't be null");
         }
         
-        em.getTransaction().begin();
+        if(courier.getId() == null) {
+            throw new IllegalStateException("Trying to delete courier with no id assigned");
+        }
+        
         em.remove(courier);
-        em.getTransaction().commit();
     }
 
     public void updateCourier(Courier courier) {
@@ -52,9 +55,7 @@ public class JPACourierDAO implements CourierDAO {
             throw new NullPointerException("Courier argument can't be null");
         }
         
-        em.getTransaction().begin();
         em.merge(courier);
-        em.getTransaction().commit();
     }
 
     public List<Courier> getAllCouriers() {
