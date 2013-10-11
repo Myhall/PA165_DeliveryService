@@ -62,7 +62,7 @@ public class JPADeliveryDAO implements DeliveryDAO{
     
 
     public List<Delivery> getAllDeliveries() {
-        return em.createQuery("SELECT d FROM Delivery d;").getResultList();
+        return em.createQuery("SELECT d FROM Delivery d").getResultList();
     }
 
     public List<Delivery> getDeliveriesByStatus(DeliveryStatus status) {
