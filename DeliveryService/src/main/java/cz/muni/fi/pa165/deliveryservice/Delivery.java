@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.deliveryservice;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -35,6 +36,7 @@ public class Delivery implements Serializable {
 
     public Delivery() {
         this.status = DeliveryStatus.CREATED;
+        this.items = new ArrayList<>();
     }
 
     public Delivery(Customer customer, String placeFrom, String placeTo) {
@@ -42,6 +44,7 @@ public class Delivery implements Serializable {
         this.placeFrom = placeFrom;
         this.placeTo = placeTo;
         this.status = DeliveryStatus.CREATED;
+        this.items = new ArrayList<>();
     }
     
     @Id
@@ -122,6 +125,14 @@ public class Delivery implements Serializable {
 
     public void setPlaceTo(String placeTo) {
         this.placeTo = placeTo;
+    }
+    
+    public void addDeliveryItem(DeliveryItem item)
+    {
+        if (item == null) {
+            throw new NullPointerException("item cannot be null");
+        }
+        this.items.add(item);
     }
 
     @Override
