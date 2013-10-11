@@ -39,6 +39,9 @@ public class JPADeliveryDAO implements DeliveryDAO{
         if (delivery == null) {
             throw new NullPointerException("delivery cannot be null");
         }
+        if (delivery.getId() == null) {
+           throw new IllegalStateException("Trying to remove unpersisted object");
+        }
         Delivery toRemove = em.find(Delivery.class, delivery.getId());
         if (toRemove != null) {
             em.remove(toRemove);
