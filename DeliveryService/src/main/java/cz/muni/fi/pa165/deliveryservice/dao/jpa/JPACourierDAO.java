@@ -47,15 +47,17 @@ public class JPACourierDAO implements CourierDAO {
             throw new IllegalStateException("Trying to delete courier with no id assigned");
         }
         
-        em.remove(courier);
+        Courier toRemove = em.find(Courier.class, courier.getId());
+        
+        em.remove(toRemove);
     }
 
-    public void updateCourier(Courier courier) {
+    public Courier updateCourier(Courier courier) {
         if(courier == null) {
             throw new NullPointerException("Courier argument can't be null");
         }
         
-        em.merge(courier);
+        return em.merge(courier);
     }
 
     public List<Courier> getAllCouriers() {
