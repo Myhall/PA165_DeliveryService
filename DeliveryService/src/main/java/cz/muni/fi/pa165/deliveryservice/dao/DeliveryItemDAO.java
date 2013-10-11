@@ -17,7 +17,6 @@ public interface DeliveryItemDAO {
      * Store new delivery item to database. ID is generated automatically.
      * 
      * @throws NullPointerException deliveryItem is null
-     * @throws IllegalArgumentException id attribute of deliveryItem is NOT null
      * @param deliveryItem New delivery item to be stored
      */
     void createDeliveryItem(DeliveryItem deliveryItem);
@@ -26,7 +25,7 @@ public interface DeliveryItemDAO {
      * Remove delivery item from database.
      * 
      * @throws NullPointerException deliveryItem is null
-     * @throws NullPointerException id attribute of deliveryItem is null
+     * @throws IllegalStateException id attribute of deliveryItem is null
      * @param deliveryItem Delivery item to be removed
      */
     void deleteDeliveryItem(DeliveryItem deliveryItem);
@@ -36,7 +35,6 @@ public interface DeliveryItemDAO {
      * 
      * @param deliveryItem Delivery item to be updated in database
      * @throws NullPointerException deliveryItem is null
-     * @throws NullPointerException id attribute of deliveryItem is null
      * @throws NullPointerException delivery item was not found in database
      */
     void updateDeliveryItem(DeliveryItem deliveryItem);
