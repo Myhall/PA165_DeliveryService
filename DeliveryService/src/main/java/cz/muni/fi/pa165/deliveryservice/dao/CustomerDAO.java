@@ -14,21 +14,19 @@ public interface CustomerDAO {
      * Stores new customer into db.
      * @param customer New customer to add into db.
      * @throws NullPointerException if customer is null.
-     * @throws IllegalArgumentException if customer's id attribute is not null.
      */
     void createCustomer(Customer customer);
     /*
      * Deletes customer from db.
      * @param customer Customer to remove from db.
      * @throws NullPointerException if customer is null.
-     * @throws NullPointerException if customer's id attribute is null.
+     * @throws IllegalStateException if customer's id attribute is null.
      */
     void deleteCustomer(Customer customer);
     /*
      * Updates customer in database.
      * @param customer Customer to update from database.
      * @throws NullPointerException if customer is null.
-     * @throws NullPointerException if customer's id attribute is null.
      */
     void updateCustomer(Customer customer);
     /*
