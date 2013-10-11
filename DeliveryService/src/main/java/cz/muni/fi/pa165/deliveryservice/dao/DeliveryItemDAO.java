@@ -35,9 +35,8 @@ public interface DeliveryItemDAO {
      * 
      * @param deliveryItem Delivery item to be updated in database
      * @throws NullPointerException deliveryItem is null
-     * @throws NullPointerException delivery item was not found in database
      */
-    void updateDeliveryItem(DeliveryItem deliveryItem);
+    DeliveryItem updateDeliveryItem(DeliveryItem deliveryItem);
     
     /**
      * Find delivery item in database.
