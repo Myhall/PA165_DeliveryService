@@ -24,25 +24,23 @@ public class JPADeliveryItemDAO implements DeliveryItemDAO {
         this.em = em;
     }        
 
+    @Override
     public void createDeliveryItem(DeliveryItem deliveryItem) {
         if (deliveryItem == null) {
             throw new NullPointerException("Delivery item is null.");
-        }
-        
-        if (deliveryItem.getId() != null) {
-            throw new IllegalArgumentException("Delivery item is already present in DB.");
         }
                 
         em.persist(deliveryItem);        
     }
 
+    @Override
     public void deleteDeliveryItem(DeliveryItem deliveryItem) {
         if (deliveryItem == null) {
             throw new NullPointerException("Delivery item is null.");
         }
         
         if (deliveryItem.getId() == null) {
-            throw new NullPointerException("Delivery item ID is null.");
+            throw new IllegalStateException("Delivery item ID is null.");
         }
         
         DeliveryItem toRemove = em.find(DeliveryItem.class, deliveryItem.getId());
@@ -51,13 +49,10 @@ public class JPADeliveryItemDAO implements DeliveryItemDAO {
         }
     }
 
+    @Override
     public void updateDeliveryItem(DeliveryItem deliveryItem) {
         if (deliveryItem == null) {
             throw new NullPointerException("Delivery item is null.");
-        }
-        
-        if (deliveryItem.getId() == null) {
-            throw new NullPointerException("Delivery item ID is null.");
         }
         
         if (em.find(DeliveryItem.class, deliveryItem.getId()) == null) {
@@ -67,6 +62,7 @@ public class JPADeliveryItemDAO implements DeliveryItemDAO {
         deliveryItem = em.merge(deliveryItem);        
     }
 
+    @Override
     public DeliveryItem findDeliveryItem(Long id) {
         if (id == null) {
             throw new NullPointerException("ID is null.");
