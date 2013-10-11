@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 
 /**
  * Unit tests for JPACustomerDAO class.
- * 
+ *
  * @author Filip Volner <volner@mail.muni.cz>
  */
 public class JPACustomerDAOTest {
@@ -153,7 +153,7 @@ public class JPACustomerDAOTest {
             em.getTransaction().begin();
             dao.deleteCustomer(customer);
             em.getTransaction().commit();
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             fail("Deleting already removed customer should not throw an exception.");
         }
 
@@ -241,7 +241,7 @@ public class JPACustomerDAOTest {
         assertFalse("GetAllCustomers on table with 1 customer should should return a list of size 1.", customers.isEmpty());
         assertTrue("GetAllCustomers on table with 1 customer should should return a list of size 1.", customers.size() == 1);
     }
-    
+
     /**
      * Test finding customer in DB by ID.
      */
@@ -251,19 +251,19 @@ public class JPACustomerDAOTest {
         em.getTransaction().begin();
         dao.createCustomer(customer);
         em.getTransaction().commit();
-                        
-        assertNotNull("Should find customer by his ID after adding to DB.", em.find(Customer.class, customer.getId()));
-        
-        assertNull("Should not return customer by ID which is not present in DB.", em.find(Customer.class, customer.getId()+1));
-        
+
+        assertNotNull("Should find customer by his ID after adding to DB.", dao.findCustomer(customer.getId()));
+
+        assertNull("Should not return customer by ID which is not present in DB.", dao.findCustomer(customer.getId() + 1));
+
         em.getTransaction().begin();
         em.remove(customer);
         em.getTransaction().commit();
-        
-        assertNull("Should not find customer by his ID after removing him from DB.",em.find(Customer.class, customer.getId()));
-        
+
+        assertNull("Should not find customer by his ID after removing him from DB.", dao.findCustomer(customer.getId()));
+
     }
-    
+
     private Customer createTestCustomer() {
         numOfTestCustomerInstances++;
         return new Customer("FirstName", "LastName",
