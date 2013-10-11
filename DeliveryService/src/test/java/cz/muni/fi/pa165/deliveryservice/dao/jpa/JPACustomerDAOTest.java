@@ -187,9 +187,8 @@ public class JPACustomerDAOTest {
             dao.updateCustomer(notPersistedCustomer);
             em.getTransaction().commit();
         } catch (Exception e) {
-            return;
+            fail("Updating customer with null ID should not throw an exception.");
         }
-        fail("Updating customer with null ID should throw an exception.");
     }
 
     /**
