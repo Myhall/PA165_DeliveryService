@@ -82,7 +82,7 @@ public class JPADeliveryItemDAOTest {
             em.getTransaction().begin();
             deliveryItemDAO.createDeliveryItem(deliveryItem);
             em.getTransaction().commit();
-        } catch (NullPointerException ex) {
+        } catch (Exception ex) {
             return;
         }
         fail("Inserting null delivery item into DB should fail with NullPointerException.");
@@ -116,7 +116,7 @@ public class JPADeliveryItemDAOTest {
             em.getTransaction().begin();
             deliveryItemDAO.deleteDeliveryItem(deliveryItem);
             em.getTransaction().commit();
-        } catch (NullPointerException ex) {
+        } catch (Exception ex) {
             return;
         }
         fail("Deleting null delivery item from DB should fail with NullPointerException.");
@@ -132,7 +132,7 @@ public class JPADeliveryItemDAOTest {
             em.getTransaction().begin();
             deliveryItemDAO.deleteDeliveryItem(deliveryItem);
             em.getTransaction().commit();
-        } catch (NullPointerException ex) {
+        } catch (Exception ex) {
             return;
         }
         fail("Deleting delivery item with null ID should throw an exception.");
@@ -177,7 +177,7 @@ public class JPADeliveryItemDAOTest {
             em.getTransaction().begin();
             deliveryItemDAO.updateDeliveryItem(deliveryItem);
             em.getTransaction().commit();
-        } catch (NullPointerException ex) {
+        } catch (Exception ex) {
             return;
         }
         fail("Updating null delivery item should fail with NullPointerException.");
@@ -193,7 +193,7 @@ public class JPADeliveryItemDAOTest {
             em.getTransaction().begin();
             deliveryItemDAO.updateDeliveryItem(deliveryItem);
             em.getTransaction().commit();
-        } catch (NullPointerException ex) {
+        } catch (Exception ex) {
             return;
         }
         fail("Updating delivery item with null ID should throw an exception.");
