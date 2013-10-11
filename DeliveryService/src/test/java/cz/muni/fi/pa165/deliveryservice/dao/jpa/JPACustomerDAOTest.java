@@ -124,7 +124,7 @@ public class JPACustomerDAOTest {
             em.getTransaction().begin();
             dao.deleteCustomer(notPersistedCustomer);
             em.getTransaction().commit();
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             return;
         }
         fail("Deleting customer with null ID should throw an exception.");
@@ -186,7 +186,7 @@ public class JPACustomerDAOTest {
             em.getTransaction().begin();
             dao.updateCustomer(notPersistedCustomer);
             em.getTransaction().commit();
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             return;
         }
         fail("Updating customer with null ID should throw an exception.");
