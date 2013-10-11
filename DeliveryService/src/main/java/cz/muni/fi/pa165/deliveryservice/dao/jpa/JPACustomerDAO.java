@@ -45,6 +45,9 @@ public class JPACustomerDAO implements CustomerDAO {
         if (customer == null) {
             throw new NullPointerException("customer is null");
         }
+         if (em.find(Customer.class, customer.getId()) == null) {
+            throw new NullPointerException("customer was not found in DB."); 
+        }
         customer=em.merge(customer);
     }
 
