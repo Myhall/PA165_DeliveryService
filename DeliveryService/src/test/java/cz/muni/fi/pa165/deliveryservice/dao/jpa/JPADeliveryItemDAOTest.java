@@ -81,8 +81,9 @@ public class JPADeliveryItemDAOTest {
             deliveryItemDAO.createDeliveryItem(deliveryItem);
             em.getTransaction().commit();
         } catch (NullPointerException ex) {
-            fail("Inserting null delivery item into DB should fail with NullPointerException.");
+            return;
         }
+        fail("Inserting null delivery item into DB should fail with NullPointerException.");
     }
 
     @Test
@@ -108,8 +109,9 @@ public class JPADeliveryItemDAOTest {
             deliveryItemDAO.deleteDeliveryItem(deliveryItem);
             em.getTransaction().commit();
         } catch (NullPointerException ex) {
-            fail("Deleting null delivery item from DB should fail with NullPointerException.");
+            return;
         }
+        fail("Deleting null delivery item from DB should fail with NullPointerException.");
     }
 
     @Test
@@ -120,8 +122,9 @@ public class JPADeliveryItemDAOTest {
             deliveryItemDAO.deleteDeliveryItem(deliveryItem);
             em.getTransaction().commit();
         } catch (NullPointerException ex) {
-            fail("Deleting delivery item with null ID should throw an exception.");
+            return;
         }
+        fail("Deleting delivery item with null ID should throw an exception.");
     }
 
     @Test
@@ -158,8 +161,9 @@ public class JPADeliveryItemDAOTest {
             deliveryItemDAO.updateDeliveryItem(deliveryItem);
             em.getTransaction().commit();
         } catch (NullPointerException ex) {
-            fail("Updating null delivery item should fail with NullPointerException.");
+            return;
         }
+        fail("Updating null delivery item should fail with NullPointerException.");
     }
 
     @Test
@@ -170,8 +174,9 @@ public class JPADeliveryItemDAOTest {
             deliveryItemDAO.updateDeliveryItem(deliveryItem);
             em.getTransaction().commit();
         } catch (NullPointerException ex) {
-            fail("Updating delivery item with null ID should throw an exception.");
+            return;
         }
+        fail("Updating delivery item with null ID should throw an exception.");
     }
 
     @Test
