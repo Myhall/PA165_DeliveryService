@@ -31,7 +31,7 @@ public interface CourierDAO {
      * Updates courier object
      * @param courier - courier object to be updated
      */
-    void updateCourier(Courier courier);
+    Courier updateCourier(Courier courier);
 
     /**
      * Get all existing couriers
