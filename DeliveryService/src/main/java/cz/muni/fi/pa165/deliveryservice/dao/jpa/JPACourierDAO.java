@@ -7,28 +7,32 @@
 package cz.muni.fi.pa165.deliveryservice.dao.jpa;
 
 import cz.muni.fi.pa165.deliveryservice.Courier;
-import cz.muni.fi.pa165.deliveryservice.Customer;
 import cz.muni.fi.pa165.deliveryservice.dao.CourierDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * JPA implementation for Courier's DAO interface
  * @author Jan Vorcak
  */
+@Transactional
 public class JPACourierDAO implements CourierDAO {
     
+    
+    @PersistenceContext
     private EntityManager em;
 
+    public JPACourierDAO() {}
+    
     public JPACourierDAO(EntityManager em) {
         this.em = em;
     }
     
-    public void createCourier(Courier courier) {    
+    public void createCourier(Courier courier) {   
         if(courier == null) {
             throw new NullPointerException("Courier argument can't be null");
         }
@@ -74,5 +78,5 @@ public class JPACourierDAO implements CourierDAO {
         }
         return em.find(Courier.class, id);
     }
-    
+
 }

@@ -1,12 +1,12 @@
 package cz.muni.fi.pa165.deliveryservice;
 
 import cz.muni.fi.pa165.deliveryservice.dao.CourierDAO;
-import cz.muni.fi.pa165.deliveryservice.dao.jpa.JPACourierDAO;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+import org.springframework.orm.jpa.JpaTransactionManager;
 
 /**
  * Hello world!
@@ -14,46 +14,20 @@ import javax.persistence.Persistence;
  */
 public class App {
 
-    static EntityManagerFactory emf = Persistence.createEntityManagerFactory("DeliveryServicePu");
-
-    public static void main(String[] args) throws Exception {
-        EntityManager em = emf.createEntityManager();
-
-        Courier courier = new Courier("Jan", "Vorcak", "vorcak@gmail.com");
-        CourierDAO courierDAO = new JPACourierDAO(em);
-        courierDAO.createCourier(courier);
+     public static void main(String[] args) throws Exception {
+         
+        ApplicationContext context = 
+    	  new ClassPathXmlApplicationContext(new String[] {"classpath:applicationContext.xml"});
         
-        courier.setFirstName("Peter");
+        CourierDAO courierDAO = (CourierDAO)context.getBean("courierDao");
+        System.out.println(courierDAO);
+
+        courierDAO.createCourier(new Courier("first", "last", "email"));
         
-        courierDAO.updateCourier(courier);
+        System.out.println("******************");
+        System.out.println(courierDAO.getAllCouriers());
+    
         
         
-        Delivery delivery = new Delivery();
-        
-        DeliveryItem item = new DeliveryItem();
-        List<DeliveryItem> items = new ArrayList<DeliveryItem>();
-        items.add(item);
-        delivery.setItems(items);
-        
-        delivery.setStatus(DeliveryStatus.CREATED);
-
-        em.getTransaction().begin();
-
-       
-        em.persist(delivery);
-
-        em.getTransaction().commit();
-
-        em.getTransaction().begin();
-
-        courier.pickDelivery(delivery);
-        courier.deliver(delivery);
-
-        em.getTransaction().commit();
-        
-        for(Courier c : courierDAO.getAllCouriers()) {
-            System.out.println(c);
-        }
-
     }
 }
