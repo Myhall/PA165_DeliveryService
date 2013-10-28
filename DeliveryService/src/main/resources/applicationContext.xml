@@ -11,17 +11,9 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx.xsd">
  
-    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+    <import resource="springDBConfig.xml"/>
+    
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
-
-    <tx:annotation-driven transaction-manager="transactionManager" />     
-         
-    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="em"/>
-    </bean>
-    <bean id="em" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="DeliveryServicePu"/>
-    </bean>
 
     <bean id="courierDao" class="cz.muni.fi.pa165.deliveryservice.dao.jpa.JPACourierDAO" />
 
