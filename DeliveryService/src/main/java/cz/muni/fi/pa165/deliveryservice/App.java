@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.deliveryservice;
 
+import cz.muni.fi.pa165.delivery.service.CourierService;
 import cz.muni.fi.pa165.deliveryservice.dao.CourierDAO;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,15 +20,12 @@ public class App {
         ApplicationContext context = 
     	  new ClassPathXmlApplicationContext(new String[] {"classpath:applicationContext.xml"});
         
-        CourierDAO courierDAO = (CourierDAO)context.getBean("courierDao");
-        System.out.println(courierDAO);
-
-        courierDAO.createCourier(new Courier("first", "last", "email"));
+        CourierService courierService = (CourierService) context.getBean("courierService");
+        courierService.createCourier("first", "last", "email");
+        courierService.createCourier("firstName", "lastName", "email@email.com");
         
         System.out.println("******************");
-        System.out.println(courierDAO.getAllCouriers());
+        System.out.println(courierService.getAllCouriers());
     
-        
-        
     }
 }

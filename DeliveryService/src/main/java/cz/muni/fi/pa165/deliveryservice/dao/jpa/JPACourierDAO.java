@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
  * JPA implementation for Courier's DAO interface
  * @author Jan Vorcak
  */
-@Transactional
 public class JPACourierDAO implements CourierDAO {
     
     

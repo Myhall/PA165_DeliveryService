@@ -7,6 +7,7 @@
 package cz.muni.fi.pa165.delivery.service;
 
 import cz.muni.fi.pa165.deliveryservice.Courier;
+import java.util.List;
 
 /**
  *
@@ -15,5 +16,13 @@ import cz.muni.fi.pa165.deliveryservice.Courier;
 public interface CourierService {
     
     Courier createCourier(String firstName, String lastName, String email);
+    
+    void deleteCourier(Courier courier);
+    
+    Courier updateCourier(Courier courier);
+    
+    List<Courier> getAllCouriers();
+    
+    Courier findCourier(Long id);
     
 }
