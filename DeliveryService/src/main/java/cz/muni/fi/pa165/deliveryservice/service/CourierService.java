@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 
-package cz.muni.fi.pa165.delivery.service;
+package cz.muni.fi.pa165.deliveryservice.service;
 
 import cz.muni.fi.pa165.deliveryservice.Courier;
+import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
 import java.util.List;
 
 /**
@@ -21,8 +22,8 @@ public interface CourierService {
     
     Courier updateCourier(Courier courier);
     
-    List<Courier> getAllCouriers();
+    List<CourierDTO> getAllCouriers();
     
-    Courier findCourier(Long id);
+    CourierDTO findCourier(Long id);
     
 }

@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.deliveryservice;
 
-import cz.muni.fi.pa165.delivery.service.CourierService;
+import cz.muni.fi.pa165.deliveryservice.service.CourierService;
 import cz.muni.fi.pa165.deliveryservice.dao.CourierDAO;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,6 +25,7 @@ public class App {
         courierService.createCourier("firstName", "lastName", "email@email.com");
         
         System.out.println("******************");
+        System.out.println(courierService.findCourier(1L).getFirstName());
         System.out.println(courierService.getAllCouriers());
     
     }

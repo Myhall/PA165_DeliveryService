@@ -1,3 +1,5 @@
+package cz.muni.fi.pa165.deliveryservice.main;
+
 
 
 import org.junit.runner.RunWith;

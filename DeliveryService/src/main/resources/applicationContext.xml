@@ -15,10 +15,9 @@
     
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 
+    <bean id="mapper" class="org.dozer.DozerBeanMapper"></bean>
+    
     <bean id="courierDao" class="cz.muni.fi.pa165.deliveryservice.dao.jpa.JPACourierDAO" />
-
-    <bean id="courierService" class="cz.muni.fi.pa165.delivery.service.CourierServiceImpl">
-        <property name="courierDao" ref="courierDao" />
-    </bean>
+    <bean id="courierService" class="cz.muni.fi.pa165.deliveryservice.service.CourierServiceImpl" />
     
 </beans>

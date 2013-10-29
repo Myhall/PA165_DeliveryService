@@ -4,23 +4,31 @@
  * and open the template in the editor.
  */
 
-package cz.muni.fi.pa165.delivery.service;
+package cz.muni.fi.pa165.deliveryservice.service;
 
 import cz.muni.fi.pa165.deliveryservice.Courier;
 import cz.muni.fi.pa165.deliveryservice.dao.CourierDAO;
+import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
+import java.util.ArrayList;
 import java.util.List;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author janvorcak
  */
+@Service
 @Transactional
 public class CourierServiceImpl implements CourierService {
 
     @Autowired
     private CourierDAO courierDao;
+    
+    @Autowired
+    private Mapper mapper;
     
     @Override
     public Courier createCourier(String firstName, String lastName, String email) {
@@ -40,13 +48,17 @@ public class CourierServiceImpl implements CourierService {
     }
 
     @Override
-    public List<Courier> getAllCouriers() {
-        return courierDao.getAllCouriers();
+    public List<CourierDTO> getAllCouriers() {
+        List<CourierDTO> resultList = new ArrayList<>();
+        for(Courier courier : courierDao.getAllCouriers()) {
+            resultList.add(mapper.map(courier, CourierDTO.class));
+        }
+        return resultList;
     }
 
     @Override
-    public Courier findCourier(Long id) {
-        return courierDao.findCourier(id);
+    public CourierDTO findCourier(Long id) {
+        return mapper.map(courierDao.findCourier(id), CourierDTO.class);
     }
 
     public void setCourierDao(CourierDAO courierDao) {
