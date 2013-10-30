@@ -91,6 +91,7 @@
             <version>3.2.4.RELEASE</version>
         </dependency>
 
+        <!-- DOZER dependencies BEGIN -->
         <dependency>
             <groupId>net.sf.dozer</groupId>
             <artifactId>dozer</artifactId>
@@ -101,6 +102,13 @@
             <artifactId>xmlbeans</artifactId>
             <version>2.4.0</version>
             <scope>runtime</scope>
+        </dependency>
+        <!-- DOZER dependencies END -->
+        
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.8.4</version>
         </dependency>
         
     </dependencies>
