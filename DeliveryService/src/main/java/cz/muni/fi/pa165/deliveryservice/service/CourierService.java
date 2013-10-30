@@ -16,11 +16,11 @@ import java.util.List;
  */
 public interface CourierService {
     
-    Courier createCourier(String firstName, String lastName, String email);
+    CourierDTO createCourier(CourierDTO courier);
     
-    void deleteCourier(Courier courier);
+    void deleteCourier(CourierDTO courier);
     
-    Courier updateCourier(Courier courier);
+    CourierDTO updateCourier(CourierDTO courier);
     
     List<CourierDTO> getAllCouriers();
     

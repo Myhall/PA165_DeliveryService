@@ -21,6 +21,15 @@ public class CourierDTO {
     private String email;
     private List<Delivery> deliveries;
 
+    public CourierDTO() {
+    }
+
+    public CourierDTO(String first, String last, String email) {
+        this.firstName = first;
+        this.lastName = last;
+        this.email = email;
+    }
+
     public Long getId() {
         return id;
     }

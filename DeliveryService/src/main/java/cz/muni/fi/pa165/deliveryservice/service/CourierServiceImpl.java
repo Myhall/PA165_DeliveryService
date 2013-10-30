@@ -31,20 +31,23 @@ public class CourierServiceImpl implements CourierService {
     private Mapper mapper;
     
     @Override
-    public Courier createCourier(String firstName, String lastName, String email) {
-        Courier courier = new Courier(firstName, lastName, email);
+    public CourierDTO createCourier(CourierDTO courierDto) {
+        Courier courier = mapper.map(courierDto, Courier.class);
         courierDao.createCourier(courier);
-        return courier;
+        return mapper.map(courier, CourierDTO.class);
     }
 
     @Override
-    public void deleteCourier(Courier courier) {
+    public void deleteCourier(CourierDTO courierDto) {
+        //TODO throw exception if no id found
+        Courier courier = courierDao.findCourier(courierDto.getId());
         courierDao.deleteCourier(courier);
     }
 
     @Override
-    public Courier updateCourier(Courier courier) {
-        return courierDao.updateCourier(courier);
+    public CourierDTO updateCourier(CourierDTO courierDto) {
+        Courier courier = courierDao.findCourier(courierDto.getId());
+        return mapper.map(courierDao.updateCourier(courier), CourierDTO.class);
     }
 
     @Override
