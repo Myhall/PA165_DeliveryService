@@ -21,7 +21,7 @@ public class CourierTestBase {
     }
     
     public static Delivery getDeliveryInstance(String suffix) {
-        Customer c = new Customer("Foo" + suffix, "Bar" + suffix, "foo@bar.com", "123 Main Street, 94401 San Mateo, CA", "555333987");
+        Customer c = new Customer("Foo" + suffix, "Bar" + suffix, "foo@bar.com", "San Mateo","123 Main Street"," 94401 ","CA", "555333987");
         Delivery d = new Delivery(c, "Trnava", "Hong Kong");
         d.addDeliveryItem(new DeliveryItem());
         return d;

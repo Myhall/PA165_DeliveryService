@@ -51,8 +51,8 @@ public class JPADeliveryDAOTest {
     @Before
     public void setUp() {
         courier = new Courier("Jan", "Petrovic", "petrovic@example.com");
-        customer = new Customer("Peter", "Petrovic", "petrovic2@example.com",
-                "Komenskeho 32", "234324");
+        customer = new Customer("Peter", "Petrovic", "petrovic2@example.com","Brno",
+                "Komenskeho 32","60200","czech republic", "234324");
 
         deliveryPersisted = new Delivery();
 

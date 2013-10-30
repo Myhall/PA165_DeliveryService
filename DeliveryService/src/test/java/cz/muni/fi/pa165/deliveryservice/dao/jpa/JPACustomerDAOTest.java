@@ -267,6 +267,6 @@ public class JPACustomerDAOTest {
         numOfTestCustomerInstances++;
         return new Customer("FirstName", "LastName",
                 "test" + numOfTestCustomerInstances + "@email.com",
-                "address", "12345");
+                "testCity","testStreet 9A","h46s4","testcountry", "12345");
     }
 }

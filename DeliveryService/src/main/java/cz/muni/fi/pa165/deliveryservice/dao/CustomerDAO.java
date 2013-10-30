@@ -7,7 +7,7 @@ import cz.muni.fi.pa165.deliveryservice.Customer;
 import java.util.List;
 /**
  * DAO interface for Customer entity
- * @author Tomáš Frkáň
+ * @author Tomas Frkan
  */
 public interface CustomerDAO {
     /*

@@ -9,7 +9,7 @@ import javax.persistence.Query;
 /**
  * DAO implementation for Customer entity
  *
- * @author Tomáš Frkáň
+ * @author Tomas Frkan
  */
 public class JPACustomerDAO implements CustomerDAO {
 
@@ -20,6 +20,7 @@ public class JPACustomerDAO implements CustomerDAO {
         this.em = em;
     }
 
+    @Override
     public void createCustomer(Customer customer) {
         if (customer == null) {
             throw new NullPointerException("customer is null");
@@ -27,6 +28,7 @@ public class JPACustomerDAO implements CustomerDAO {
         em.persist(customer);
     }
 
+    @Override
     public void deleteCustomer(Customer customer) {
         if (customer == null) {
             throw new NullPointerException("customer is null");
@@ -41,6 +43,7 @@ public class JPACustomerDAO implements CustomerDAO {
         }
     }
 
+    @Override
     public Customer updateCustomer(Customer customer) {
         if (customer == null) {
             throw new NullPointerException("customer is null");
@@ -48,6 +51,7 @@ public class JPACustomerDAO implements CustomerDAO {
         return em.merge(customer);
     }
 
+    @Override
     public List<Customer> getAllCustomers() {
         Query query = em.createQuery("SELECT c FROM Customer c");
         List<Customer> results = query.getResultList();
@@ -55,6 +59,7 @@ public class JPACustomerDAO implements CustomerDAO {
         return results;
     }
 
+    @Override
     public Customer findCustomer(Long id) {
         if (id == null) {
             throw new NullPointerException("ID is null.");

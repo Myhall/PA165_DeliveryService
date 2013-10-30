@@ -9,30 +9,39 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 /**
- * Customer entity class 
- * @author Tomáš Frkáň
+ * Customer entity class
+ *
+ * @author Tomas Frkan
  */
 @Entity
 public class Customer implements Serializable {
+
     private List<Delivery> deliveries;
     private String firstName;
     private String lastName;
     private String email;
-    private String address;
+    private String city;
+    private String street;
+    private String zipCode;
+    private String country;
     private String telephoneNumber;
     private Long id;
 
     public Customer() {
     }
-    
-    public Customer(String firstName, String lastName, String email, 
-            String address, String telephoneNumber){
-        this.firstName=firstName;
-        this.lastName=lastName;
-        this.email=email;
-        this.address=address;
-        this.telephoneNumber=telephoneNumber;
+
+    public Customer(String firstName, String lastName, String email,
+            String city, String street, String zipCode, String country, String telephoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.telephoneNumber = telephoneNumber;
+        this.city = city;
+        this.street = street;
+        this.country = country;
+        this.zipCode = zipCode;
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
@@ -67,12 +76,36 @@ public class Customer implements Serializable {
         this.email = email;
     }
 
-    public String getAddress() {
-        return address;
+    public String getCity() {
+        return city;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getTelephoneNumber() {
@@ -82,7 +115,7 @@ public class Customer implements Serializable {
     public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
     }
-   
+
     @OneToMany(mappedBy = "customer")
     public List<Delivery> getDeliveries() {
         return deliveries;
@@ -113,5 +146,4 @@ public class Customer implements Serializable {
         }
         return true;
     }
-
 }
