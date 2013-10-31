@@ -15,24 +15,24 @@ public interface DeliveryItemService {
     /**
      * Create new delivery item.
      * 
-     * @param deliveryItem New delivery item to be stored
+     * @param deliveryItemDTO New delivery item to be stored
      */
-    void createDeliveryItem(DeliveryItemDTO deliveryItem);
+    void createDeliveryItem(DeliveryItemDTO deliveryItemDTO);
 
     /**
      * Delete delivery item.
      * 
-     * @param deliveryItem Delivery item to be removed
+     * @param deliveryItemDTO Delivery item to be removed
      */
-    void deleteDeliveryItem(DeliveryItemDTO deliveryItem);
+    void deleteDeliveryItem(DeliveryItemDTO deliveryItemDTO);
 
     /**
      * Update delivery item.
      * 
-     * @param deliveryItem Delivery item to be updated in database
+     * @param deliveryItemDTO Delivery item to be updated in database
      * @return DTO version of updated delivery item
      */
-    DeliveryItemDTO updateDeliveryItem(DeliveryItemDTO deliveryItem);
+    DeliveryItemDTO updateDeliveryItem(DeliveryItemDTO deliveryItemDTO);
     
     /**
      * Find delivery item by ID.
