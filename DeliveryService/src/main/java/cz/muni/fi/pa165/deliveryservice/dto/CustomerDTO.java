@@ -6,6 +6,7 @@ package cz.muni.fi.pa165.deliveryservice.dto;
 
 import cz.muni.fi.pa165.deliveryservice.Delivery;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -94,4 +95,27 @@ public class CustomerDTO {
     public void setDeliveries(List<Delivery> deliveries) {
         this.deliveries = deliveries;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 71 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CustomerDTO other = (CustomerDTO) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+    
 }

@@ -39,13 +39,13 @@ public class CustomerServiceImpl implements CustomerService {
         if (customerDto.getId() == null) {
             throw new IllegalArgumentException("Unable to remove CustomerDTO with null ID");
         }
-        Customer customer = customerDao.findCustomer(customerDto.getId());
+        Customer customer = mapper.map(customerDto,Customer.class);
         customerDao.deleteCustomer(customer);
     }
 
     @Override
     public CustomerDTO updateCustomer(CustomerDTO customerDto) {
-        Customer customer = customerDao.findCustomer(customerDto.getId());
+        Customer customer = mapper.map(customerDto,Customer.class);
         return mapper.map(customerDao.updateCustomer(customer), CustomerDTO.class);
     }
 
