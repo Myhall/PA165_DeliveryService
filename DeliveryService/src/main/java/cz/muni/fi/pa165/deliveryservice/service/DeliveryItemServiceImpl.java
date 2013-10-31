@@ -4,7 +4,14 @@
  */
 package cz.muni.fi.pa165.deliveryservice.service;
 
+import cz.muni.fi.pa165.deliveryservice.DeliveryItem;
+import cz.muni.fi.pa165.deliveryservice.dao.DeliveryItemDAO;
 import cz.muni.fi.pa165.deliveryservice.dto.DeliveryItemDTO;
+import org.dozer.Mapper;
+import org.dozer.MappingException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.DataRetrievalFailureException;
 
 /**
  *
@@ -12,24 +19,52 @@ import cz.muni.fi.pa165.deliveryservice.dto.DeliveryItemDTO;
  */
 public class DeliveryItemServiceImpl implements DeliveryItemService {
 
-    @Override
-    public void createDeliveryItem(DeliveryItemDTO deliveryItem) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    DeliveryItemDAO deliveryItemDao;
+    
+    @Autowired
+    private Mapper mapper;
+
+    @Autowired
+    public void setDeliveryItemDao(DeliveryItemDAO deliveryItemDao) {
+        this.deliveryItemDao = deliveryItemDao;
     }
 
     @Override
-    public void deleteDeliveryItem(DeliveryItemDTO deliveryItem) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void createDeliveryItem(DeliveryItemDTO deliveryItemDTO) {
+        try {
+            DeliveryItem deliveryItem = mapper.map(deliveryItemDTO, DeliveryItem.class);
+            deliveryItemDao.createDeliveryItem(deliveryItem);
+        } catch (MappingException | NullPointerException ex) {
+            throw new DataIntegrityViolationException(ex.getMessage());
+        }
     }
 
     @Override
-    public DeliveryItemDTO updateDeliveryItem(DeliveryItemDTO deliveryItem) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void deleteDeliveryItem(DeliveryItemDTO deliveryItemDTO) {
+        try {
+            DeliveryItem deliveryItem = deliveryItemDao.findDeliveryItem(deliveryItemDTO.getId());
+            deliveryItemDao.deleteDeliveryItem(deliveryItem);
+        } catch (NullPointerException | IllegalStateException ex) {
+            throw new DataRetrievalFailureException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public DeliveryItemDTO updateDeliveryItem(DeliveryItemDTO deliveryItemDTO) {
+        try {
+            DeliveryItem deliveryItem = deliveryItemDao.findDeliveryItem(deliveryItemDTO.getId());
+            return mapper.map(deliveryItemDao.updateDeliveryItem(deliveryItem), DeliveryItemDTO.class);
+        } catch (MappingException | NullPointerException ex) {
+            throw new DataRetrievalFailureException(ex.getMessage());
+        }
     }
 
     @Override
     public DeliveryItemDTO findDeliveryItem(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return mapper.map(deliveryItemDao.findDeliveryItem(id), DeliveryItemDTO.class);
+        } catch (NullPointerException | IllegalStateException ex) {
+            throw new DataRetrievalFailureException(ex.getMessage());
+        }
     }
-    
 }
