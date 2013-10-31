@@ -7,6 +7,7 @@ package cz.muni.fi.pa165.deliveryservice.dao.jpa;
 import cz.muni.fi.pa165.deliveryservice.DeliveryItem;
 import cz.muni.fi.pa165.deliveryservice.dao.DeliveryItemDAO;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  * JPA implementation of DeliveryItemDAO interface.
@@ -15,8 +16,12 @@ import javax.persistence.EntityManager;
  */
 public class JPADeliveryItemDAO implements DeliveryItemDAO {
 
+    @PersistenceContext
     private EntityManager em;
 
+    public JPADeliveryItemDAO() {
+    }
+    
     public JPADeliveryItemDAO(EntityManager em) {
         if (em == null) {
             throw new NullPointerException("Entity manager is null.");
