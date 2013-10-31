@@ -23,4 +23,6 @@
     <bean id="customerDao" class="cz.muni.fi.pa165.deliveryservice.dao.jpa.JPACustomerDAO" />
     <bean id="customerService" class="cz.muni.fi.pa165.deliveryservice.service.CustomerServiceImpl" />
     
+    <bean id="deliveryItemDao" class="cz.muni.fi.pa165.deliveryservice.dao.jpa.JPADeliveryItemDAO" />
+    
 </beans>
