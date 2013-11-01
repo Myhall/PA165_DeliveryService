@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.deliveryservice.service;
 
-import cz.muni.fi.pa165.deliveryservice.Courier;
-import cz.muni.fi.pa165.deliveryservice.Customer;
 import cz.muni.fi.pa165.deliveryservice.DeliveryStatus;
+import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
+import cz.muni.fi.pa165.deliveryservice.dto.CustomerDTO;
 import cz.muni.fi.pa165.deliveryservice.dto.DeliveryDTO;
 import java.util.List;
 
@@ -24,7 +24,7 @@ public interface DeliveryService {
     
     List<DeliveryDTO> getDeliveriesByStatus(DeliveryStatus status);
     
-    List<DeliveryDTO> getDeliveriesByCustomer(Customer customer);
+    List<DeliveryDTO> getDeliveriesByCustomer(CustomerDTO customer);
     
-    List<DeliveryDTO> getDeliveriesByCourier(Courier courier);
+    List<DeliveryDTO> getDeliveriesByCourier(CourierDTO courier);
 }
