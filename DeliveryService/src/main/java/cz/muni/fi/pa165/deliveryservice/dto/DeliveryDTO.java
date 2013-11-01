@@ -96,6 +96,9 @@ public class DeliveryDTO {
         this.placeTo = placeTo;
     }
 
+    public DeliveryDTO() {
+    }
+
     public DeliveryDTO(Long id, BigDecimal price, Customer customer, Courier courier, String additionalInformation, DeliveryStatus status, List<DeliveryItem> items, String placeFrom, String placeTo) {
         this.id = id;
         this.price = price;

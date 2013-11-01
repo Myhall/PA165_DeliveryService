@@ -1,23 +1,26 @@
-package cz.muni.fi.pa165.deliveryservice.dto;
+package cz.muni.fi.pa165.deliveryservice.service;
 
 import cz.muni.fi.pa165.deliveryservice.Courier;
 import cz.muni.fi.pa165.deliveryservice.Customer;
 import cz.muni.fi.pa165.deliveryservice.Delivery;
 import cz.muni.fi.pa165.deliveryservice.DeliveryStatus;
 import cz.muni.fi.pa165.deliveryservice.dao.DeliveryDAO;
+import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
+import cz.muni.fi.pa165.deliveryservice.dto.CustomerDTO;
+import cz.muni.fi.pa165.deliveryservice.dto.DeliveryDTO;
 import cz.muni.fi.pa165.deliveryservice.exceptions.DataPersistenceException;
 import cz.muni.fi.pa165.deliveryservice.service.DeliveryService;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Michal Sorentiny
  */
+@Transactional
 public class DeliveryServiceImpl implements DeliveryService {
 
     @Autowired
@@ -99,10 +102,10 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     @Override
-    public List<DeliveryDTO> getDeliveriesByCustomer(Customer customer) {
+    public List<DeliveryDTO> getDeliveriesByCustomer(CustomerDTO customer) {
         try {
             List<DeliveryDTO> returnMe = new ArrayList<>();
-            for (Delivery d : deliveryDAO.getDeliveriesByCustomer(customer)) {
+            for (Delivery d : deliveryDAO.getDeliveriesByCustomer(mapper.map(customer, Customer.class))) {
                 returnMe.add(mapper.map(d, DeliveryDTO.class));
             }
             return returnMe;
@@ -113,10 +116,10 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     @Override
-    public List<DeliveryDTO> getDeliveriesByCourier(Courier courier) {
+    public List<DeliveryDTO> getDeliveriesByCourier(CourierDTO courier) {
         try {
             List<DeliveryDTO> returnMe = new ArrayList<>();
-            for (Delivery d : deliveryDAO.getDeliveriesByCourier(courier)) {
+            for (Delivery d : deliveryDAO.getDeliveriesByCourier(mapper.map(courier, Courier.class))) {
                 returnMe.add(mapper.map(d, DeliveryDTO.class));
             }
             return returnMe;
