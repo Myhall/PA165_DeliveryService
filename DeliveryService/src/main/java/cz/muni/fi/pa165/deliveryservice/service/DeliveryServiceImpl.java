@@ -9,7 +9,6 @@ import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
 import cz.muni.fi.pa165.deliveryservice.dto.CustomerDTO;
 import cz.muni.fi.pa165.deliveryservice.dto.DeliveryDTO;
 import cz.muni.fi.pa165.deliveryservice.exceptions.DataPersistenceException;
-import cz.muni.fi.pa165.deliveryservice.service.DeliveryService;
 import java.util.ArrayList;
 import java.util.List;
 import org.dozer.Mapper;
@@ -30,6 +29,9 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public DeliveryDTO createDelivery(DeliveryDTO delivery) {
+        if (delivery == null)
+            throw new NullPointerException("delivery");
+        
         try {
             Delivery d = mapper.map(delivery, Delivery.class);
             deliveryDAO.createDelivery(d);
@@ -42,6 +44,9 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public void deleteDelivery(DeliveryDTO delivery) {
+        if (delivery == null)
+            throw new NullPointerException("delivery");
+        
         try {
             Delivery d = mapper.map(delivery, Delivery.class);
             deliveryDAO.deleteDelivery(d);
@@ -53,6 +58,9 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public DeliveryDTO updateDelivery(DeliveryDTO delivery) {
+        if (delivery == null)
+            throw new NullPointerException("delivery");
+        
         try {
             Delivery d = mapper.map(delivery, Delivery.class);
             return mapper.map(deliveryDAO.updateDelivery(d), DeliveryDTO.class);
@@ -64,6 +72,9 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public DeliveryDTO findDelivery(Long id) {
+        if (id == null)
+            throw new NullPointerException("id");
+        
         try {
             Delivery d = deliveryDAO.findDelivery(id);
             return mapper.map(d, DeliveryDTO.class);
@@ -89,6 +100,9 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public List<DeliveryDTO> getDeliveriesByStatus(DeliveryStatus status) {
+        if (status == null)
+            throw new NullPointerException("status");
+        
         try {
             List<DeliveryDTO> returnMe = new ArrayList<>();
             for (Delivery d : deliveryDAO.getDeliveriesByStatus(status)) {
@@ -103,6 +117,9 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public List<DeliveryDTO> getDeliveriesByCustomer(CustomerDTO customer) {
+        if (customer == null)
+            throw new NullPointerException("customer");
+        
         try {
             List<DeliveryDTO> returnMe = new ArrayList<>();
             for (Delivery d : deliveryDAO.getDeliveriesByCustomer(mapper.map(customer, Customer.class))) {
@@ -117,6 +134,9 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public List<DeliveryDTO> getDeliveriesByCourier(CourierDTO courier) {
+        if (courier == null)
+            throw new NullPointerException("courier");
+        
         try {
             List<DeliveryDTO> returnMe = new ArrayList<>();
             for (Delivery d : deliveryDAO.getDeliveriesByCourier(mapper.map(courier, Courier.class))) {
