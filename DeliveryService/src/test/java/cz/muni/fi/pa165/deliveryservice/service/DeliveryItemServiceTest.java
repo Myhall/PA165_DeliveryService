@@ -6,6 +6,7 @@ import cz.muni.fi.pa165.deliveryservice.DeliveryItem;
 import cz.muni.fi.pa165.deliveryservice.dao.DeliveryItemDAO;
 import cz.muni.fi.pa165.deliveryservice.dto.DeliveryItemDTO;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.Objects;
 import org.dozer.DozerBeanMapper;
 import org.hamcrest.BaseMatcher;
@@ -116,24 +117,48 @@ public class DeliveryItemServiceTest {
         verify(deliveryItemDao).deleteDeliveryItem(deliveryItem);
     }
 
-    @Test(expected = DataAccessException.class)
-    public void testCreateDeliveryWithNull() {
+    @Test(expected = NullPointerException.class)
+    public void testCreateDeliveryItemServiceWithNull() {
         deliveryItemService.createDeliveryItem(null);
     }
 
-    @Test(expected = DataAccessException.class)
-    public void testFindDeliveryWithNull() {
+    @Test(expected = NullPointerException.class)
+    public void testFindDeliveryItemServiceWithNull() {
         deliveryItemService.findDeliveryItem(null);
     }
 
-    @Test(expected = DataAccessException.class)
-    public void testUpdateDeliveryWithNull() {
+    @Test(expected = NullPointerException.class)
+    public void testUpdateDeliveryItemServiceWithNull() {
         deliveryItemService.updateDeliveryItem(null);
     }
 
-    @Test(expected = DataAccessException.class)
-    public void testDeleteDeliveryWithNull() {
+    @Test(expected = NullPointerException.class)
+    public void testDeleteDeliveryItemServiceWithNull() {
         deliveryItemService.deleteDeliveryItem(null);
+    }
+
+    @Test(expected = DataAccessException.class)
+    public void testCreateDeliveryItemPersistenceException() {
+        doThrow(SQLException.class).when(deliveryItemDao).createDeliveryItem(deliveryItem);
+        deliveryItemService.createDeliveryItem(deliveryItemDto);
+    }
+
+    @Test(expected = DataAccessException.class)
+    public void testUpdateDeliveryItemPersistenceException() {
+        when(deliveryItemDao.updateDeliveryItem(deliveryItem)).thenThrow(SQLException.class);
+        deliveryItemService.updateDeliveryItem(deliveryItemDto);
+    }
+
+    @Test(expected = DataAccessException.class)
+    public void testFindDeliveryItemPersistenceException() {
+        when(deliveryItemDao.findDeliveryItem(deliveryItem.getId())).thenThrow(SQLException.class);
+        deliveryItemService.findDeliveryItem(deliveryItem.getId());
+    }
+
+    @Test(expected = DataAccessException.class)
+    public void testDeleteDeliveryItemPersistenceException() {
+        doThrow(SQLException.class).when(deliveryItemDao).deleteDeliveryItem(deliveryItem);
+        deliveryItemService.deleteDeliveryItem(deliveryItemDto);
     }
 
     private static DeliveryItem createDeliveryItemInstance(Long id, Delivery delivery, String name, String description, BigDecimal weight) {
