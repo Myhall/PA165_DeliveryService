@@ -113,22 +113,22 @@ public class DeliveryServiceTest {
     public void tearDown() {
     }
     
-    @Test(expected = DataAccessException.class)
+    @Test(expected = NullPointerException.class)
     public void testCreateDeliveryWithNull() {
         deliveryService.createDelivery(null);
     }
 
-    @Test(expected = DataAccessException.class)
+    @Test(expected = NullPointerException.class)
     public void testFindDeliveryWithNull() {
         deliveryService.findDelivery(null);
     }
     
-    @Test(expected = DataAccessException.class)
+    @Test(expected = NullPointerException.class)
     public void testDeleteDeliveryWithNull() {
         deliveryService.deleteDelivery(null);
     }
     
-    @Test(expected = DataAccessException.class)
+    @Test(expected = NullPointerException.class)
     public void testUpdateDeliveryWithNull() {
         deliveryService.updateDelivery(null);
     }
