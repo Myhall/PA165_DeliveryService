@@ -7,11 +7,9 @@ package cz.muni.fi.pa165.deliveryservice.service;
 import cz.muni.fi.pa165.deliveryservice.DeliveryItem;
 import cz.muni.fi.pa165.deliveryservice.dao.DeliveryItemDAO;
 import cz.muni.fi.pa165.deliveryservice.dto.DeliveryItemDTO;
+import cz.muni.fi.pa165.deliveryservice.exceptions.DataPersistenceException;
 import org.dozer.Mapper;
-import org.dozer.MappingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -22,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class DeliveryItemServiceImpl implements DeliveryItemService {
 
     DeliveryItemDAO deliveryItemDao;
-    
     @Autowired
     private Mapper mapper;
 
@@ -33,40 +30,56 @@ public class DeliveryItemServiceImpl implements DeliveryItemService {
 
     @Override
     public void createDeliveryItem(DeliveryItemDTO deliveryItemDTO) {
+        if (deliveryItemDTO == null) {
+            throw new NullPointerException("deliveryItemDTO");
+        }
+
         try {
             DeliveryItem deliveryItem = mapper.map(deliveryItemDTO, DeliveryItem.class);
             deliveryItemDao.createDeliveryItem(deliveryItem);
-        } catch (MappingException | NullPointerException ex) {
-            throw new DataIntegrityViolationException(ex.getMessage());
+        } catch (Exception ex) {
+            throw new DataPersistenceException(ex.getMessage());
         }
     }
 
     @Override
     public void deleteDeliveryItem(DeliveryItemDTO deliveryItemDTO) {
+        if (deliveryItemDTO == null) {
+            throw new NullPointerException("deliveryItemDTO");
+        }
+
         try {
             DeliveryItem deliveryItem = deliveryItemDao.findDeliveryItem(deliveryItemDTO.getId());
             deliveryItemDao.deleteDeliveryItem(deliveryItem);
-        } catch (NullPointerException | IllegalStateException ex) {
-            throw new DataRetrievalFailureException(ex.getMessage());
+        } catch (Exception ex) {
+            throw new DataPersistenceException(ex.getMessage());
         }
     }
 
     @Override
     public DeliveryItemDTO updateDeliveryItem(DeliveryItemDTO deliveryItemDTO) {
+        if (deliveryItemDTO == null) {
+            throw new NullPointerException("deliveryItemDTO");
+        }
+
         try {
             DeliveryItem deliveryItem = deliveryItemDao.findDeliveryItem(deliveryItemDTO.getId());
             return mapper.map(deliveryItemDao.updateDeliveryItem(deliveryItem), DeliveryItemDTO.class);
-        } catch (MappingException | NullPointerException ex) {
-            throw new DataRetrievalFailureException(ex.getMessage());
+        } catch (Exception ex) {
+            throw new DataPersistenceException(ex.getMessage());
         }
     }
 
     @Override
     public DeliveryItemDTO findDeliveryItem(Long id) {
+        if (id == null) {
+            throw new NullPointerException("id");
+        }
+
         try {
             return mapper.map(deliveryItemDao.findDeliveryItem(id), DeliveryItemDTO.class);
-        } catch (NullPointerException | IllegalStateException ex) {
-            throw new DataRetrievalFailureException(ex.getMessage());
+        } catch (Exception ex) {
+            throw new DataPersistenceException(ex.getMessage());
         }
     }
 }
