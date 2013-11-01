@@ -45,7 +45,7 @@ public class DeliveryItemServiceTest {
         //
         Customer customer = new Customer("jozo", "Mrkva", "bla@gmail.com", "Boston", "1st ave 55", "H4474a", "murica", "+42584444");
         Delivery delivery = new Delivery(customer, "test place from", "test place to");
-        deliveryItem = createDeliveryItemInstance(null, delivery, "Jan", "ulica 1", BigDecimal.valueOf(55));
+        deliveryItem = createDeliveryItemInstance(1L, delivery, "Jan", "ulica 1", BigDecimal.valueOf(55));
         deliveryItemDto = mapper.map(deliveryItem, DeliveryItemDTO.class);
         when(deliveryItemDao.updateDeliveryItem(deliveryItem)).thenReturn(deliveryItem);
         when(deliveryItemDao.findDeliveryItem(deliveryItem.getId())).thenReturn(deliveryItem);
@@ -98,8 +98,6 @@ public class DeliveryItemServiceTest {
 
     @Test
     public void testFindDeliveryItemService() {
-        deliveryItem.setId(1L);
-        deliveryItemDto.setId(1L);
         when(deliveryItemDao.findDeliveryItem(1L)).thenReturn(deliveryItem);
         DeliveryItemDTO d = deliveryItemService.findDeliveryItem(1L);
         assertEquals(d, deliveryItemDto);
