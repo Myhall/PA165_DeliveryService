@@ -24,6 +24,7 @@
     <bean id="customerService" class="cz.muni.fi.pa165.deliveryservice.service.CustomerServiceImpl" />
     
     <bean id="deliveryItemDao" class="cz.muni.fi.pa165.deliveryservice.dao.jpa.JPADeliveryItemDAO" />
+    <bean id="deliveryItemService" class="cz.muni.fi.pa165.deliveryservice.service.DeliveryItemServiceImpl" />
     
     <bean id="deliveryDao" class="cz.muni.fi.pa165.deliveryservice.dao.jpa.JPADeliveryItemDAO" />
     <bean id="deliveryService" class="cz.muni.fi.pa165.deliveryservice.service.DeliveryItemServiceImpl" />
