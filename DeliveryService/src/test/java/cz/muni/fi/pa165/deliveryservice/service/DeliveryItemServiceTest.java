@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.dao.DataAccessException;
 import org.springframework.test.util.ReflectionTestUtils;
 
 /**
@@ -56,13 +57,13 @@ public class DeliveryItemServiceTest {
     }
 
     @Test
-    public void testCreate() {
+    public void testCreateDeliveryItemService() {
         deliveryItemService.createDeliveryItem(deliveryItemDto);
         verify(deliveryItemDao).createDeliveryItem(deliveryItem);
     }
 
     @Test
-    public void testCreateDeep() {
+    public void testCreateDeliveryItemServiceDeep() {
         deliveryItemService.createDeliveryItem(deliveryItemDto);
         final DeliveryItem d = deliveryItem;
         verify(deliveryItemDao).createDeliveryItem(argThat(new BaseMatcher<DeliveryItem>() {
@@ -95,7 +96,7 @@ public class DeliveryItemServiceTest {
     }
 
     @Test
-    public void testFind() {
+    public void testFindDeliveryItemService() {
         deliveryItem.setId(1L);
         deliveryItemDto.setId(1L);
         when(deliveryItemDao.findDeliveryItem(1L)).thenReturn(deliveryItem);
@@ -104,15 +105,35 @@ public class DeliveryItemServiceTest {
     }
 
     @Test
-    public void testUpdate() {
+    public void testUpdateDeliveryItemService() {
         deliveryItemService.updateDeliveryItem(deliveryItemDto);
         verify(deliveryItemDao).updateDeliveryItem(deliveryItem);
     }
 
     @Test
-    public void testRemove() {
+    public void testRemoveDeliveryItemService() {
         deliveryItemService.deleteDeliveryItem(deliveryItemDto);
         verify(deliveryItemDao).deleteDeliveryItem(deliveryItem);
+    }
+
+    @Test(expected = DataAccessException.class)
+    public void testCreateDeliveryWithNull() {
+        deliveryItemService.createDeliveryItem(null);
+    }
+
+    @Test(expected = DataAccessException.class)
+    public void testFindDeliveryWithNull() {
+        deliveryItemService.findDeliveryItem(null);
+    }
+
+    @Test(expected = DataAccessException.class)
+    public void testUpdateDeliveryWithNull() {
+        deliveryItemService.updateDeliveryItem(null);
+    }
+
+    @Test(expected = DataAccessException.class)
+    public void testDeleteDeliveryWithNull() {
+        deliveryItemService.deleteDeliveryItem(null);
     }
 
     private static DeliveryItem createDeliveryItemInstance(Long id, Delivery delivery, String name, String description, BigDecimal weight) {

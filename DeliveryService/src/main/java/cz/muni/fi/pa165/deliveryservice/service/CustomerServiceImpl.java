@@ -34,6 +34,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDTO createCustomer(CustomerDTO customerDto) {
+        if (customerDto == null){
+            throw new NullPointerException("customerDto");
+        }
         try {
             Customer customer = mapper.map(customerDto, Customer.class);
             customerDao.createCustomer(customer);
@@ -45,6 +48,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void deleteCustomer(CustomerDTO customerDto) {
+        if (customerDto == null){
+            throw new NullPointerException("customerDto");
+        }
         if (customerDto.getId() == null) {
             throw new IllegalArgumentException("Unable to remove CustomerDTO with null ID");
         }
@@ -58,6 +64,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDTO updateCustomer(CustomerDTO customerDto) {
+        if (customerDto == null){
+            throw new NullPointerException("customerDto");
+        }
         try {
             Customer customer = mapper.map(customerDto, Customer.class);
             return mapper.map(customerDao.updateCustomer(customer), CustomerDTO.class);
@@ -81,6 +90,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDTO findCustomer(Long id) {
+        if (id == null){
+            throw new NullPointerException("id");
+        }
         try {
             return mapper.map(customerDao.findCustomer(id), CustomerDTO.class);
         } catch (Exception ex) {
