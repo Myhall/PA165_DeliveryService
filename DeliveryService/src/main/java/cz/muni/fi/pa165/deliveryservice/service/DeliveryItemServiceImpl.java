@@ -12,11 +12,13 @@ import org.dozer.MappingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DataRetrievalFailureException;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author Filip Volner <volner@mail.muni.cz>
  */
+@Transactional
 public class DeliveryItemServiceImpl implements DeliveryItemService {
 
     DeliveryItemDAO deliveryItemDao;
