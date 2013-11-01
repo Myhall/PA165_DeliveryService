@@ -46,6 +46,7 @@ public class DeliveryItemServiceTest {
         deliveryItem = createDeliveryItemInstance(null, delivery, "Jan", "ulica 1", BigDecimal.valueOf(55));
         deliveryItemDto = mapper.map(deliveryItem, DeliveryItemDTO.class);
         when(deliveryItemDao.updateDeliveryItem(deliveryItem)).thenReturn(deliveryItem);
+        when(deliveryItemDao.findDeliveryItem(deliveryItem.getId())).thenReturn(deliveryItem);
 
     }
 
