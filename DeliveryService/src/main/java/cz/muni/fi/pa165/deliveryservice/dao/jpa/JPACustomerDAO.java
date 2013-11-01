@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.deliveryservice.Customer;
 import cz.muni.fi.pa165.deliveryservice.dao.CustomerDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 /**
@@ -13,8 +14,11 @@ import javax.persistence.Query;
  */
 public class JPACustomerDAO implements CustomerDAO {
 
-    //@PersistenceContext
+    @PersistenceContext
     private EntityManager em;
+
+    public JPACustomerDAO() {
+    }
 
     public JPACustomerDAO(EntityManager em) {
         this.em = em;
@@ -35,6 +39,8 @@ public class JPACustomerDAO implements CustomerDAO {
         }
         if (customer.getId() == null) {
             throw new IllegalStateException("customer.id is null");
+
+
         }
 
         Customer c = em.find(Customer.class, customer.getId());
