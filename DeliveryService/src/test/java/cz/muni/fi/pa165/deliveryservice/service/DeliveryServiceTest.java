@@ -96,6 +96,7 @@ public class DeliveryServiceTest {
         }};
         
         when(deliveryDAO.findDelivery(findId)).thenReturn(delivery);
+        when(deliveryDAO.updateDelivery(delivery)).thenReturn(delivery);
         when(deliveryDAO.findDelivery(null)).thenThrow(NullPointerException.class);
         when(deliveryDAO.getAllDeliveries()).thenReturn(allDeliveries);
         when(deliveryDAO.getDeliveriesByStatus(DeliveryStatus.CREATED)).thenReturn(new ArrayList<Delivery>() {{
@@ -151,7 +152,6 @@ public class DeliveryServiceTest {
         verify(deliveryDAO).deleteDelivery(delivery);
     }
     
-    @Ignore
     @Test
     public void testUpdateDelivery() {
         deliveryService.updateDelivery(deliveryDto);
