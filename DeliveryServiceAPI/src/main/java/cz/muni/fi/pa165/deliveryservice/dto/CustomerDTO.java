@@ -4,7 +4,6 @@
  */
 package cz.muni.fi.pa165.deliveryservice.dto;
 
-import cz.muni.fi.pa165.deliveryservice.Delivery;
 import java.util.List;
 import java.util.Objects;
 
@@ -22,7 +21,7 @@ public class CustomerDTO {
     private String street;
     private String zipCode;
     private String telephoneNumber;
-    private List<Delivery> deliveries;
+    private List<DeliveryDTO> deliveries;
 
     public Long getId() {
         return id;
@@ -88,11 +87,11 @@ public class CustomerDTO {
         this.telephoneNumber = telephoneNumber;
     }
 
-    public List<Delivery> getDeliveries() {
+    public List<DeliveryDTO> getDeliveries() {
         return deliveries;
     }
 
-    public void setDeliveries(List<Delivery> deliveries) {
+    public void setDeliveries(List<DeliveryDTO> deliveries) {
         this.deliveries = deliveries;
     }
 

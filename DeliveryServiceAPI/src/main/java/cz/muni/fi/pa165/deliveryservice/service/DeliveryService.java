@@ -1,9 +1,9 @@
 package cz.muni.fi.pa165.deliveryservice.service;
 
-import cz.muni.fi.pa165.deliveryservice.DeliveryStatus;
 import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
 import cz.muni.fi.pa165.deliveryservice.dto.CustomerDTO;
 import cz.muni.fi.pa165.deliveryservice.dto.DeliveryDTO;
+import cz.muni.fi.pa165.deliveryservice.enums.DeliveryStatus;
 import java.util.List;
 
 /**

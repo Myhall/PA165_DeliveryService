@@ -6,7 +6,6 @@
 
 package cz.muni.fi.pa165.deliveryservice.service;
 
-import cz.muni.fi.pa165.deliveryservice.Courier;
 import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
 import java.util.List;
 

@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.deliveryservice;
 
+import cz.muni.fi.pa165.deliveryservice.enums.DeliveryStatus;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;

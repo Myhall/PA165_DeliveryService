@@ -4,7 +4,6 @@
  */
 package cz.muni.fi.pa165.deliveryservice.service;
 
-import cz.muni.fi.pa165.deliveryservice.Customer;
 import cz.muni.fi.pa165.deliveryservice.dto.CustomerDTO;
 import java.util.List;
 

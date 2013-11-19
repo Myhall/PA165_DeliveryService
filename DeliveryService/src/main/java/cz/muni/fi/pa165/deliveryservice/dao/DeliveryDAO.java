@@ -3,7 +3,7 @@ package cz.muni.fi.pa165.deliveryservice.dao;
 import cz.muni.fi.pa165.deliveryservice.Courier;
 import cz.muni.fi.pa165.deliveryservice.Customer;
 import cz.muni.fi.pa165.deliveryservice.Delivery;
-import cz.muni.fi.pa165.deliveryservice.DeliveryStatus;
+import cz.muni.fi.pa165.deliveryservice.enums.DeliveryStatus;
 import java.util.List;
 
 /**
