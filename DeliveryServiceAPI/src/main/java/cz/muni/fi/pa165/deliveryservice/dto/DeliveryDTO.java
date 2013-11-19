@@ -1,9 +1,6 @@
 package cz.muni.fi.pa165.deliveryservice.dto;
 
-import cz.muni.fi.pa165.deliveryservice.Courier;
-import cz.muni.fi.pa165.deliveryservice.Customer;
-import cz.muni.fi.pa165.deliveryservice.DeliveryItem;
-import cz.muni.fi.pa165.deliveryservice.DeliveryStatus;
+import cz.muni.fi.pa165.deliveryservice.enums.DeliveryStatus;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
@@ -16,11 +13,11 @@ public class DeliveryDTO {
     
     private Long id;
     private BigDecimal price;
-    private Customer customer;
-    private Courier courier;
+    private CustomerDTO customer;
+    private CourierDTO courier;
     private String additionalInformation;
     private DeliveryStatus status;
-    private List<DeliveryItem> items;
+    private List<DeliveryItemDTO> items;
     private String placeFrom;
     private String placeTo;
 
@@ -40,19 +37,19 @@ public class DeliveryDTO {
         this.price = price;
     }
 
-    public Customer getCustomer() {
+    public CustomerDTO getCustomer() {
         return customer;
     }
 
-    public void setCustomer(Customer customer) {
+    public void setCustomer(CustomerDTO customer) {
         this.customer = customer;
     }
 
-    public Courier getCourier() {
+    public CourierDTO getCourier() {
         return courier;
     }
 
-    public void setCourier(Courier courier) {
+    public void setCourier(CourierDTO courier) {
         this.courier = courier;
     }
 
@@ -72,11 +69,11 @@ public class DeliveryDTO {
         this.status = status;
     }
 
-    public List<DeliveryItem> getItems() {
+    public List<DeliveryItemDTO> getItems() {
         return items;
     }
 
-    public void setItems(List<DeliveryItem> items) {
+    public void setItems(List<DeliveryItemDTO> items) {
         this.items = items;
     }
 
@@ -99,7 +96,7 @@ public class DeliveryDTO {
     public DeliveryDTO() {
     }
 
-    public DeliveryDTO(Long id, BigDecimal price, Customer customer, Courier courier, String additionalInformation, DeliveryStatus status, List<DeliveryItem> items, String placeFrom, String placeTo) {
+    public DeliveryDTO(Long id, BigDecimal price, CustomerDTO customer, CourierDTO courier, String additionalInformation, DeliveryStatus status, List<DeliveryItemDTO> items, String placeFrom, String placeTo) {
         this.id = id;
         this.price = price;
         this.customer = customer;

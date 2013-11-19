@@ -9,7 +9,7 @@ package cz.muni.fi.pa165.deliveryservice.service;
 import cz.muni.fi.pa165.deliveryservice.Courier;
 import cz.muni.fi.pa165.deliveryservice.Customer;
 import cz.muni.fi.pa165.deliveryservice.Delivery;
-import cz.muni.fi.pa165.deliveryservice.DeliveryStatus;
+import cz.muni.fi.pa165.deliveryservice.enums.DeliveryStatus;
 import cz.muni.fi.pa165.deliveryservice.dao.DeliveryDAO;
 import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
 import cz.muni.fi.pa165.deliveryservice.dto.CustomerDTO;

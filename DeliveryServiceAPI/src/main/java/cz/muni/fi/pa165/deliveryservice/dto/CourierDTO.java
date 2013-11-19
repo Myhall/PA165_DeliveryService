@@ -6,7 +6,6 @@
 
 package cz.muni.fi.pa165.deliveryservice.dto;
 
-import cz.muni.fi.pa165.deliveryservice.Delivery;
 import java.util.List;
 import java.util.Objects;
 
@@ -20,7 +19,7 @@ public class CourierDTO {
     private String firstName;
     private String lastName;
     private String email;
-    private List<Delivery> deliveries;
+    private List<DeliveryDTO> deliveries;
 
     public CourierDTO() {
     }
@@ -63,11 +62,11 @@ public class CourierDTO {
         this.email = email;
     }
 
-    public List<Delivery> getDeliveries() {
+    public List<DeliveryDTO> getDeliveries() {
         return deliveries;
     }
 
-    public void setDeliveries(List<Delivery> deliveries) {
+    public void setDeliveries(List<DeliveryDTO> deliveries) {
         this.deliveries = deliveries;
     }
 

@@ -4,7 +4,6 @@
  */
 package cz.muni.fi.pa165.deliveryservice.dto;
 
-import cz.muni.fi.pa165.deliveryservice.Delivery;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -15,7 +14,7 @@ import java.util.Objects;
 public class DeliveryItemDTO {
     
     private Long id;
-    private Delivery delivery;
+    private DeliveryDTO delivery;
     private String name;
     private String description;
     private BigDecimal weight;
@@ -31,11 +30,11 @@ public class DeliveryItemDTO {
         this.id = id;
     }
 
-    public Delivery getDelivery() {
+    public DeliveryDTO getDelivery() {
         return delivery;
     }
 
-    public void setDelivery(Delivery delivery) {
+    public void setDelivery(DeliveryDTO delivery) {
         this.delivery = delivery;
     }
 
