@@ -34,69 +34,49 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerDTO createCustomer(CustomerDTO customerDto) {
-        if (customerDto == null){
+        if (customerDto == null) {
             throw new NullPointerException("customerDto");
         }
-        try {
-            Customer customer = mapper.map(customerDto, Customer.class);
-            customerDao.createCustomer(customer);
-            return mapper.map(customer, CustomerDTO.class);
-        } catch (Exception ex) {
-            throw new DataPersistenceException("There has been an error creating customer on persistence layer.", ex);
-        }
+        Customer customer = mapper.map(customerDto, Customer.class);
+        customerDao.createCustomer(customer);
+        return mapper.map(customer, CustomerDTO.class);
     }
 
     @Override
     public void deleteCustomer(CustomerDTO customerDto) {
-        if (customerDto == null){
+        if (customerDto == null) {
             throw new NullPointerException("customerDto");
         }
         if (customerDto.getId() == null) {
             throw new IllegalArgumentException("Unable to remove CustomerDTO with null ID");
         }
-        try {
-            Customer customer = mapper.map(customerDto, Customer.class);
-            customerDao.deleteCustomer(customer);
-        } catch (Exception ex) {
-            throw new DataPersistenceException("There has been an error deleting customer on persistence layer.", ex);
-        }
+        Customer customer = mapper.map(customerDto, Customer.class);
+        customerDao.deleteCustomer(customer);
     }
 
     @Override
     public CustomerDTO updateCustomer(CustomerDTO customerDto) {
-        if (customerDto == null){
+        if (customerDto == null) {
             throw new NullPointerException("customerDto");
         }
-        try {
-            Customer customer = mapper.map(customerDto, Customer.class);
-            return mapper.map(customerDao.updateCustomer(customer), CustomerDTO.class);
-        } catch (Exception ex) {
-            throw new DataPersistenceException("There has been an error updating customer on persistence layer.", ex);
-        }
+        Customer customer = mapper.map(customerDto, Customer.class);
+        return mapper.map(customerDao.updateCustomer(customer), CustomerDTO.class);
     }
 
     @Override
     public List<CustomerDTO> getAllCustomers() {
-        try {
-            List<CustomerDTO> list = new ArrayList<>();
-            for (Customer customer : customerDao.getAllCustomers()) {
-                list.add(mapper.map(customer, CustomerDTO.class));
-            }
-            return list;
-        } catch (Exception ex) {
-            throw new DataPersistenceException("There has been an error creating customer on persistence layer.", ex);
+        List<CustomerDTO> list = new ArrayList<>();
+        for (Customer customer : customerDao.getAllCustomers()) {
+            list.add(mapper.map(customer, CustomerDTO.class));
         }
+        return list;
     }
 
     @Override
     public CustomerDTO findCustomer(Long id) {
-        if (id == null){
+        if (id == null) {
             throw new NullPointerException("id");
         }
-        try {
-            return mapper.map(customerDao.findCustomer(id), CustomerDTO.class);
-        } catch (Exception ex) {
-            throw new DataPersistenceException("There has been an error finding customer on persistence layer.", ex);
-        }
+        return mapper.map(customerDao.findCustomer(id), CustomerDTO.class);
     }
 }

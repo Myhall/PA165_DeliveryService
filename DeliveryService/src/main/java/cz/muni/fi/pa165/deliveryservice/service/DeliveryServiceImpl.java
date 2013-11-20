@@ -29,123 +29,90 @@ public class DeliveryServiceImpl implements DeliveryService {
 
     @Override
     public DeliveryDTO createDelivery(DeliveryDTO delivery) {
-        if (delivery == null)
+        if (delivery == null) {
             throw new NullPointerException("delivery");
-        
-        try {
-            Delivery d = mapper.map(delivery, Delivery.class);
-            deliveryDAO.createDelivery(d);
-            return mapper.map(d, DeliveryDTO.class);
-        } catch (Exception e) {
-            //TODO exception message
-            throw new DataPersistenceException("There has been an error on Persistence layer.", e);
         }
+
+        Delivery d = mapper.map(delivery, Delivery.class);
+        deliveryDAO.createDelivery(d);
+        return mapper.map(d, DeliveryDTO.class);
     }
 
     @Override
     public void deleteDelivery(DeliveryDTO delivery) {
-        if (delivery == null)
+        if (delivery == null) {
             throw new NullPointerException("delivery");
-        
-        try {
-            Delivery d = mapper.map(delivery, Delivery.class);
-            deliveryDAO.deleteDelivery(d);
-        } catch (Exception e) {
-            //TODO exception message
-            throw new DataPersistenceException("There has been an error on Persistence layer.", e);
         }
+
+        Delivery d = mapper.map(delivery, Delivery.class);
+        deliveryDAO.deleteDelivery(d);
     }
 
     @Override
     public DeliveryDTO updateDelivery(DeliveryDTO delivery) {
-        if (delivery == null)
+        if (delivery == null) {
             throw new NullPointerException("delivery");
-        
-        try {
-            Delivery d = mapper.map(delivery, Delivery.class);
-            return mapper.map(deliveryDAO.updateDelivery(d), DeliveryDTO.class);
-        } catch (Exception e) {
-            //TODO exception message
-            throw new DataPersistenceException("There has been an error on Persistence layer.", e);
         }
+
+        Delivery d = mapper.map(delivery, Delivery.class);
+        return mapper.map(deliveryDAO.updateDelivery(d), DeliveryDTO.class);
     }
 
     @Override
     public DeliveryDTO findDelivery(Long id) {
-        if (id == null)
+        if (id == null) {
             throw new NullPointerException("id");
-        
-        try {
-            Delivery d = deliveryDAO.findDelivery(id);
-            return mapper.map(d, DeliveryDTO.class);
-        } catch (Exception e) {
-            //TODO exception message
-            throw new DataPersistenceException("There has been an error on Persistence layer.", e);
         }
+
+        Delivery d = deliveryDAO.findDelivery(id);
+        return mapper.map(d, DeliveryDTO.class);
     }
 
     @Override
     public List<DeliveryDTO> getAllDeliveries() {
-        try {
-            List<DeliveryDTO> returnMe = new ArrayList<>();
-            for (Delivery d : deliveryDAO.getAllDeliveries()) {
-                returnMe.add(mapper.map(d, DeliveryDTO.class));
-            }
-            return returnMe;
-        } catch (Exception e) {
-            //TODO exception message
-            throw new DataPersistenceException("There has been an error on Persistence layer.", e);
+        List<DeliveryDTO> returnMe = new ArrayList<>();
+        for (Delivery d : deliveryDAO.getAllDeliveries()) {
+            returnMe.add(mapper.map(d, DeliveryDTO.class));
         }
+        return returnMe;
     }
 
     @Override
     public List<DeliveryDTO> getDeliveriesByStatus(DeliveryStatus status) {
-        if (status == null)
+        if (status == null) {
             throw new NullPointerException("status");
-        
-        try {
-            List<DeliveryDTO> returnMe = new ArrayList<>();
-            for (Delivery d : deliveryDAO.getDeliveriesByStatus(status)) {
-                returnMe.add(mapper.map(d, DeliveryDTO.class));
-            }
-            return returnMe;
-        } catch (Exception e) {
-            //TODO exception message
-            throw new DataPersistenceException("There has been an error on Persistence layer.", e);
         }
+
+        List<DeliveryDTO> returnMe = new ArrayList<>();
+        for (Delivery d : deliveryDAO.getDeliveriesByStatus(status)) {
+            returnMe.add(mapper.map(d, DeliveryDTO.class));
+        }
+        return returnMe;
     }
 
     @Override
     public List<DeliveryDTO> getDeliveriesByCustomer(CustomerDTO customer) {
-        if (customer == null)
+        if (customer == null) {
             throw new NullPointerException("customer");
-        
-        try {
-            List<DeliveryDTO> returnMe = new ArrayList<>();
-            for (Delivery d : deliveryDAO.getDeliveriesByCustomer(mapper.map(customer, Customer.class))) {
-                returnMe.add(mapper.map(d, DeliveryDTO.class));
-            }
-            return returnMe;
-        } catch (Exception e) {
-            //TODO exception message
-            throw new DataPersistenceException("There has been an error on Persistence layer.", e);
         }
+
+        List<DeliveryDTO> returnMe = new ArrayList<>();
+        for (Delivery d : deliveryDAO.getDeliveriesByCustomer(mapper.map(customer, Customer.class))) {
+            returnMe.add(mapper.map(d, DeliveryDTO.class));
+        }
+        return returnMe;
     }
 
     @Override
     public List<DeliveryDTO> getDeliveriesByCourier(CourierDTO courier) {
-        if (courier == null)
+        if (courier == null) {
             throw new NullPointerException("courier");
-        
-        try {
-            List<DeliveryDTO> returnMe = new ArrayList<>();
-            for (Delivery d : deliveryDAO.getDeliveriesByCourier(mapper.map(courier, Courier.class))) {
-                returnMe.add(mapper.map(d, DeliveryDTO.class));
-            }
-            return returnMe;
-        } catch (Exception e) {
-            //TODO exception message
-            throw new DataPersistenceException("There has been an error on Persistence layer.", e);
         }
+
+        List<DeliveryDTO> returnMe = new ArrayList<>();
+        for (Delivery d : deliveryDAO.getDeliveriesByCourier(mapper.map(courier, Courier.class))) {
+            returnMe.add(mapper.map(d, DeliveryDTO.class));
+        }
+        return returnMe;
     }
 }

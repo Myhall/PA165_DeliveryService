@@ -27,81 +27,59 @@ public class CourierServiceImpl implements CourierService {
 
     @Autowired
     private CourierDAO courierDao;
-
     @Autowired
     private Mapper mapper;
 
     @Override
     public CourierDTO createCourier(CourierDTO courierDto) {
-        if(courierDto == null) {
+        if (courierDto == null) {
             throw new NullPointerException();
         }
-        
-        try {
-            Courier courier = mapper.map(courierDto, Courier.class);
-            courierDao.createCourier(courier);
-            return mapper.map(courier, CourierDTO.class);
-        } catch (Exception ex) {
-            throw new DataPersistenceException(ex.getMessage());
-        }
+
+        Courier courier = mapper.map(courierDto, Courier.class);
+        courierDao.createCourier(courier);
+        return mapper.map(courier, CourierDTO.class);
     }
 
     @Override
     public void deleteCourier(CourierDTO courierDto) {
-        if(courierDto == null) {
+        if (courierDto == null) {
             throw new NullPointerException();
         }
-        
-        try {
-            Courier courier = courierDao.findCourier(courierDto.getId());
-            courierDao.deleteCourier(courier);
-        } catch (Exception ex) {
-            throw new DataPersistenceException(ex.getMessage());
-        }
+
+        Courier courier = courierDao.findCourier(courierDto.getId());
+        courierDao.deleteCourier(courier);
     }
 
     @Override
     public CourierDTO updateCourier(CourierDTO courierDto) {
-        if(courierDto == null) {
+        if (courierDto == null) {
             throw new NullPointerException();
         }
-        
-        try {
-            Courier courier = courierDao.findCourier(courierDto.getId());
-            return mapper.map(courierDao.updateCourier(courier), CourierDTO.class);
-        } catch (Exception ex) {
-            throw new DataPersistenceException(ex.getMessage());
-        }
+
+        Courier courier = courierDao.findCourier(courierDto.getId());
+        return mapper.map(courierDao.updateCourier(courier), CourierDTO.class);
     }
 
     @Override
     public List<CourierDTO> getAllCouriers() {
-        try {
-            List<CourierDTO> resultList = new ArrayList<>();
-            for (Courier courier : courierDao.getAllCouriers()) {
-                resultList.add(mapper.map(courier, CourierDTO.class));
-            }
-            return resultList;
-        } catch (Exception ex) {
-            throw new DataPersistenceException(ex.getMessage());
+        List<CourierDTO> resultList = new ArrayList<>();
+        for (Courier courier : courierDao.getAllCouriers()) {
+            resultList.add(mapper.map(courier, CourierDTO.class));
         }
+        return resultList;
     }
 
     @Override
     public CourierDTO findCourier(Long id) {
-        if(id == null) {
+        if (id == null) {
             throw new NullPointerException();
         }
-            
-        try {
-            return mapper.map(courierDao.findCourier(id), CourierDTO.class);
-        } catch (Exception ex) {
-            throw new DataPersistenceException(ex.getMessage());
-        }
+
+        return mapper.map(courierDao.findCourier(id), CourierDTO.class);
     }
 
     public void setCourierDao(CourierDAO courierDao) {
         this.courierDao = courierDao;
     }
-
 }

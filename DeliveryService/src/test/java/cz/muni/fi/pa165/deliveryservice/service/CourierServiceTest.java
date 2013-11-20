@@ -6,7 +6,9 @@ import cz.muni.fi.pa165.deliveryservice.dao.CourierDAO;
 import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
 import cz.muni.fi.pa165.deliveryservice.main.AbstractIntegrationTest;
 import java.sql.SQLException;
+import javax.persistence.PersistenceException;
 import org.dozer.DozerBeanMapper;
+import org.hibernate.HibernateException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -132,7 +134,7 @@ public class CourierServiceTest extends AbstractIntegrationTest {
     @Test(expected = DataAccessException.class)
     public void testCreateCourierPersistenceException()
     {
-        doThrow(SQLException.class).when(dao).createCourier(courier);
+        doThrow(PersistenceException.class).when(dao).createCourier(courier);
         courierService.createCourier(courierDTO);
     }
     

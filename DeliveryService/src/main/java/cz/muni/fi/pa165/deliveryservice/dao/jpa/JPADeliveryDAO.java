@@ -8,11 +8,13 @@ import cz.muni.fi.pa165.deliveryservice.dao.DeliveryDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Michal Sorentiny
  */
+@Repository
 public class JPADeliveryDAO implements DeliveryDAO{
     
     @PersistenceContext

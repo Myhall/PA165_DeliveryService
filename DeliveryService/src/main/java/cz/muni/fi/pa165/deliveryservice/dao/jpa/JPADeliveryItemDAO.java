@@ -8,12 +8,14 @@ import cz.muni.fi.pa165.deliveryservice.DeliveryItem;
 import cz.muni.fi.pa165.deliveryservice.dao.DeliveryItemDAO;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.springframework.stereotype.Repository;
 
 /**
  * JPA implementation of DeliveryItemDAO interface.
  *
  * @author Filip Volner <volner@mail.muni.cz>
  */
+@Repository
 public class JPADeliveryItemDAO implements DeliveryItemDAO {
 
     @PersistenceContext
