@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.deliveryservice.enums.DeliveryStatus;
 import cz.muni.fi.pa165.deliveryservice.dao.DeliveryDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -14,7 +15,7 @@ import javax.persistence.EntityManager;
  */
 public class JPADeliveryDAO implements DeliveryDAO{
     
-//    @PersistenceContext
+    @PersistenceContext
     EntityManager em;
 
     public JPADeliveryDAO() {
