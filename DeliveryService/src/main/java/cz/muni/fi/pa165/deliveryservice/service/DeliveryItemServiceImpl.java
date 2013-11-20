@@ -34,12 +34,8 @@ public class DeliveryItemServiceImpl implements DeliveryItemService {
             throw new NullPointerException("deliveryItemDTO");
         }
 
-        try {
-            DeliveryItem deliveryItem = mapper.map(deliveryItemDTO, DeliveryItem.class);
-            deliveryItemDao.createDeliveryItem(deliveryItem);
-        } catch (Exception ex) {
-            throw new DataPersistenceException(ex.getMessage());
-        }
+        DeliveryItem deliveryItem = mapper.map(deliveryItemDTO, DeliveryItem.class);
+        deliveryItemDao.createDeliveryItem(deliveryItem);
     }
 
     @Override
@@ -48,12 +44,8 @@ public class DeliveryItemServiceImpl implements DeliveryItemService {
             throw new NullPointerException("deliveryItemDTO");
         }
 
-        try {
-            DeliveryItem deliveryItem = deliveryItemDao.findDeliveryItem(deliveryItemDTO.getId());
-            deliveryItemDao.deleteDeliveryItem(deliveryItem);
-        } catch (Exception ex) {
-            throw new DataPersistenceException(ex.getMessage());
-        }
+        DeliveryItem deliveryItem = deliveryItemDao.findDeliveryItem(deliveryItemDTO.getId());
+        deliveryItemDao.deleteDeliveryItem(deliveryItem);
     }
 
     @Override
@@ -62,12 +54,8 @@ public class DeliveryItemServiceImpl implements DeliveryItemService {
             throw new NullPointerException("deliveryItemDTO");
         }
 
-        try {
-            DeliveryItem deliveryItem = deliveryItemDao.findDeliveryItem(deliveryItemDTO.getId());
-            return mapper.map(deliveryItemDao.updateDeliveryItem(deliveryItem), DeliveryItemDTO.class);
-        } catch (Exception ex) {
-            throw new DataPersistenceException(ex.getMessage());
-        }
+        DeliveryItem deliveryItem = deliveryItemDao.findDeliveryItem(deliveryItemDTO.getId());
+        return mapper.map(deliveryItemDao.updateDeliveryItem(deliveryItem), DeliveryItemDTO.class);
     }
 
     @Override
@@ -76,10 +64,6 @@ public class DeliveryItemServiceImpl implements DeliveryItemService {
             throw new NullPointerException("id");
         }
 
-        try {
-            return mapper.map(deliveryItemDao.findDeliveryItem(id), DeliveryItemDTO.class);
-        } catch (Exception ex) {
-            throw new DataPersistenceException(ex.getMessage());
-        }
+        return mapper.map(deliveryItemDao.findDeliveryItem(id), DeliveryItemDTO.class);
     }
 }

@@ -18,11 +18,13 @@ public class App {
         
         CourierService courierService = (CourierService) context.getBean("courierService");
         courierService.createCourier(new CourierDTO("first", "last", "email"));
-        courierService.createCourier(new CourierDTO("firstName", "lastName", "email@email.com"));
+        CourierDTO c = courierService.createCourier(new CourierDTO("firstName", "lastName", "email@email.com"));
+        
         
         System.out.println("******************");
         System.out.println(courierService.findCourier(1L).getFirstName());
         System.out.println(courierService.getAllCouriers());
-    
+        
+        courierService.createCourier(c);
     }
 }
