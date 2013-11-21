@@ -14,18 +14,28 @@ import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.validation.Validate;
+import net.sourceforge.stripes.validation.ValidateNestedProperties;
+import net.sourceforge.stripes.validation.ValidationErrorHandler;
+import net.sourceforge.stripes.validation.ValidationErrors;
 
 /**
  *
  * @author janvorcak
  */
 @UrlBinding("/couriers/${event}")
-public class CourierActionBean extends BaseActionBean {
+public class CourierActionBean extends BaseActionBean implements ValidationErrorHandler {
 
     @SpringBean
     protected CourierService courierService;
 
     private List<CourierDTO> courierDTOs;
+    
+    @ValidateNestedProperties(value = {
+            @Validate(on = {"add", "save"}, field = "firstName", required = true),
+            @Validate(on = {"add", "save"}, field = "lastName", required = true),
+            @Validate(on = {"add", "save"}, field = "email", required = true)
+    })
     private CourierDTO courierDTO;
 
     @DefaultHandler
@@ -57,6 +67,12 @@ public class CourierActionBean extends BaseActionBean {
 
     public void setCourierDTO(CourierDTO courierDTO) {
         this.courierDTO = courierDTO;
+    }
+
+    @Override
+    public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
+        courierDTOs = courierService.getAllCouriers();
+        return null;
     }
 
 }

@@ -14,6 +14,19 @@
                         <th><s:label for="b1" name="courierDTO.firstName"/></th>
                         <td><s:text id="b1" name="courierDTO.firstName"/></td>
                     </tr>
+                    <tr>
+                        <th><s:label for="b1" name="courierDTO.lastName"/></th>
+                        <td><s:text id="b1" name="courierDTO.lastName"/></td>
+                    </tr>
+                    <tr>
+                        <th><s:label for="b1" name="courierDTO.email"/></th>
+                        <td>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-addon">@</span>
+                                <s:text id="b1" name="courierDTO.email"/>
+                            </div>
+                        </td>
+                    </tr>
                 </table>
                 <s:submit name="save">Save</s:submit>
                 </fieldset>
