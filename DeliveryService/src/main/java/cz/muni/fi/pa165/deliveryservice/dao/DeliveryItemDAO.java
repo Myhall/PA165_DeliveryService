@@ -5,6 +5,7 @@
 package cz.muni.fi.pa165.deliveryservice.dao;
 
 import cz.muni.fi.pa165.deliveryservice.DeliveryItem;
+import java.util.List;
 
 /**
  * DAO interface for DeliveryItem entity
@@ -46,4 +47,10 @@ public interface DeliveryItemDAO {
      * @throws NullPointerException id is null
      */
     DeliveryItem findDeliveryItem(Long id);
+    
+    /*
+     * Returns list of all delivery items.
+     * @return List<DeliveryItem> list of all delivery items.
+     */
+    List<DeliveryItem> getAllDeliveryItems();
 }

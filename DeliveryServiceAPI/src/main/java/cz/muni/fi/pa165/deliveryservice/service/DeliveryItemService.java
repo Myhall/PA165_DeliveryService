@@ -5,6 +5,7 @@
 package cz.muni.fi.pa165.deliveryservice.service;
 
 import cz.muni.fi.pa165.deliveryservice.dto.DeliveryItemDTO;
+import java.util.List;
 
 /**
  *
@@ -41,5 +42,12 @@ public interface DeliveryItemService {
      * @return delivery item DTO object or null if no such item is found
      */
     DeliveryItemDTO findDeliveryItem(Long id);
+    
+     /**
+     * Returns list of all delivery items.
+     *
+     * @return List<DeliveryItemDTO> list of all delivery items
+     */
+    List<DeliveryItemDTO> getAllDeliveryItems();
     
 }

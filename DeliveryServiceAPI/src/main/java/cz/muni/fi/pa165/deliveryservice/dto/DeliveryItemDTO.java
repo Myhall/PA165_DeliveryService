@@ -22,6 +22,17 @@ public class DeliveryItemDTO {
     public DeliveryItemDTO() {
     }
 
+    public DeliveryItemDTO(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public DeliveryItemDTO(String name, String description, BigDecimal weight) {
+        this.name = name;
+        this.description = description;
+        this.weight = weight;
+    }
+
     public Long getId() {
         return id;
     }

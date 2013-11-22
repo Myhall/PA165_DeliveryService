@@ -7,7 +7,8 @@ package cz.muni.fi.pa165.deliveryservice.service;
 import cz.muni.fi.pa165.deliveryservice.DeliveryItem;
 import cz.muni.fi.pa165.deliveryservice.dao.DeliveryItemDAO;
 import cz.muni.fi.pa165.deliveryservice.dto.DeliveryItemDTO;
-import cz.muni.fi.pa165.deliveryservice.exceptions.DataPersistenceException;
+import java.util.ArrayList;
+import java.util.List;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -66,4 +67,14 @@ public class DeliveryItemServiceImpl implements DeliveryItemService {
 
         return mapper.map(deliveryItemDao.findDeliveryItem(id), DeliveryItemDTO.class);
     }
+
+    @Override
+    public List<DeliveryItemDTO> getAllDeliveryItems() {
+        List<DeliveryItemDTO> list = new ArrayList<>();
+        for (DeliveryItem deliveryItem : deliveryItemDao.getAllDeliveryItems()) {
+            list.add(mapper.map(deliveryItem, DeliveryItemDTO.class));
+        }
+        return list;
+    }
+
 }

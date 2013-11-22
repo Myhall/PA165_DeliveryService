@@ -4,10 +4,13 @@
  */
 package cz.muni.fi.pa165.deliveryservice.dao.jpa;
 
+import cz.muni.fi.pa165.deliveryservice.Customer;
 import cz.muni.fi.pa165.deliveryservice.DeliveryItem;
 import cz.muni.fi.pa165.deliveryservice.dao.DeliveryItemDAO;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -76,6 +79,14 @@ public class JPADeliveryItemDAO implements DeliveryItemDAO {
         result = em.find(DeliveryItem.class, id);
         
         return result;
+    }
+
+    @Override
+    public List<DeliveryItem> getAllDeliveryItems() {
+        Query query = em.createQuery("SELECT d FROM DeliveryItem d");
+        List<DeliveryItem> results = query.getResultList();
+
+        return results;
     }
     
     
