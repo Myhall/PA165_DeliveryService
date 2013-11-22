@@ -44,7 +44,7 @@ public class DeliveryItemActionBean extends BaseActionBean implements Validation
     
     @ValidateNestedProperties(value = {
         @Validate(on = {"add", "save"}, field = "name", required = true),
-        //@Validate(on = {"add", "save"}, field = "weight", required = true, minvalue = 0)
+        @Validate(on = {"add", "save"}, field = "weight", minvalue = 0)
     })
     private DeliveryItemDTO deliveryItem;
 
