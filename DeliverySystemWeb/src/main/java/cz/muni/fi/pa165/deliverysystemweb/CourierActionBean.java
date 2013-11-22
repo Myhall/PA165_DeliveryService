@@ -26,7 +26,7 @@ import net.sourceforge.stripes.validation.ValidationErrors;
  *
  * @author janvorcak
  */
-@UrlBinding("/couriers/${event}")
+@UrlBinding("/courier/${event}")
 public class CourierActionBean extends BaseActionBean implements ValidationErrorHandler {
 
     @SpringBean

@@ -98,13 +98,6 @@ public class CourierServiceTest extends AbstractIntegrationTest {
         courierService.findCourier(null);
     }
     
-    @Test
-    public void testUpdateCourier()
-    {
-        courierService.updateCourier(courierDTO);
-        verify(dao).updateCourier(courier);
-    }
-    
     @Test(expected = NullPointerException.class)
     public void testUpdateCourierNullArgument()
     {
