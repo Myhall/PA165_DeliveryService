@@ -34,8 +34,8 @@
 
                     <c:choose>
 
-                        <c:when test="${not empty actionBean.courierDTO}">
-                            <s:submit name="save" class="btn btn-primary">
+                        <c:when test="${not empty actionBean.courierDTO.id}">
+                            <s:submit name="update" class="btn btn-primary">
                                 <f:message key="buttons.update" />
                             </s:submit>
                         </c:when>

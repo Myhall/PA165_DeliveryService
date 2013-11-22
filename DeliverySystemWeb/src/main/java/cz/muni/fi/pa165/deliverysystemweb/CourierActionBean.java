@@ -56,6 +56,11 @@ public class CourierActionBean extends BaseActionBean implements ValidationError
         return new ForwardResolution("/courier/edit.jsp");
     }
     
+    public Resolution update() {
+        courierService.updateCourier(courierDTO);
+        return new RedirectResolution(this.getClass(), "list");
+    }
+    
     public Resolution delete() {
         String id = getContext().getRequest().getParameter("id");
         courierDTO = courierService.findCourier(Long.valueOf(id));
@@ -84,9 +89,9 @@ public class CourierActionBean extends BaseActionBean implements ValidationError
         return null;
     }
 
-    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit"})
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "update"})
     public void loadCourierFromDatabase() {
-        String id = getContext().getRequest().getParameter("id");
+        String id = getContext().getRequest().getParameter("courierDTO.id");
         if (id == null) return;
         
         courierDTO = courierService.findCourier(Long.valueOf(id));

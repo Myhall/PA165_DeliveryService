@@ -24,7 +24,7 @@
                     <td>
                         <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" 
                                 event="edit" class="btn btn-xs btn-primary" >
-                            <s:param name="id" value="${courier.id}" />
+                            <s:param name="courierDTO.id" value="${courier.id}" />
                             <f:message key="buttons.update" />
                         </s:link>
                     </td>

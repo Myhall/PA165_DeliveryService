@@ -6,8 +6,10 @@
 package cz.muni.fi.pa165.deliveryservice.service;
 
 import cz.muni.fi.pa165.deliveryservice.Courier;
+import cz.muni.fi.pa165.deliveryservice.Delivery;
 import cz.muni.fi.pa165.deliveryservice.dao.CourierDAO;
 import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
+import cz.muni.fi.pa165.deliveryservice.dto.DeliveryDTO;
 import cz.muni.fi.pa165.deliveryservice.exceptions.DataPersistenceException;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,12 +54,24 @@ public class CourierServiceImpl implements CourierService {
     }
 
     @Override
-    public CourierDTO updateCourier(CourierDTO courierDto) {
+    public CourierDTO updateCourier(final CourierDTO courierDto) {
         if (courierDto == null) {
             throw new NullPointerException();
         }
 
         Courier courier = courierDao.findCourier(courierDto.getId());
+        courier.setEmail(courierDto.getEmail());
+        courier.setFirstName(courierDto.getFirstName());
+        courier.setLastName(courierDto.getLastName());
+        
+        List<Delivery> deliveries = new ArrayList<Delivery>(){{
+            for(DeliveryDTO deliveryDto : courierDto.getDeliveries()) {
+                add(mapper.map(deliveryDto, Delivery.class));
+            }
+        }};
+        
+        courier.setDeliveries(deliveries);
+        
         return mapper.map(courierDao.updateCourier(courier), CourierDTO.class);
     }
 
