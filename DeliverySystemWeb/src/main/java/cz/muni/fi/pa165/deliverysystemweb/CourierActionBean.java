@@ -14,6 +14,7 @@ import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.validation.EmailTypeConverter;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
@@ -32,9 +33,9 @@ public class CourierActionBean extends BaseActionBean implements ValidationError
     private List<CourierDTO> courierDTOs;
     
     @ValidateNestedProperties(value = {
-            @Validate(on = {"add", "save"}, field = "firstName", required = true),
-            @Validate(on = {"add", "save"}, field = "lastName", required = true),
-            @Validate(on = {"add", "save"}, field = "email", required = true)
+            @Validate(on = {"add", "save"}, field = "firstName", required = true, minlength = 3, maxlength = 255),
+            @Validate(on = {"add", "save"}, field = "lastName", required = true, minlength = 3, maxlength = 255 ),
+            @Validate(on = {"add", "save"}, field = "email", required = true, converter = EmailTypeConverter.class)
     })
     private CourierDTO courierDTO;
 
@@ -51,6 +52,13 @@ public class CourierActionBean extends BaseActionBean implements ValidationError
 
     public Resolution edit() {
         return new ForwardResolution("/courier/edit.jsp");
+    }
+    
+    public Resolution delete() {
+        String id = getContext().getRequest().getParameter("id");
+        courierDTO = courierService.findCourier(Long.valueOf(id));
+        courierService.deleteCourier(courierDTO);
+        return new RedirectResolution(this.getClass(), "list");
     }
 
     public List<CourierDTO> getCourierDTOs() {
@@ -71,7 +79,6 @@ public class CourierActionBean extends BaseActionBean implements ValidationError
 
     @Override
     public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
-        courierDTOs = courierService.getAllCouriers();
         return null;
     }
 

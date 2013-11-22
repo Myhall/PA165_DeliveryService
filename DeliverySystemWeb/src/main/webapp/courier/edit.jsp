@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <s:layout-render name="/layout.jsp">
     <s:layout-component name="body">
@@ -7,29 +8,37 @@
 
         <s:form beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean">
             <s:hidden name="courierDTO.id"/>
-            <fieldset><legend>Test message</legend>
-                <s:errors/>
-                <table>
-                    <tr>
-                        <th><s:label for="b1" name="courierDTO.firstName"/></th>
-                        <td><s:text id="b1" name="courierDTO.firstName"/></td>
-                    </tr>
-                    <tr>
-                        <th><s:label for="b1" name="courierDTO.lastName"/></th>
-                        <td><s:text id="b1" name="courierDTO.lastName"/></td>
-                    </tr>
-                    <tr>
-                        <th><s:label for="b1" name="courierDTO.email"/></th>
-                        <td>
-                            <div class="input-group input-group-lg">
-                                <span class="input-group-addon">@</span>
-                                <s:text id="b1" name="courierDTO.email"/>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-                <s:submit name="save">Save</s:submit>
-                </fieldset>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><f:message key="courier.createMessage" /></h3>
+                </div>
+                <div class="panel-body" style="width:60%">
+                    <s:errors/>
+                    <div class="form-group">
+                        <label class="control-label" for="inputSuccess"><s:label name="courierDTO.firstName"/></label>
+                        <s:text name="courierDTO.firstName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="inputWarning"><s:label name="courierDTO.lastName"/></label>
+                        <s:text name="courierDTO.lastName" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="inputError"><s:label name="courierDTO.email"/></label>
+                        <div class="input-group">
+                            <span class="input-group-addon">@</span>
+                            <s:text name="courierDTO.email" class="form-control" />
+                        </div>
+                    </div>
+                    <s:submit name="save" class="btn btn-primary">
+                        <f:message key="buttons.save" />
+                    </s:submit>
+                    <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" class="btn btn-default">
+                        <f:message key="buttons.cancel" />
+                    </s:link>
+                    </div>
+                </div>
+                        
         </s:form>     
     </s:layout-component>
 </s:layout-render>

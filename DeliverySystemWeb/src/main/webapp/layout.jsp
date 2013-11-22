@@ -43,13 +43,8 @@
                     </div><!--/.nav-collapse -->
                 </div>
 
-                <!-- Main component for a primary marketing message or call to action -->
-                <div class="jumbotron">
-                    
-                    <s:layout-component name="body"/>
-
-                </div>
-
+                        <s:layout-component name="body"/>
+                 
             </div> <!-- /container -->
 
 
