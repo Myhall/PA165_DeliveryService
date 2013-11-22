@@ -38,9 +38,9 @@ public class CourierActionBean extends BaseActionBean implements ValidationError
     private List<CourierDTO> courierDTOs;
 
     @ValidateNestedProperties(value = {
-        @Validate(on = {"add", "save"}, field = "firstName", required = true, minlength = 3, maxlength = 255),
-        @Validate(on = {"add", "save"}, field = "lastName", required = true, minlength = 3, maxlength = 255),
-        @Validate(on = {"add", "save"}, field = "email", required = true, converter = EmailTypeConverter.class)
+        @Validate(on = {"update", "save"}, field = "firstName", required = true, minlength = 3, maxlength = 255),
+        @Validate(on = {"update", "save"}, field = "lastName", required = true, minlength = 3, maxlength = 255),
+        @Validate(on = {"update", "save"}, field = "email", required = true, converter = EmailTypeConverter.class)
     })
     private CourierDTO courierDTO;
 
@@ -68,9 +68,16 @@ public class CourierActionBean extends BaseActionBean implements ValidationError
 
     public Resolution view() {
         String id = getContext().getRequest().getParameter("id");
-
+        
+        Long l_id;
         try {
-            courierDTO = courierService.findCourier(Long.valueOf(id));
+            l_id = Long.valueOf(id);
+        } catch(NumberFormatException ex) {
+            return new ErrorResolution(HttpServletResponse.SC_BAD_REQUEST);
+        }
+        
+        try {
+            courierDTO = courierService.findCourier(l_id);
         } catch (DataAccessException ex) {
             return new ErrorResolution(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
@@ -99,12 +106,30 @@ public class CourierActionBean extends BaseActionBean implements ValidationError
 
     public Resolution delete() {
         String id = getContext().getRequest().getParameter("id");
+        
+        Long l_id;
         try {
-            courierDTO = courierService.findCourier(Long.valueOf(id));
+            l_id = Long.valueOf(id);
+        } catch(NumberFormatException ex) {
+            return new ErrorResolution(HttpServletResponse.SC_BAD_REQUEST);
+        }
+        
+        try {
+            courierDTO = courierService.findCourier(l_id);
+        } catch (DataAccessException ex) {
+            return new ErrorResolution(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+
+        if (courierDTO == null) {
+            return new ErrorResolution(HttpServletResponse.SC_NOT_FOUND);
+        }
+
+        try {
             courierService.deleteCourier(courierDTO);
         } catch (DataAccessException ex) {
             return new ErrorResolution(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
+        
         return new RedirectResolution(this.getClass(), "list");
     }
 
