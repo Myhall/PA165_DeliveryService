@@ -14,10 +14,10 @@
 
         <s:form beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean">
             <s:hidden name="deliveryItem.id"/>
-            <fieldset><legend><f:message key="edit.edit"/></legend>
+            <fieldset><legend><f:message key="label.edit"/></legend>
                 <%@include file="form.jsp"%>
-                <s:submit name="save"><f:message key="edit.save"/></s:submit>
-                <s:submit name="cancel"><f:message key="edit.cancel"/></s:submit>
+                <s:submit name="save"><f:message key="buttons.save"/></s:submit>
+                <s:submit name="cancel"><f:message key="buttons.cancel"/></s:submit>
             </fieldset>
         </s:form>
 

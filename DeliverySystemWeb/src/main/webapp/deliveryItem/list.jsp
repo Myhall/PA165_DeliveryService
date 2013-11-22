@@ -21,6 +21,8 @@
                     <th><f:message key="deliveryItem.name"/></th>
                     <th><f:message key="deliveryItem.description"/></th>
                     <th><f:message key="deliveryItem.weight"/></th>
+                    <th><f:message key="label.edit"/></th>
+                    <th><f:message key="label.delete"/></th>
                 </tr>
             </thead>
             <c:forEach items="${actionBean.deliveryItems}" var="deliveryItem">
@@ -29,15 +31,14 @@
                     <td><c:out value="${deliveryItem.description}"/></td>
                     <td><c:out value="${deliveryItem.weight}"/></td>
                     <td>
-                        <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" event="edit">
-                            <s:param name="deliveryItem.id" value="${deliveryItem.id}"/><f:message key="edit.edit"/>
+                        <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" event="edit" class="btn btn-xs btn-primary">
+                            <s:param name="deliveryItem.id" value="${deliveryItem.id}"/><f:message key="buttons.edit"/>
                         </s:link>
                     </td>
                     <td>
-                        <s:form beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean">
-                            <s:hidden name="deliveryItem.id" value="${deliveryItem.id}"/>
-                            <s:submit name="delete"><f:message key="list.delete"/></s:submit>
-                        </s:form>
+                        <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" event="delete" class="btn btn-xs btn-danger">
+                            <s:param name="deliveryItem.id" value="${deliveryItem.id}"/><f:message key="buttons.delete"/>
+                        </s:link>
                     </td>
                 </tr>
             </c:forEach>
@@ -50,7 +51,7 @@
                 </legend>
                 <%@include file="form.jsp"%>
                 <s:submit name="add">
-                    <f:message key="list.create"/>
+                    <f:message key="buttons.create"/>
                 </s:submit>
             </fieldset>
         </s:form>
