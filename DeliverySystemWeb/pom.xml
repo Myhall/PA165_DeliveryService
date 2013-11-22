@@ -184,6 +184,8 @@
             <artifactId>cos</artifactId>
             <version>05Nov2002</version>
         </dependency>
+        
+        <!-- tomcat servlet -->
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-servlet-api</artifactId>
