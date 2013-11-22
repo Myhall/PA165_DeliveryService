@@ -5,7 +5,7 @@
 <s:layout-render name="/layout.jsp">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" var="actionBean"/>
-
+        
         <s:form beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean">
             <s:hidden name="courierDTO.id"/>
 
