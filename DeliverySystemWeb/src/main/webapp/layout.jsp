@@ -1,10 +1,12 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <s:layout-definition>
     <!DOCTYPE html>
     <html lang="${pageContext.request.locale}">
         <head>
-            <title>Example</title>
+            <title>Delivery service - <f:message key="${titlekey}"/></title>
             <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/bootstrap.css" />
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/main.css" />

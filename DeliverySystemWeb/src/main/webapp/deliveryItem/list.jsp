@@ -12,47 +12,56 @@
 <s:layout-render name="/layout.jsp" titlekey="deliveryItem.list.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" var="actionBean"/>
-
-        <p><f:message key ="deliveryItem.list.allitems"/></p>
-
-        <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th><f:message key="deliveryItem.name"/></th>
-                    <th><f:message key="deliveryItem.description"/></th>
-                    <th><f:message key="deliveryItem.weight"/></th>
-                </tr>
-            </thead>
-            <c:forEach items="${actionBean.deliveryItems}" var="deliveryItem">
-                <tr>
-                    <td><c:out value="${deliveryItem.name}"/></td>
-                    <td><c:out value="${deliveryItem.description}"/></td>
-                    <td><c:out value="${deliveryItem.weight}"/></td>
-                    <td>
-                        <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" event="edit">
-                            <s:param name="deliveryItem.id" value="${deliveryItem.id}"/><f:message key="edit.edit"/>
-                        </s:link>
-                    </td>
-                    <td>
-                        <s:form beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean">
-                            <s:hidden name="deliveryItem.id" value="${deliveryItem.id}"/>
-                            <s:submit name="delete"><f:message key="list.delete"/></s:submit>
-                        </s:form>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-
+        
         <s:form beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean">
             <fieldset>
                 <legend>
                     <f:message key="deliveryItem.new"/>
                 </legend>
                 <%@include file="form.jsp"%>
-                <s:submit name="add">
-                    <f:message key="list.create"/>
+                <s:submit name="add" class="btn btn-primary">
+                    <f:message key="buttons.create"/>
                 </s:submit>
             </fieldset>
         </s:form>
+        <br/>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><f:message key="deliveryItem.list.allitems" /></h3>
+            </div>
+            <div class="panel-body">
+
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th><f:message key="deliveryItem.name"/></th>
+                            <th><f:message key="deliveryItem.description"/></th>
+                            <th><f:message key="deliveryItem.weight"/></th>
+                            <th><f:message key="label.edit"/></th>
+                            <th><f:message key="label.delete"/></th>
+                        </tr>
+                    </thead>
+                    <c:forEach items="${actionBean.deliveryItems}" var="deliveryItem">
+                        <tr>
+                            <td><c:out value="${deliveryItem.name}"/></td>
+                            <td><c:out value="${deliveryItem.description}"/></td>
+                            <td><c:out value="${deliveryItem.weight}"/></td>
+                            <td>
+                                <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" event="edit" class="btn btn-xs btn-primary">
+                                    <s:param name="deliveryItem.id" value="${deliveryItem.id}"/><f:message key="buttons.edit"/>
+                                </s:link>
+                            </td>
+                            <td>
+                                <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" event="delete" class="btn btn-xs btn-danger">
+                                    <s:param name="deliveryItem.id" value="${deliveryItem.id}"/><f:message key="buttons.delete"/>
+                                </s:link>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+
+
+            </div>
+        </div>
     </s:layout-component>
 </s:layout-render>
