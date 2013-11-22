@@ -68,7 +68,7 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
         return new RedirectResolution(this.getClass(), "list");
     }
 
-    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "save"})
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "update"})
     public void loadCustomerFromDatabase() {
         String ids = getContext().getRequest().getParameter("customerDTO.id");
         if (ids == null) {
