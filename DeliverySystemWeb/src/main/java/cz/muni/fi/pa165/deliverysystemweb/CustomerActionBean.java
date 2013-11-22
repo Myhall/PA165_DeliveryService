@@ -26,13 +26,14 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
     @SpringBean
     protected CustomerService customerService;
     private List<CustomerDTO> customerList;
-    private CustomerDTO customerDTO;
 
     @ValidateNestedProperties(value = {
         @Validate(on = {"add", "save"}, field = "firstName", required = true),
         @Validate(on = {"add", "save"}, field = "lastName", required = true),
         @Validate(on = {"add", "save"}, field = "email", required = true)
     })
+    private CustomerDTO customerDTO;
+    
     @DefaultHandler
     public Resolution list() {
         customerList = customerService.getAllCustomers();
