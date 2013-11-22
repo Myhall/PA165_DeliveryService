@@ -32,6 +32,7 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <!--<li class="active"><a href="#">Link</a></li>-->
+                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean">Deliveries</s:link></li>
                             <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean">Couriers</s:link></li>
                             <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean">Delivery Items</s:link></li>
                         </ul>
