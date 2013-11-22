@@ -56,7 +56,7 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
         return customerList;
     }
 
-    public Resolution add() {
+    public Resolution save() {
         customerService.createCustomer(customerDTO);
         return new RedirectResolution(this.getClass(), "list");
 
@@ -81,7 +81,7 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
         return new ForwardResolution("/customer/edit.jsp");
     }
 
-    public Resolution save() {
+    public Resolution update() {
         customerService.updateCustomer(customerDTO);
         return new RedirectResolution(this.getClass(), "list");
     }

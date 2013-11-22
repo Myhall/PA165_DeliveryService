@@ -35,14 +35,14 @@
                     <td>
                         <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" 
                                 event="edit" class="btn btn-xs btn-primary" >
-                            <s:param name="customer.id" value="${customer.id}" />
+                            <s:param name="customerDTO.id" value="${customer.id}" />
                             <f:message key="buttons.update" />
                         </s:link>
                     </td>
                     <td>
                         <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" 
                                 event="delete" class="btn btn-xs btn-danger" >
-                            <s:param name="customer.id" value="${customer.id}" />
+                            <s:param name="customerDTO.id" value="${customer.id}" />
                             <f:message key="buttons.delete" />
                         </s:link>
                     </td>
