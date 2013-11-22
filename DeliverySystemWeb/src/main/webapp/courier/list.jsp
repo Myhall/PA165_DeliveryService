@@ -12,6 +12,7 @@
                     <th><f:message key="courierDTO.firstName"/></th>
                     <th><f:message key="courierDTO.lastName"/></th>
                     <th><f:message key="courierDTO.email"/></th>
+                    <th><f:message key="buttons.update"/></th>
                     <th><f:message key="buttons.delete"/></th>
                 </tr>
             </thead>
@@ -20,6 +21,13 @@
                     <td>${courier.firstName}</td>
                     <td>${courier.lastName}</td>
                     <td>${courier.email}</td>
+                    <td>
+                        <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" 
+                                event="edit" class="btn btn-xs btn-primary" >
+                            <s:param name="id" value="${courier.id}" />
+                            <f:message key="buttons.update" />
+                        </s:link>
+                    </td>
                     <td>
                         <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" 
                                 event="delete" class="btn btn-xs btn-danger" >
