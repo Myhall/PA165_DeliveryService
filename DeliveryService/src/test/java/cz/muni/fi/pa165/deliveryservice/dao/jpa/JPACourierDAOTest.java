@@ -35,7 +35,7 @@ public class JPACourierDAOTest {
     
     @Before
     public void setUp() {
-        emf = Persistence.createEntityManagerFactory("DeliveryServicePu");
+        emf = Persistence.createEntityManagerFactory("DeliveryServiceInMemoryPu");
         em = emf.createEntityManager();
         dao = new JPACourierDAO(em);
     }

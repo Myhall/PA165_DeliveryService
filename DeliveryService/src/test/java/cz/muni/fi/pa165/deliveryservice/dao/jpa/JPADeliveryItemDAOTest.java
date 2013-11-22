@@ -36,7 +36,7 @@ public class JPADeliveryItemDAOTest {
 
     @BeforeClass
     public static void setUpClass() {
-        emf = Persistence.createEntityManagerFactory("DeliveryServicePu");
+        emf = Persistence.createEntityManagerFactory("DeliveryServiceInMemoryPu");
     }
 
     @Before
