@@ -29,6 +29,7 @@
 
     <import resource="classpath*:applicationContext.xml" />
     
-    <bean class="cz.muni.fi.pa165.deliveryservice.service.CourierServiceImpl" ></bean>
+    <!--<bean class="cz.muni.fi.pa165.deliveryservice.service.CourierServiceImpl" ></bean>
+    <bean class="cz.muni.fi.pa165.deliveryservice.service.DeliveryItemServiceImpl" ></bean>-->
     
 </beans>
