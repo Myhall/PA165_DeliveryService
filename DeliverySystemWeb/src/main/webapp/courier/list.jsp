@@ -35,7 +35,7 @@
                             <td>${courier.email}</td>
                             <td>
                                 <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" 
-                                        event="view" class="btn btn-xs btn-primary" >
+                                        event="edit" class="btn btn-xs btn-primary" >
                                     <s:param name="courierDTO.id" value="${courier.id}" />
                                     <f:message key="buttons.update" />
                                 </s:link>
