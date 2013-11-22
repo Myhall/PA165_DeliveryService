@@ -8,11 +8,13 @@ package cz.muni.fi.pa165.deliverysystemweb;
 import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
 import cz.muni.fi.pa165.deliveryservice.service.CourierService;
 import java.util.List;
+import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
+import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import net.sourceforge.stripes.validation.EmailTypeConverter;
 import net.sourceforge.stripes.validation.Validate;
@@ -54,6 +56,11 @@ public class CourierActionBean extends BaseActionBean implements ValidationError
         return new ForwardResolution("/courier/edit.jsp");
     }
     
+    public Resolution update() {
+        courierService.updateCourier(courierDTO);
+        return new RedirectResolution(this.getClass(), "list");
+    }
+    
     public Resolution delete() {
         String id = getContext().getRequest().getParameter("id");
         courierDTO = courierService.findCourier(Long.valueOf(id));
@@ -82,4 +89,12 @@ public class CourierActionBean extends BaseActionBean implements ValidationError
         return null;
     }
 
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "update"})
+    public void loadCourierFromDatabase() {
+        String id = getContext().getRequest().getParameter("courierDTO.id");
+        if (id == null) return;
+        
+        courierDTO = courierService.findCourier(Long.valueOf(id));
+    }
+    
 }

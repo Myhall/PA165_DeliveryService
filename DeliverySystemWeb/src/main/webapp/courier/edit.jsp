@@ -1,11 +1,12 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <s:layout-render name="/layout.jsp">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" var="actionBean"/>
-        
+
         <s:form beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean">
             <s:hidden name="courierDTO.id"/>
 
@@ -30,15 +31,29 @@
                             <s:text name="courierDTO.email" class="form-control" />
                         </div>
                     </div>
-                    <s:submit name="save" class="btn btn-primary">
-                        <f:message key="buttons.save" />
-                    </s:submit>
+
+                    <c:choose>
+
+                        <c:when test="${not empty actionBean.courierDTO.id}">
+                            <s:submit name="update" class="btn btn-primary">
+                                <f:message key="buttons.update" />
+                            </s:submit>
+                        </c:when>
+
+                        <c:otherwise>
+                            <s:submit name="save" class="btn btn-primary">
+                                <f:message key="buttons.save" />
+                            </s:submit>
+                        </c:otherwise>
+
+                    </c:choose>
+
                     <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" class="btn btn-default">
                         <f:message key="buttons.cancel" />
                     </s:link>
-                    </div>
                 </div>
-                        
+            </div>
+
         </s:form>     
     </s:layout-component>
 </s:layout-render>
