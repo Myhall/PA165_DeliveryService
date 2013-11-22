@@ -18,6 +18,7 @@
                     <th><f:message key="customer.zipCode"/></th>
                     <th><f:message key="customer.country"/></th>
                     <th><f:message key="customer.telephoneNumber"/></th>
+                    <th><f:message key="buttons.update"/></th>
                     <th><f:message key="buttons.delete"/></th>
                 </tr>
             </thead>
@@ -32,11 +33,13 @@
                     <td><c:out value="${customer.country}"/></td>
                     <td><c:out value="${customer.telephoneNumber}"/></td>
                     <td>
-                        <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" event="edit">
-                            <s:param name="customer.id" value="${customer.id}"/><f:message key="edit.edit"/>
+                        <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" 
+                                event="edit" class="btn btn-xs btn-primary" >
+                            <s:param name="customer.id" value="${customer.id}" />
+                            <f:message key="buttons.update" />
                         </s:link>
                     </td>
-                     <td>
+                    <td>
                         <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" 
                                 event="delete" class="btn btn-xs btn-danger" >
                             <s:param name="customer.id" value="${customer.id}" />
@@ -46,5 +49,8 @@
                 </tr>
             </c:forEach>
         </table>
+        <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" event="edit" class="btn btn-primary">
+            <f:message key="customer.create" />
+        </s:link>
     </s:layout-component>
 </s:layout-render>

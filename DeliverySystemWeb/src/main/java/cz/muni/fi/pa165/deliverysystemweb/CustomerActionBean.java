@@ -74,7 +74,7 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
         if (ids == null) {
             return;
         }
-        customerDTO = customerService.findCustomer(Long.parseLong(ids));
+        customerDTO = customerService.findCustomer(Long.valueOf(ids));
     }
 
     public Resolution edit() {
