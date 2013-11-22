@@ -25,22 +25,23 @@
             </thead>
             <c:forEach items="${actionBean.deliveries}" var="del">
                 <tr>
-                    <td>${del.customer}</td>
+                    <td>${del.customer.email}</td>
                     <td>${del.placeFrom}</td>
                     <td>${del.placeTo}</td>
-                    <td>${del.courier}</td>
+                    <td>${del.courier.email}</td>
+                    <td>${del.status}</td>
                     
                     <td>
                         <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" 
                                 event="edit" class="btn btn-xs btn-primary" >
-                            <s:param name="id" value="${delivery.id}" />
+                            <s:param name="id" value="${del.id}" />
                             <f:message key="buttons.update" />
                         </s:link>
                     </td>
                     <td>
                         <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" 
                                 event="delete" class="btn btn-xs btn-danger" >
-                            <s:param name="id" value="${delivery.id}" />
+                            <s:param name="id" value="${del.id}" />
                             <f:message key="buttons.delete" />
                         </s:link>
                     </td>

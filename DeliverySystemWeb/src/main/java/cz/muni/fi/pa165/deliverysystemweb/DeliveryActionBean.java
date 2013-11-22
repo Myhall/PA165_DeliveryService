@@ -1,10 +1,16 @@
 package cz.muni.fi.pa165.deliverysystemweb;
 
+import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
 import cz.muni.fi.pa165.deliveryservice.dto.CustomerDTO;
 import cz.muni.fi.pa165.deliveryservice.dto.DeliveryDTO;
+import cz.muni.fi.pa165.deliveryservice.dto.DeliveryItemDTO;
+import cz.muni.fi.pa165.deliveryservice.enums.DeliveryStatus;
+import cz.muni.fi.pa165.deliveryservice.service.CourierService;
 import cz.muni.fi.pa165.deliveryservice.service.CustomerService;
 import cz.muni.fi.pa165.deliveryservice.service.DeliveryItemService;
 import cz.muni.fi.pa165.deliveryservice.service.DeliveryService;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
@@ -28,12 +34,14 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
 
     @SpringBean protected DeliveryService deliveryService;
     @SpringBean protected CustomerService customerService;
+    @SpringBean protected CourierService courierService;
+    @SpringBean protected DeliveryItemService deliveryItemService;
     
     private List<DeliveryDTO> deliveries;
     
     @ValidateNestedProperties(value = {
-            @Validate(on = {"add", "save"}, field = "customer", required = true),
-            @Validate(on = {"add", "save"}, field = "status", required = true),
+//            @Validate(on = {"add", "save"}, field = "customer", required = true),
+//            @Validate(on = {"add", "save"}, field = "status", required = true),
             @Validate(on = {"add", "save"}, field = "placeFrom", required = true, minlength = 1, maxlength = 255),
             @Validate(on = {"add", "save"}, field = "placeTo", required = true, minlength = 1, maxlength = 255)
     })
@@ -78,9 +86,24 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
         this.delivery = delivery;
     }
     
-    public List<CustomerDTO> loadCustomers()
+    public List<CustomerDTO> getAllCustomers()
     {
         return customerService.getAllCustomers();
+    }
+    
+    public List<CourierDTO> getAllCouriers()
+    {
+        return courierService.getAllCouriers();
+    }
+    
+    public List<DeliveryItemDTO> getAllDeliveryItems()
+    {
+        return deliveryItemService.getAllDeliveryItems();
+    }
+    
+    public List<DeliveryStatus> getAllStatuses()
+    {
+        return Arrays.asList(DeliveryStatus.values());
     }
     
     @Override

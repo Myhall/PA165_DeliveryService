@@ -23,23 +23,69 @@
                     <s:errors/>
                     <div class="form-group">
                         <label class="control-label" for="inputSuccess"><s:label name="delivery.customer"/></label>
-                        <s:select name="customer" class="control-select" >
-                            <s:options-collection collection="actionBean.loadCustomers" value="id" label="firstName" />
+                        <s:select name="delivery.customer.id" class="control-select" >
+
+                            <s:options-collection collection="${actionBean.allCustomers}" value="id" label="email" />
                         </s:select>
-                        <s:text name="delivery.customer" class="form-control" />
-                    </div>
-<!--                    <div class="form-group">
-                        <label class="control-label" for="inputWarning"><s:label name="courierDTO.lastName"/></label>
-                        <s:text name="courierDTO.lastName" class="form-control"/>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="inputError"><s:label name="courierDTO.email"/></label>
-                        <div class="input-group">
-                            <span class="input-group-addon">@</span>
-                            <s:text name="courierDTO.email" class="form-control" />
-                        </div>
-                    </div>-->
+                        <label class="control-label" for="inputSuccess"><s:label name="delivery.courier"/></label>
+                        <s:select name="delivery.courier.id" class="control-select" >
+                            <s:option value="" />
+                            <s:options-collection collection="${actionBean.allCouriers}" value="id" label="email" />
+                        </s:select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="inputWarning"><s:label name="delivery.from"/></label>
+                        <s:text name="delivery.placeFrom" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="inputWarning"><s:label name="delivery.to"/></label>
+                        <s:text name="delivery.placeTo" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="inputWarning"><s:label name="delivery.status"/></label>
+                        <s:select name="delivery.status" class="control-select" >
+                            <s:options-collection collection="${actionBean.allStatuses}" />
+                        </s:select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="inputWarning"><s:label name="delivery.additionalInformation"/></label>
+                        <s:text name="delivery.additionalInformation" class="form-control"/>
+                    </div>
 
+                    <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th><f:message key="deliveryItem.name"/></th>
+                    <th><f:message key="deliveryItem.weight"/></th>
+                    <th><f:message key="deliveryItem.description"/></th>
+                </tr>
+            </thead>
+            <c:forEach items="${actionBean.delivery.deliveryItems}" var="it">
+                <tr>
+                    <td>${it.name}</td>
+                    <td>${it.weight}</td>
+                    <td>${it.description}</td>
+                                     
+                    <td>
+                        <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" 
+                                event="edit" class="btn btn-xs btn-primary" >
+                            <s:param name="id" value="${it.id}" />
+                            <f:message key="buttons.update" />
+                        </s:link>
+                    </td>
+                    <td>
+                        <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" 
+                                event="delete" class="btn btn-xs btn-danger" >
+                            <s:param name="id" value="${it.id}" />
+                            <f:message key="buttons.delete" />
+                        </s:link>
+                    </td>
+                </tr>
+            </c:forEach>
+                
+        </table>
                     <c:choose>
 
                         <c:when test="${not empty actionBean.delivery.id}">
