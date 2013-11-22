@@ -20,6 +20,7 @@ public class CustomerDTO {
     private String city;
     private String street;
     private String zipCode;
+    private String country;
     private String telephoneNumber;
     private List<DeliveryDTO> deliveries;
 
@@ -33,6 +34,14 @@ public class CustomerDTO {
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public void setFirstName(String firstName) {

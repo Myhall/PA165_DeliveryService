@@ -5,9 +5,10 @@
 package cz.muni.fi.pa165.deliveryservice.service;
 
 import cz.muni.fi.pa165.deliveryservice.Customer;
+import cz.muni.fi.pa165.deliveryservice.Delivery;
 import cz.muni.fi.pa165.deliveryservice.dao.CustomerDAO;
 import cz.muni.fi.pa165.deliveryservice.dto.CustomerDTO;
-import cz.muni.fi.pa165.deliveryservice.exceptions.DataPersistenceException;
+import cz.muni.fi.pa165.deliveryservice.dto.DeliveryDTO;
 import java.util.ArrayList;
 import java.util.List;
 import org.dozer.Mapper;
@@ -55,11 +56,31 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDTO updateCustomer(CustomerDTO customerDto) {
+    public CustomerDTO updateCustomer(final CustomerDTO customerDto) {
         if (customerDto == null) {
             throw new NullPointerException("customerDto");
         }
-        Customer customer = mapper.map(customerDto, Customer.class);
+
+        Customer customer = customerDao.findCustomer(customerDto.getId());
+        customer.setCity(customerDto.getCity());
+        customer.setCountry(customerDto.getCountry());
+        customer.setEmail(customerDto.getEmail());
+        customer.setFirstName(customerDto.getFirstName());
+        customer.setLastName(customerDto.getLastName());
+        customer.setStreet(customerDto.getStreet());
+        customer.setTelephoneNumber(customerDto.getTelephoneNumber());
+        customer.setZipCode(customerDto.getZipCode());
+
+        List<Delivery> deliveries = new ArrayList<Delivery>() {
+            {
+                for (DeliveryDTO deliveryDto : customerDto.getDeliveries()) {
+                    add(mapper.map(deliveryDto, Delivery.class));
+                }
+            }
+        };
+
+
+        customer.setDeliveries(deliveries);
         return mapper.map(customerDao.updateCustomer(customer), CustomerDTO.class);
     }
 

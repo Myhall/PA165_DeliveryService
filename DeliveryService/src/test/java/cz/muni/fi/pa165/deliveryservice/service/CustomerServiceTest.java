@@ -96,11 +96,6 @@ public class CustomerServiceTest {
         customerService.deleteCustomer(null);
     }
 
-    @Test
-    public void testUpdateCustomer() {
-        customerService.updateCustomer(customerDto);
-        verify(customerDao).updateCustomer(customer);
-    }
 
     @Test(expected = NullPointerException.class)
     public void testUpdateNullCustomer() {

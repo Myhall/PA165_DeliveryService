@@ -51,6 +51,12 @@ public class CourierActionBean extends BaseActionBean implements ValidationError
         courierService.createCourier(courierDTO);
         return new RedirectResolution(this.getClass(), "list");
     }
+    
+    public Resolution view() {
+        String id = getContext().getRequest().getParameter("id");
+        courierDTO = courierService.findCourier(Long.valueOf(id));
+        return new ForwardResolution("/courier/view.jsp");
+    }
 
     public Resolution edit() {
         return new ForwardResolution("/courier/edit.jsp");

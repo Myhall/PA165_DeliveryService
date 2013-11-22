@@ -4,6 +4,7 @@
  */
 package cz.muni.fi.pa165.deliveryservice.service;
 
+import cz.muni.fi.pa165.deliveryservice.Delivery;
 import cz.muni.fi.pa165.deliveryservice.DeliveryItem;
 import cz.muni.fi.pa165.deliveryservice.dao.DeliveryItemDAO;
 import cz.muni.fi.pa165.deliveryservice.dto.DeliveryItemDTO;
@@ -54,8 +55,12 @@ public class DeliveryItemServiceImpl implements DeliveryItemService {
         if (deliveryItemDTO == null) {
             throw new NullPointerException("deliveryItemDTO");
         }
-
+        
         DeliveryItem deliveryItem = deliveryItemDao.findDeliveryItem(deliveryItemDTO.getId());
+        deliveryItem.setDelivery(deliveryItemDTO.getDelivery() == null ? null : mapper.map(deliveryItemDTO.getDelivery(), Delivery.class));
+        deliveryItem.setDescription(deliveryItemDTO.getDescription());
+        deliveryItem.setName(deliveryItemDTO.getName());
+        deliveryItem.setWeight(deliveryItemDTO.getWeight());
         return mapper.map(deliveryItemDao.updateDeliveryItem(deliveryItem), DeliveryItemDTO.class);
     }
 
