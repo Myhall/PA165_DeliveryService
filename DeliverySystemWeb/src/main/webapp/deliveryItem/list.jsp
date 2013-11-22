@@ -12,29 +12,17 @@
 <s:layout-render name="/layout.jsp" titlekey="deliveryItem.list.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" var="actionBean"/>
-        
-        <s:form beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean">
-            <fieldset>
-                <legend>
-                    <f:message key="deliveryItem.new"/>
-                </legend>
-                <%@include file="form.jsp"%>
-                <s:submit name="add" class="btn btn-primary">
-                    <f:message key="buttons.create"/>
-                </s:submit>
-            </fieldset>
-        </s:form>
-        <br/>
+
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title"><f:message key="deliveryItem.list.allitems" /></h3>
             </div>
             <div class="panel-body">
 
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th><f:message key="deliveryItem.name"/></th>
+                           <th><f:message key="deliveryItem.name"/></th>
                             <th><f:message key="deliveryItem.description"/></th>
                             <th><f:message key="deliveryItem.weight"/></th>
                             <th><f:message key="label.edit"/></th>
@@ -60,6 +48,9 @@
                     </c:forEach>
                 </table>
 
+                <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" event="edit" class="btn btn-primary">
+                    <f:message key="deliveryItem.new" />
+                </s:link>
 
             </div>
         </div>
