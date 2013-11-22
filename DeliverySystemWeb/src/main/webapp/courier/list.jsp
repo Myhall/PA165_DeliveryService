@@ -6,7 +6,13 @@
 <s:layout-render name="/layout.jsp">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" var="actionBean"/>
-        <table class="table table-striped table-bordered">
+        
+        <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><f:message key="courier.list" /></h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped table-bordered">
             <thead>
                 <tr>
                     <th><f:message key="courierDTO.firstName"/></th>
@@ -42,5 +48,9 @@
         <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" event="edit" class="btn btn-primary">
             <f:message key="courier.createMessage" />
         </s:link>
+                </div>
+                
+        </div>
+        
     </s:layout-component>
 </s:layout-render>

@@ -5,7 +5,9 @@
     <html lang="${pageContext.request.locale}">
         <head>
             <title>Example</title>
+            <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/bootstrap.css" />
+            <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/main.css" />
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,17 +32,13 @@
                         <a class="navbar-brand" href="${pageContext.request.contextPath}">Delivery service</a>
                     </div>
                     <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <!--<li class="active"><a href="#">Link</a></li>-->
-                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean">Couriers</s:link></li>
-                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean">Delivery Items</s:link></li>
-                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean">Customer</s:link></li>
-                        </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li class="active"><a href="./">Default</a></li>
-                            <li><a href="#">Static top</a></li>
-                            <li><a href="#">Fixed top</a></li>
+                            <!--<li class="active"><a href="#">Link</a></li>-->
+                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" class="glyphicon glyphicon-globe">&nbsp;Couriers</s:link></li>
+                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" class="glyphicon glyphicon-briefcase">&nbsp;Delivery Items</s:link></li>
+                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" class="glyphicon glyphicon-user">&nbsp;Customers</s:link></li>
                         </ul>
+                        
                     </div><!--/.nav-collapse -->
                 </div>
 
