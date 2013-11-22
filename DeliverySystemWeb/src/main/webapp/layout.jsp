@@ -35,6 +35,7 @@
                             <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean">Deliveries</s:link></li>
                             <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean">Couriers</s:link></li>
                             <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean">Delivery Items</s:link></li>
+                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean">Customer</s:link></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="active"><a href="./">Default</a></li>
