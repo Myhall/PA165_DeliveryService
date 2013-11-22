@@ -1,6 +1,9 @@
 package cz.muni.fi.pa165.deliverysystemweb;
 
+import cz.muni.fi.pa165.deliveryservice.dto.CustomerDTO;
 import cz.muni.fi.pa165.deliveryservice.dto.DeliveryDTO;
+import cz.muni.fi.pa165.deliveryservice.service.CustomerService;
+import cz.muni.fi.pa165.deliveryservice.service.DeliveryItemService;
 import cz.muni.fi.pa165.deliveryservice.service.DeliveryService;
 import java.util.List;
 import net.sourceforge.stripes.action.Before;
@@ -23,8 +26,8 @@ import net.sourceforge.stripes.validation.ValidationErrors;
 @UrlBinding("/delivery/${event}")
 public class DeliveryActionBean extends BaseActionBean implements ValidationErrorHandler {
 
-    @SpringBean
-    protected DeliveryService service;
+    @SpringBean protected DeliveryService deliveryService;
+    @SpringBean protected CustomerService customerService;
     
     private List<DeliveryDTO> deliveries;
     
@@ -38,12 +41,12 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
     
     @DefaultHandler
     public Resolution list() {
-        deliveries = service.getAllDeliveries();
+        deliveries = deliveryService.getAllDeliveries();
         return new ForwardResolution("/delivery/list.jsp");
     }
     
     public Resolution save() {
-        service.createDelivery(delivery);
+        deliveryService.createDelivery(delivery);
         return new RedirectResolution(this.getClass(), "list");
     }
 
@@ -53,8 +56,8 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
     
     public Resolution delete() {
         String id = getContext().getRequest().getParameter("id");
-        delivery = service.findDelivery(Long.valueOf(id));
-        service.deleteDelivery(delivery);
+        delivery = deliveryService.findDelivery(Long.valueOf(id));
+        deliveryService.deleteDelivery(delivery);
         return new RedirectResolution(this.getClass(), "list");
     }
 
@@ -75,6 +78,11 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
         this.delivery = delivery;
     }
     
+    public List<CustomerDTO> loadCustomers()
+    {
+        return customerService.getAllCustomers();
+    }
+    
     @Override
     public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
         return null;
@@ -85,6 +93,6 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
         String id = getContext().getRequest().getParameter("id");
         if (id == null) return;
         
-        delivery = service.findDelivery(Long.valueOf(id));
+        delivery = deliveryService.findDelivery(Long.valueOf(id));
     }
 }

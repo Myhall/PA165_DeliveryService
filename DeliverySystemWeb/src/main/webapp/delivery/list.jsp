@@ -16,17 +16,20 @@
             <thead>
                 <tr>
                     <th><f:message key="delivery.customer"/></th>
-<!--                    <th><f:message key="courierDTO.lastName"/></th>
-                    <th><f:message key="courierDTO.email"/></th>
+                    <th><f:message key="delivery.placeFrom"/></th>
+                    <th><f:message key="delivery.placeTo"/></th>
+                    <th><f:message key="delivery.courier"/></th>
                     <th><f:message key="buttons.update"/></th>
-                    <th><f:message key="buttons.delete"/></th>-->
+                    <th><f:message key="buttons.delete"/></th>
                 </tr>
             </thead>
-            <c:forEach items="${actionBean.deliveries}" var="courier">
+            <c:forEach items="${actionBean.deliveries}" var="del">
                 <tr>
-                    <td>${delivery.customer}</td>
-                    <td>${delivery.courier}</td>
-                    <!--<td>${courier.email}</td>-->
+                    <td>${del.customer}</td>
+                    <td>${del.placeFrom}</td>
+                    <td>${del.placeTo}</td>
+                    <td>${del.courier}</td>
+                    
                     <td>
                         <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" 
                                 event="edit" class="btn btn-xs btn-primary" >
