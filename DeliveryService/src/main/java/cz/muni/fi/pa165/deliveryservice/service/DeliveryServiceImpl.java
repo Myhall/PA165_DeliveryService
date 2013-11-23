@@ -3,10 +3,13 @@ package cz.muni.fi.pa165.deliveryservice.service;
 import cz.muni.fi.pa165.deliveryservice.Courier;
 import cz.muni.fi.pa165.deliveryservice.Customer;
 import cz.muni.fi.pa165.deliveryservice.Delivery;
+import cz.muni.fi.pa165.deliveryservice.DeliveryItem;
 import cz.muni.fi.pa165.deliveryservice.dao.DeliveryDAO;
+import cz.muni.fi.pa165.deliveryservice.dao.DeliveryItemDAO;
 import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
 import cz.muni.fi.pa165.deliveryservice.dto.CustomerDTO;
 import cz.muni.fi.pa165.deliveryservice.dto.DeliveryDTO;
+import cz.muni.fi.pa165.deliveryservice.dto.DeliveryItemDTO;
 import cz.muni.fi.pa165.deliveryservice.enums.DeliveryStatus;
 import cz.muni.fi.pa165.deliveryservice.exceptions.DataPersistenceException;
 import java.util.ArrayList;
@@ -34,7 +37,12 @@ public class DeliveryServiceImpl implements DeliveryService {
         }
 
         Delivery d = mapper.map(delivery, Delivery.class);
+        for(DeliveryItem item : d.getItems())
+        {
+            item.setDelivery(d);
+        }
         deliveryDAO.createDelivery(d);
+        
         return mapper.map(d, DeliveryDTO.class);
     }
 
@@ -55,6 +63,10 @@ public class DeliveryServiceImpl implements DeliveryService {
         }
 
         Delivery d = mapper.map(delivery, Delivery.class);
+        for(DeliveryItem item : d.getItems())
+        {
+            item.setDelivery(d);
+        }
         return mapper.map(deliveryDAO.updateDelivery(d), DeliveryDTO.class);
     }
 

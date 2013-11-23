@@ -58,32 +58,23 @@
                     <div class="form-group">
                         <label class="control-label" for="inputWarning"><s:label name="deliveryItems"/></label>
                         
-                        <s:select name="delivery.deliveryItems.id" class="control-select" id="itemadd">
-                            <s:options-collection collection="${actionBean.allDeliveryItems}" value="id" label="name" />
-                        </s:select>
-                        
-                        <s:button class="btn btn-xs btn-primary" name="additem" onclick="deliveryItems.add(itemadd.value);" >
-                            <f:message key="buttons.add" />
-                        </s:button>
-                        
-                        
-                    
                         <table class="table table-striped table-bordered">
                             <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th><f:message key="deliveryItem.name"/></th>
                                     <th><f:message key="deliveryItem.weight"/></th>
                                     <th><f:message key="deliveryItem.description"/></th>
                                 </tr>
                             </thead>
-                            <c:forEach items="${actionBean.delivery.items}" var="it" varStatus="loop">
+                            <c:forEach items="${actionBean.allDeliveryItems}" var="it" varStatus="loop">
                                 <tr>
                                     <td>${it.id}
-                                        <s:hidden name="it[${loop.index}].id" value="${it.id}" />
                                     </td>
                                     <td>${it.name}</td>
                                     <td>${it.weight}</td>
                                     <td>${it.description}</td>              
+                                    <td><s:checkbox name="delivery.items" value="${it.id}"  /></td>
                                     <td>
                                         <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" 
                                                 event="edit" class="btn btn-xs btn-primary" >
@@ -103,6 +94,9 @@
 
                         </table>
                     </div>
+                        
+                        
+                        
                     <c:choose>
 
                         <c:when test="${not empty actionBean.delivery.id}">

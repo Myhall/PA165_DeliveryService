@@ -12,8 +12,10 @@ import cz.muni.fi.pa165.deliveryservice.service.DeliveryService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
+import net.sourceforge.stripes.action.ErrorResolution;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
@@ -24,6 +26,7 @@ import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
 import net.sourceforge.stripes.validation.ValidationErrors;
+import org.springframework.dao.DataAccessException;
 
 /**
  *
@@ -43,10 +46,21 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
 //            @Validate(on = {"add", "save"}, field = "customer", required = true),
 //            @Validate(on = {"add", "save"}, field = "status", required = true),
             @Validate(on = {"add", "save"}, field = "placeFrom", required = true, minlength = 1, maxlength = 255),
-            @Validate(on = {"add", "save"}, field = "placeTo", required = true, minlength = 1, maxlength = 255)
+            @Validate(on = {"add", "save"}, field = "placeTo", required = true, minlength = 1, maxlength = 255),
+//            @Validate(on = {"add", "save"}, field = "items", converter = DeliveryItemTypeConverter.class)
     })
     private DeliveryDTO delivery;
     private List<DeliveryItemDTO> deliveryItems;
+
+    public List<DeliveryItemDTO> getDeliveryItems() {
+        return deliveryItems;
+    }
+
+    public void setDeliveryItems(List<DeliveryItemDTO> deliveryItems) {
+        this.deliveryItems = deliveryItems;
+    }
+    
+    
     
     @DefaultHandler
     public Resolution list() {
@@ -55,8 +69,24 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
     }
     
     public Resolution save() {
-        delivery.setItems(deliveryItems);
+        try{
         deliveryService.createDelivery(delivery);
+        } catch (DataAccessException ex)
+        {
+            return new ErrorResolution(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+        return new RedirectResolution(this.getClass(), "list");
+    }
+    
+    public Resolution update()
+    {
+        try
+        {
+            deliveryService.updateDelivery(delivery);
+        } catch (DataAccessException ex)
+        {
+            return new ErrorResolution(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
         return new RedirectResolution(this.getClass(), "list");
     }
 
@@ -129,6 +159,5 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
         if (id == null) return;
         
         delivery = deliveryService.findDelivery(Long.valueOf(id));
-        deliveryItems = delivery.getItems();
     }
 }

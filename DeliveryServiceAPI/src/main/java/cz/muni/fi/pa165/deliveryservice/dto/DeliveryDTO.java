@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.deliveryservice.dto;
 
 import cz.muni.fi.pa165.deliveryservice.enums.DeliveryStatus;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -94,6 +95,7 @@ public class DeliveryDTO {
     }
 
     public DeliveryDTO() {
+        items = new ArrayList<>();
     }
 
     public DeliveryDTO(Long id, BigDecimal price, CustomerDTO customer, CourierDTO courier, String additionalInformation, DeliveryStatus status, List<DeliveryItemDTO> items, String placeFrom, String placeTo) {
