@@ -7,7 +7,7 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 <s:errors/>
 <div class="row">
-    <div class="form-group col-lg-3">
+    <div class="form-group col-lg-4">
         <th><s:label for="e1" name="deliveryItem.name"/></th>
         <td><s:text id="e1" name="deliveryItem.name" class="form-control" /></td>
     </div>
@@ -19,7 +19,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="form-group col-lg-1">
+    <div class="form-group col-lg-2">
         <th><s:label for="e5" name="deliveryItem.weight"/></th>
         <td><s:text id="e5" name="deliveryItem.weight" size="5" class="form-control"/></td>
     </div>
