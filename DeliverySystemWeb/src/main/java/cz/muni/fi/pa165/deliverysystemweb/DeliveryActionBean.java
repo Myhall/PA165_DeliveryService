@@ -106,6 +106,15 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
         return Arrays.asList(DeliveryStatus.values());
     }
     
+    public void addDeliveryItem(String id)
+    {
+        if (id != null && id != "") {
+            DeliveryItemDTO item = deliveryItemService.findDeliveryItem(Long.valueOf(id));
+            delivery.getItems().add(item);
+        }
+        
+    }
+    
     @Override
     public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
         return null;

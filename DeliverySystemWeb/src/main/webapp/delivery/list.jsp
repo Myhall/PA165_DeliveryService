@@ -19,6 +19,7 @@
                     <th><f:message key="delivery.placeFrom"/></th>
                     <th><f:message key="delivery.placeTo"/></th>
                     <th><f:message key="delivery.courier"/></th>
+                    <th><f:message key="delivery.status"/></th>
                     <th><f:message key="buttons.update"/></th>
                     <th><f:message key="buttons.delete"/></th>
                 </tr>

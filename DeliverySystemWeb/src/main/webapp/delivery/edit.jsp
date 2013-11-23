@@ -54,38 +54,47 @@
                         <s:text name="delivery.additionalInformation" class="form-control"/>
                     </div>
 
-                    <table class="table table-striped table-bordered">
-            <thead>
-                <tr>
-                    <th><f:message key="deliveryItem.name"/></th>
-                    <th><f:message key="deliveryItem.weight"/></th>
-                    <th><f:message key="deliveryItem.description"/></th>
-                </tr>
-            </thead>
-            <c:forEach items="${actionBean.delivery.deliveryItems}" var="it">
-                <tr>
-                    <td>${it.name}</td>
-                    <td>${it.weight}</td>
-                    <td>${it.description}</td>
-                                     
-                    <td>
-                        <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" 
-                                event="edit" class="btn btn-xs btn-primary" >
-                            <s:param name="id" value="${it.id}" />
-                            <f:message key="buttons.update" />
-                        </s:link>
-                    </td>
-                    <td>
-                        <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" 
-                                event="delete" class="btn btn-xs btn-danger" >
-                            <s:param name="id" value="${it.id}" />
-                            <f:message key="buttons.delete" />
-                        </s:link>
-                    </td>
-                </tr>
-            </c:forEach>
-                
-        </table>
+                    <div class="form-group">
+                        <label class="control-label" for="inputWarning"><s:label name="deliveryItems"/></label>
+                        <s:select name="delivery.deliveryItems.id" class="control-select" id="itemadd">
+                            <s:options-collection collection="${actionBean.allDeliveryItems}" value="id" label="name" />
+                        </s:select>
+                        <s:button class="btn btn-xs btn-primary" name="additem" onclick="var idd = itemadd.value;${actionBean.addDeliveryItem(idd)}" >
+                            <f:message key="buttons.add" />
+                        </s:button>
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th><f:message key="deliveryItem.name"/></th>
+                                    <th><f:message key="deliveryItem.weight"/></th>
+                                    <th><f:message key="deliveryItem.description"/></th>
+                                </tr>
+                            </thead>
+                            <c:forEach items="${actionBean.delivery.items}" var="it">
+                                <tr>
+                                    <td>${it.name}</td>
+                                    <td>${it.weight}</td>
+                                    <td>${it.description}</td>
+                                    <td>                 
+                                    <td>
+                                        <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" 
+                                                event="edit" class="btn btn-xs btn-primary" >
+                                            <s:param name="id" value="${it.id}" />
+                                            <f:message key="buttons.update" />
+                                        </s:link>
+                                    </td>
+                                    <td>
+                                        <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" 
+                                                event="delete" class="btn btn-xs btn-danger" >
+                                            <s:param name="id" value="${it.id}" />
+                                            <f:message key="buttons.delete" />
+                                        </s:link>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+
+                        </table>
+                    </div>
                     <c:choose>
 
                         <c:when test="${not empty actionBean.delivery.id}">

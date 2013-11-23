@@ -16,9 +16,25 @@
             <s:hidden name="deliveryItem.id"/>
             <fieldset><legend><f:message key="label.edit"/></legend>
                 <%@include file="form.jsp"%>
-                <s:submit name="save"><f:message key="buttons.save"/></s:submit>
+
+                <c:choose>
+
+                    <c:when test="${not empty actionBean.deliveryItem.id}">
+                        <s:submit name="save" class="btn btn-primary">
+                            <f:message key="buttons.save" />
+                        </s:submit>
+                    </c:when>
+
+                    <c:otherwise>
+                        <s:submit name="add" class="btn btn-primary">
+                            <f:message key="buttons.create" />
+                        </s:submit>
+                    </c:otherwise>
+
+                </c:choose>
+
                 <s:submit name="cancel"><f:message key="buttons.cancel"/></s:submit>
-            </fieldset>
+                </fieldset>
         </s:form>
 
     </s:layout-component>

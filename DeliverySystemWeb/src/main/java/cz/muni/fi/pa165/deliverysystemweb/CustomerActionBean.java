@@ -26,13 +26,14 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
     @SpringBean
     protected CustomerService customerService;
     private List<CustomerDTO> customerList;
-    private CustomerDTO customerDTO;
 
     @ValidateNestedProperties(value = {
         @Validate(on = {"add", "save"}, field = "firstName", required = true),
         @Validate(on = {"add", "save"}, field = "lastName", required = true),
         @Validate(on = {"add", "save"}, field = "email", required = true)
     })
+    private CustomerDTO customerDTO;
+    
     @DefaultHandler
     public Resolution list() {
         customerList = customerService.getAllCustomers();
@@ -56,7 +57,7 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
         return customerList;
     }
 
-    public Resolution add() {
+    public Resolution save() {
         customerService.createCustomer(customerDTO);
         return new RedirectResolution(this.getClass(), "list");
 
@@ -68,20 +69,20 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
         return new RedirectResolution(this.getClass(), "list");
     }
 
-    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "save"})
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "update"})
     public void loadCustomerFromDatabase() {
         String ids = getContext().getRequest().getParameter("customerDTO.id");
         if (ids == null) {
             return;
         }
-        customerDTO = customerService.findCustomer(Long.parseLong(ids));
+        customerDTO = customerService.findCustomer(Long.valueOf(ids));
     }
 
     public Resolution edit() {
         return new ForwardResolution("/customer/edit.jsp");
     }
 
-    public Resolution save() {
+    public Resolution update() {
         customerService.updateCustomer(customerDTO);
         return new RedirectResolution(this.getClass(), "list");
     }
