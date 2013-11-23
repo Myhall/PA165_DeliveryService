@@ -55,7 +55,7 @@ public class DeliveryItemServiceImpl implements DeliveryItemService {
         if (deliveryItemDTO == null) {
             throw new NullPointerException("deliveryItemDTO");
         }
-        
+
         DeliveryItem deliveryItem = deliveryItemDao.findDeliveryItem(deliveryItemDTO.getId());
         deliveryItem.setDelivery(deliveryItemDTO.getDelivery() == null ? null : mapper.map(deliveryItemDTO.getDelivery(), Delivery.class));
         deliveryItem.setDescription(deliveryItemDTO.getDescription());
@@ -69,8 +69,11 @@ public class DeliveryItemServiceImpl implements DeliveryItemService {
         if (id == null) {
             throw new NullPointerException("id");
         }
-
-        return mapper.map(deliveryItemDao.findDeliveryItem(id), DeliveryItemDTO.class);
+        DeliveryItem deliveryItem = deliveryItemDao.findDeliveryItem(id);
+        if (deliveryItem == null) {
+            return null;
+        }
+        return mapper.map(deliveryItem, DeliveryItemDTO.class);
     }
 
     @Override
@@ -81,5 +84,4 @@ public class DeliveryItemServiceImpl implements DeliveryItemService {
         }
         return list;
     }
-
 }

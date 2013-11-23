@@ -20,9 +20,9 @@
                 </div><!-- /.col-lg-4 -->
                 <div class="col-lg-4 text-center">
 
-
-                    <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" class="btn btn-success btn-lg">
-                        <span class="glyphicon glyphicon-briefcase"></span> Deliveries
+                                        <!-- MISO TU MAS LINK ZO ZELENEHO TLACITKA -->
+                    <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" class="btn btn-success btn-lg">
+                        <span class="glyphicon glyphicon-briefcase"></span> <f:message key="delivery.list.title"/>
                     </s:link>
 
                 </div><!-- /.col-lg-4 -->

@@ -90,7 +90,11 @@ public class CourierServiceImpl implements CourierService {
             throw new NullPointerException();
         }
 
-        return mapper.map(courierDao.findCourier(id), CourierDTO.class);
+        Courier fromDB = courierDao.findCourier(id);
+        if(fromDB == null) {
+            return null;
+        }
+        return mapper.map(fromDB, CourierDTO.class);
     }
 
     public void setCourierDao(CourierDAO courierDao) {

@@ -98,6 +98,10 @@ public class CustomerServiceImpl implements CustomerService {
         if (id == null) {
             throw new NullPointerException("id");
         }
-        return mapper.map(customerDao.findCustomer(id), CustomerDTO.class);
+        Customer customerFromDB = customerDao.findCustomer(id);
+        if(customerFromDB == null) {
+            return null;
+        }
+        return mapper.map(customerFromDB, CustomerDTO.class);
     }
 }
