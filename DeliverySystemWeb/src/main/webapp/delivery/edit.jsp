@@ -78,14 +78,14 @@
                                     <td>
                                         <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" 
                                                 event="edit" class="btn btn-xs btn-primary" >
-                                            <s:param name="id" value="${it.id}" />
+                                            <s:param name="deliveryItem.id" value="${it.id}" />
                                             <f:message key="buttons.update" />
                                         </s:link>
                                     </td>
                                     <td>
                                         <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" 
                                                 event="delete" class="btn btn-xs btn-danger" >
-                                            <s:param name="id" value="${it.id}" />
+                                            <s:param name="deliveryItem.id" value="${it.id}" />
                                             <f:message key="buttons.delete" />
                                         </s:link>
                                     </td>
