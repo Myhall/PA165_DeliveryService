@@ -25,7 +25,7 @@
                            <th><f:message key="deliveryItem.name"/></th>
                             <th><f:message key="deliveryItem.description"/></th>
                             <th><f:message key="deliveryItem.weight"/></th>
-                            <th><f:message key="label.edit"/></th>
+                            <th><f:message key="buttons.edit"/></th>
                             <th><f:message key="label.delete"/></th>
                         </tr>
                     </thead>

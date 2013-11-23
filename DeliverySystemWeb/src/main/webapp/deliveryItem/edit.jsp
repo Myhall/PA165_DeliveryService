@@ -33,7 +33,8 @@
 
                 </c:choose>
 
-                <s:submit name="cancel"><f:message key="buttons.cancel"/></s:submit>
+                <s:submit name="cancel" class="btn btn-primary">
+                    <f:message key="buttons.cancel"/></s:submit>
                 </fieldset>
         </s:form>
 

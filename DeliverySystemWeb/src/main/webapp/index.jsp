@@ -21,8 +21,8 @@
                 <div class="col-lg-4 text-center">
 
 
-                    <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" class="btn btn-success btn-lg">
-                        <span class="glyphicon glyphicon-briefcase"></span> Deliveries
+                    <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" class="btn btn-success btn-lg">
+                        <span class="glyphicon glyphicon-briefcase"></span> <f:message key="deliveryItem.list.title"/>
                     </s:link>
 
                 </div><!-- /.col-lg-4 -->
