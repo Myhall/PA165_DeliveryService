@@ -22,6 +22,7 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
+                            <th/>
                            <th><f:message key="deliveryItem.name"/></th>
                             <th><f:message key="deliveryItem.description"/></th>
                             <th><f:message key="deliveryItem.weight"/></th>
@@ -31,6 +32,7 @@
                     </thead>
                     <c:forEach items="${actionBean.deliveryItems}" var="deliveryItem">
                         <tr>
+                            <td/>
                             <td><c:out value="${deliveryItem.name}"/></td>
                             <td><c:out value="${deliveryItem.description}"/></td>
                             <td><c:out value="${deliveryItem.weight}"/></td>
@@ -49,7 +51,7 @@
                 </table>
 
                 <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" event="edit" class="btn btn-primary">
-                    <f:message key="deliveryItem.new" />
+                    <f:message key="deliveryItem.create" />
                 </s:link>
 
             </div>
