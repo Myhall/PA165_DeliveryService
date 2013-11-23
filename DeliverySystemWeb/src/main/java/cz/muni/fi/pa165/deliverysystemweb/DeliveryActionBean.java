@@ -46,6 +46,7 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
             @Validate(on = {"add", "save"}, field = "placeTo", required = true, minlength = 1, maxlength = 255)
     })
     private DeliveryDTO delivery;
+    private List<DeliveryItemDTO> deliveryItems;
     
     @DefaultHandler
     public Resolution list() {
@@ -54,6 +55,7 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
     }
     
     public Resolution save() {
+        delivery.setItems(deliveryItems);
         deliveryService.createDelivery(delivery);
         return new RedirectResolution(this.getClass(), "list");
     }
@@ -127,5 +129,6 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
         if (id == null) return;
         
         delivery = deliveryService.findDelivery(Long.valueOf(id));
+        deliveryItems = delivery.getItems();
     }
 }

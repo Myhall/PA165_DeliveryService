@@ -20,15 +20,23 @@
                 </div><!-- /.col-lg-4 -->
                 <div class="col-lg-4 text-center">
 
-                                        <!-- MISO TU MAS LINK ZO ZELENEHO TLACITKA -->
+                                        
+                    <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" class="btn btn-success btn-lg">
+                        <span class="glyphicon glyphicon-briefcase"></span> <f:message key="deliveryItem.list.title"/>
+                    </s:link>
+ 
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-4 text-center">
+
+                                        
                     <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" class="btn btn-success btn-lg">
                         <span class="glyphicon glyphicon-briefcase"></span> <f:message key="delivery.list.title"/>
                     </s:link>
-
+ 
                 </div><!-- /.col-lg-4 -->
                 <div class="col-lg-4 text-center">
                     <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" class="btn btn-success btn-lg">
-                        <span class="glyphicon glyphicon-user"></span> <f:message key="customer.title"/>
+                        <span class="glyphicon glyphicon-user"></span> <f:message key="customer.list.title"/>
                     </s:link>
                 </div><!-- /.col-lg-4 -->
             </div><!-- /.row -->

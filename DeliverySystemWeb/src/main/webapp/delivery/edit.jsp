@@ -14,6 +14,7 @@
 
         <s:form beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean">
             <s:hidden name="delivery.id"/>
+            <s:hidden name="deliveryItems" />
 
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -57,11 +58,11 @@
                     <div class="form-group">
                         <label class="control-label" for="inputWarning"><s:label name="deliveryItems"/></label>
                         
-                        <s:select name="delivery.deliveryItems" class="control-select" id="itemadd">
+                        <s:select name="delivery.deliveryItems.id" class="control-select" id="itemadd">
                             <s:options-collection collection="${actionBean.allDeliveryItems}" value="id" label="name" />
                         </s:select>
                         
-                        <s:button class="btn btn-xs btn-primary" name="additem" onclick="" >
+                        <s:button class="btn btn-xs btn-primary" name="additem" onclick="deliveryItems.add(itemadd.value);" >
                             <f:message key="buttons.add" />
                         </s:button>
                         

@@ -36,10 +36,10 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <!--<li class="active"><a href="#">Link</a></li>-->
-                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" class="glyphicon glyphicon-globe">&nbsp;Deliveries</s:link></li>
-                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" class="glyphicon glyphicon-globe">&nbsp;Couriers</s:link></li>
-                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" class="glyphicon glyphicon-briefcase">&nbsp;Delivery Items</s:link></li>
-                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" class="glyphicon glyphicon-user">&nbsp;Customers</s:link></li>
+                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" class="glyphicon glyphicon-globe">&nbsp;<f:message key="delivery.title"/></s:link></li>
+                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" class="glyphicon glyphicon-globe">&nbsp;<f:message key="courier.title"/></s:link></li>
+                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" class="glyphicon glyphicon-briefcase">&nbsp;<f:message key="deliveryItem.list.title"/></s:link></li>
+                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" class="glyphicon glyphicon-user">&nbsp;<f:message key="customer.list.title"/></s:link></li>
                         </ul>
                         
                     </div><!--/.nav-collapse -->
