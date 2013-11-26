@@ -74,7 +74,7 @@
                                     <td>${it.name}</td>
                                     <td>${it.weight}</td>
                                     <td>${it.description}</td>              
-                                    <td><s:checkbox name="delivery.items" value="${it.id}"  /></td>
+                                    <td><s:checkbox name="itemId" value="${it.id}"  /></td>
                                     <td>
                                         <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" 
                                                 event="edit" class="btn btn-xs btn-primary" >

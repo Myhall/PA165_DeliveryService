@@ -50,7 +50,8 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
 //            @Validate(on = {"add", "save"}, field = "items", converter = DeliveryItemTypeConverter.class)
     })
     private DeliveryDTO delivery;
-    private List<DeliveryItemDTO> deliveryItems;
+    private List<DeliveryItemDTO> deliveryItems = new ArrayList<>();;
+    private List<Long> itemId = new ArrayList<>();
 
     public List<DeliveryItemDTO> getDeliveryItems() {
         return deliveryItems;
@@ -59,8 +60,14 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
     public void setDeliveryItems(List<DeliveryItemDTO> deliveryItems) {
         this.deliveryItems = deliveryItems;
     }
-    
-    
+
+    public List<Long> getItemId() {
+        return itemId;
+    }
+
+    public void setItemId(List<Long> itemId) {
+        this.itemId = itemId;
+    }
     
     @DefaultHandler
     public Resolution list() {
@@ -70,6 +77,12 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
     
     public Resolution save() {
         try{
+            List<DeliveryItemDTO> items = new ArrayList();
+            for(Long id : itemId)
+            {
+                items.add(deliveryItemService.findDeliveryItem(id));
+            }
+            delivery.setItems(items);
         deliveryService.createDelivery(delivery);
         } catch (DataAccessException ex)
         {
