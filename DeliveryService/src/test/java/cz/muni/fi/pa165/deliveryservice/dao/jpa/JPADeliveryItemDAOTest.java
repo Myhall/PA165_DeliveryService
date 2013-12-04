@@ -58,7 +58,7 @@ public class JPADeliveryItemDAOTest {
 
     private DeliveryItem createTestDeliveryItem() {
         DeliveryItem deliveryItem = new DeliveryItem();
-        deliveryItem.setDelivery(null);
+        //deliveryItem.setDelivery(null);
         deliveryItem.setDescription("Test Description");
         deliveryItem.setName("Test Name");
         deliveryItem.setWeight(new BigDecimal("5"));

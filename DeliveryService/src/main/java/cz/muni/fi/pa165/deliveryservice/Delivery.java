@@ -9,9 +9,11 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -103,7 +105,8 @@ public class Delivery implements Serializable {
         this.status = status;
     }
 
-    @OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL)
+    //@OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     public List<DeliveryItem> getItems() {
         return items;
     }

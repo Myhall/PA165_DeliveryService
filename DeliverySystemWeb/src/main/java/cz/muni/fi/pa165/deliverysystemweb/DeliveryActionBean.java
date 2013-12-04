@@ -35,69 +35,63 @@ import org.springframework.dao.DataAccessException;
 @UrlBinding("/delivery/${event}")
 public class DeliveryActionBean extends BaseActionBean implements ValidationErrorHandler {
 
-    @SpringBean protected DeliveryService deliveryService;
-    @SpringBean protected CustomerService customerService;
-    @SpringBean protected CourierService courierService;
-    @SpringBean protected DeliveryItemService deliveryItemService;
-    
+    @SpringBean
+    protected DeliveryService deliveryService;
+    @SpringBean
+    protected CustomerService customerService;
+    @SpringBean
+    protected CourierService courierService;
+    @SpringBean
+    protected DeliveryItemService deliveryItemService;
     private List<DeliveryDTO> deliveries;
-    
     @ValidateNestedProperties(value = {
-//            @Validate(on = {"add", "save"}, field = "customer", required = true),
-//            @Validate(on = {"add", "save"}, field = "status", required = true),
-            @Validate(on = {"add", "save"}, field = "placeFrom", required = true, minlength = 1, maxlength = 255),
-            @Validate(on = {"add", "save"}, field = "placeTo", required = true, minlength = 1, maxlength = 255),
-//            @Validate(on = {"add", "save"}, field = "items", converter = DeliveryItemTypeConverter.class)
+        //            @Validate(on = {"add", "save"}, field = "customer", required = true),
+        //            @Validate(on = {"add", "save"}, field = "status", required = true),
+        @Validate(on = {"add", "save"}, field = "placeFrom", required = true, minlength = 1, maxlength = 255),
+        @Validate(on = {"add", "save"}, field = "placeTo", required = true, minlength = 1, maxlength = 255), //            @Validate(on = {"add", "save"}, field = "items", converter = DeliveryItemTypeConverter.class)
     })
-    private DeliveryDTO delivery;
-    private List<DeliveryItemDTO> deliveryItems = new ArrayList<>();;
-    private List<Long> itemId = new ArrayList<>();
+    private DeliveryWrapper delivery;
+    //private DeliveryDTO delivery;
 
-    public List<DeliveryItemDTO> getDeliveryItems() {
-        return deliveryItems;
-    }
-
-    public void setDeliveryItems(List<DeliveryItemDTO> deliveryItems) {
-        this.deliveryItems = deliveryItems;
-    }
-
-    public List<Long> getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(List<Long> itemId) {
-        this.itemId = itemId;
-    }
-    
     @DefaultHandler
     public Resolution list() {
         deliveries = deliveryService.getAllDeliveries();
         return new ForwardResolution("/delivery/list.jsp");
     }
-    
+
     public Resolution save() {
-        try{
-            List<DeliveryItemDTO> items = new ArrayList();
-            for(Long id : itemId)
-            {
-                items.add(deliveryItemService.findDeliveryItem(id));
+        try {
+            if (delivery.getDeliveryItemIds() != null) {
+                List<DeliveryItemDTO> didtos = new ArrayList<>();
+                for (Long id : delivery.getDeliveryItemIds()) {
+                    DeliveryItemDTO didto = deliveryItemService.findDeliveryItem(id);
+                    if (didto != null) {
+                        didtos.add(didto);
+                    }
+                }
+                delivery.setItems(didtos);
             }
-            delivery.setItems(items);
-        deliveryService.createDelivery(delivery);
-        } catch (DataAccessException ex)
-        {
+            deliveryService.createDelivery(delivery);
+        } catch (DataAccessException ex) {
             return new ErrorResolution(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
         return new RedirectResolution(this.getClass(), "list");
     }
-    
-    public Resolution update()
-    {
-        try
-        {
+
+    public Resolution update() {
+        try {
+            if (delivery.getDeliveryItemIds() != null) {
+                List<DeliveryItemDTO> didtos = new ArrayList<>();
+                for (Long id : delivery.getDeliveryItemIds()) {
+                    DeliveryItemDTO didto = deliveryItemService.findDeliveryItem(id);
+                    if (didto != null) {
+                        didtos.add(didto);
+                    }
+                }
+                delivery.setItems(didtos);
+            }
             deliveryService.updateDelivery(delivery);
-        } catch (DataAccessException ex)
-        {
+        } catch (DataAccessException ex) {
             return new ErrorResolution(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
         return new RedirectResolution(this.getClass(), "list");
@@ -106,71 +100,58 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
     public Resolution edit() {
         return new ForwardResolution("/delivery/edit.jsp");
     }
-    
+
     public Resolution delete() {
         String id = getContext().getRequest().getParameter("id");
-        delivery = deliveryService.findDelivery(Long.valueOf(id));
-        deliveryService.deleteDelivery(delivery);
+        DeliveryDTO toRemove = deliveryService.findDelivery(Long.valueOf(id));
+        deliveryService.deleteDelivery(toRemove);
         return new RedirectResolution(this.getClass(), "list");
-    }
-    
-    public Resolution addDeliveryItem() {
-        //for(String id: getContext().getRequest().getParameter("itemid"))
-        String id = getContext().getRequest().getParameter("itemid");
-        {
-        DeliveryItemDTO item = deliveryItemService.findDeliveryItem(Long.valueOf(id));
-            delivery.getItems().add(item);
-        }
-        return new ForwardResolution("/delivery/edit.jsp");
     }
 
     public List<DeliveryDTO> getDeliveries() {
         return deliveries;
     }
-    
-    public void setDeliveries(List<DeliveryDTO> value)
-    {
+
+    public void setDeliveries(List<DeliveryDTO> value) {
         deliveries = value;
     }
 
-    public DeliveryDTO getDelivery() {
+    public DeliveryWrapper getDelivery() {
         return delivery;
     }
 
-    public void setDelivery(DeliveryDTO delivery) {
+    public void setDelivery(DeliveryWrapper delivery) {
         this.delivery = delivery;
     }
     
-    public List<CustomerDTO> getAllCustomers()
-    {
-        return customerService.getAllCustomers();
-    }
-    
-    public List<CourierDTO> getAllCouriers()
-    {
-        return courierService.getAllCouriers();
-    }
-    
-    public List<DeliveryItemDTO> getAllDeliveryItems()
-    {
+    public List<DeliveryItemDTO> getAllDeliveryItems() {
         return deliveryItemService.getAllDeliveryItems();
     }
-    
-    public List<DeliveryStatus> getAllStatuses()
-    {
+
+    public List<CustomerDTO> getAllCustomers() {
+        return customerService.getAllCustomers();
+    }
+
+    public List<CourierDTO> getAllCouriers() {
+        return courierService.getAllCouriers();
+    }
+
+    public List<DeliveryStatus> getAllStatuses() {
         return Arrays.asList(DeliveryStatus.values());
     }
-      
+
     @Override
     public Resolution handleValidationErrors(ValidationErrors ve) throws Exception {
         return null;
     }
-    
+
     @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit"})
     public void loadDeliveryFromDatabase() {
         String id = getContext().getRequest().getParameter("id");
-        if (id == null) return;
-        
-        delivery = deliveryService.findDelivery(Long.valueOf(id));
+        if (id == null) {
+            return;
+        }
+
+        delivery = new DeliveryWrapper(deliveryService.findDelivery(Long.valueOf(id)));
     }
 }

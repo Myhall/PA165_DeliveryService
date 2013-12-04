@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="delivery_items")
 public class DeliveryItem implements Serializable {
-    private Delivery delivery;
+    //private Delivery delivery;
     private String name;
     private String description;
     private BigDecimal weight;
@@ -37,14 +37,14 @@ public class DeliveryItem implements Serializable {
         this.id = id;
     }
 
-    @ManyToOne
-    public Delivery getDelivery() {
-        return delivery;
-    }
-
-    public void setDelivery(Delivery delivery) {
-        this.delivery = delivery;
-    }
+//    @ManyToOne
+//    public Delivery getDelivery() {
+//        return delivery;
+//    }
+//
+//    public void setDelivery(Delivery delivery) {
+//        this.delivery = delivery;
+//    }
 
     public String getName() {
         return name;

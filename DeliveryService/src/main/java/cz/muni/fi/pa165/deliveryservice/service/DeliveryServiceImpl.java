@@ -37,10 +37,7 @@ public class DeliveryServiceImpl implements DeliveryService {
         }
 
         Delivery d = mapper.map(delivery, Delivery.class);
-        for(DeliveryItem item : d.getItems())
-        {
-            item.setDelivery(d);
-        }
+        
         deliveryDAO.createDelivery(d);
         
         return mapper.map(d, DeliveryDTO.class);
@@ -63,10 +60,7 @@ public class DeliveryServiceImpl implements DeliveryService {
         }
 
         Delivery d = mapper.map(delivery, Delivery.class);
-        for(DeliveryItem item : d.getItems())
-        {
-            item.setDelivery(d);
-        }
+        
         return mapper.map(deliveryDAO.updateDelivery(d), DeliveryDTO.class);
     }
 

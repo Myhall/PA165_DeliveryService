@@ -18,7 +18,7 @@ public interface DeliveryItemService {
      * 
      * @param deliveryItemDTO New delivery item to be stored
      */
-    void createDeliveryItem(DeliveryItemDTO deliveryItemDTO);
+    DeliveryItemDTO createDeliveryItem(DeliveryItemDTO deliveryItemDTO);
 
     /**
      * Delete delivery item.

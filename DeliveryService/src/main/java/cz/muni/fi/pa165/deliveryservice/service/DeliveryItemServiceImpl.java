@@ -21,23 +21,24 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class DeliveryItemServiceImpl implements DeliveryItemService {
 
+    @Autowired
     DeliveryItemDAO deliveryItemDao;
     @Autowired
     private Mapper mapper;
 
-    @Autowired
     public void setDeliveryItemDao(DeliveryItemDAO deliveryItemDao) {
         this.deliveryItemDao = deliveryItemDao;
     }
 
     @Override
-    public void createDeliveryItem(DeliveryItemDTO deliveryItemDTO) {
+    public DeliveryItemDTO createDeliveryItem(DeliveryItemDTO deliveryItemDTO) {
         if (deliveryItemDTO == null) {
             throw new NullPointerException("deliveryItemDTO");
         }
 
         DeliveryItem deliveryItem = mapper.map(deliveryItemDTO, DeliveryItem.class);
         deliveryItemDao.createDeliveryItem(deliveryItem);
+        return mapper.map(deliveryItem, DeliveryItemDTO.class);
     }
 
     @Override
@@ -56,11 +57,12 @@ public class DeliveryItemServiceImpl implements DeliveryItemService {
             throw new NullPointerException("deliveryItemDTO");
         }
 
-        DeliveryItem deliveryItem = deliveryItemDao.findDeliveryItem(deliveryItemDTO.getId());
-        deliveryItem.setDelivery(deliveryItemDTO.getDelivery() == null ? null : mapper.map(deliveryItemDTO.getDelivery(), Delivery.class));
-        deliveryItem.setDescription(deliveryItemDTO.getDescription());
-        deliveryItem.setName(deliveryItemDTO.getName());
-        deliveryItem.setWeight(deliveryItemDTO.getWeight());
+//        DeliveryItem deliveryItem = deliveryItemDao.findDeliveryItem(deliveryItemDTO.getId());
+//        deliveryItem.setDelivery(deliveryItemDTO.getDelivery() == null ? null : mapper.map(deliveryItemDTO.getDelivery(), Delivery.class));
+//        deliveryItem.setDescription(deliveryItemDTO.getDescription());
+//        deliveryItem.setName(deliveryItemDTO.getName());
+//        deliveryItem.setWeight(deliveryItemDTO.getWeight());
+        DeliveryItem deliveryItem = mapper.map(deliveryItemDTO, DeliveryItem.class);
         return mapper.map(deliveryItemDao.updateDeliveryItem(deliveryItem), DeliveryItemDTO.class);
     }
 

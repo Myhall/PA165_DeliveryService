@@ -55,48 +55,13 @@
                         <s:text name="delivery.additionalInformation" class="form-control"/>
                     </div>
 
-                    <div class="form-group">
-                        <label class="control-label" for="inputWarning"><s:label name="deliveryItems"/></label>
-                        
-                        <table class="table table-striped table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th><f:message key="deliveryItem.name"/></th>
-                                    <th><f:message key="deliveryItem.weight"/></th>
-                                    <th><f:message key="deliveryItem.description"/></th>
-                                </tr>
-                            </thead>
-                            <c:forEach items="${actionBean.allDeliveryItems}" var="it" varStatus="loop">
-                                <tr>
-                                    <td>${it.id}
-                                    </td>
-                                    <td>${it.name}</td>
-                                    <td>${it.weight}</td>
-                                    <td>${it.description}</td>              
-                                    <td><s:checkbox name="itemId" value="${it.id}"  /></td>
-                                    <td>
-                                        <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" 
-                                                event="edit" class="btn btn-xs btn-primary" >
-                                            <s:param name="deliveryItem.id" value="${it.id}" />
-                                            <f:message key="buttons.update" />
-                                        </s:link>
-                                    </td>
-                                    <td>
-                                        <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" 
-                                                event="delete" class="btn btn-xs btn-danger" >
-                                            <s:param name="deliveryItem.id" value="${it.id}" />
-                                            <f:message key="buttons.delete" />
-                                        </s:link>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-
-                        </table>
+                    <label class="cform-group" for="inputWarning" name="delivery.deliveryItemIds"><f:message key="deliveryItem.list.title"/></label>
+                    <div class="controls">
+                        <s:select id="inputWarning" multiple="multiple" name="delivery.deliveryItemIds"> 
+                            <s:options-collection collection="${actionBean.allDeliveryItems}" value="id" label="name"/>
+                        </s:select>
                     </div>
-                        
-                        
-                        
+
                     <c:choose>
 
                         <c:when test="${not empty actionBean.delivery.id}">
