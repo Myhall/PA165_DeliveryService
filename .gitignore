@@ -220,3 +220,6 @@ pip-log.txt
 /DB/
 /DeliverySystemWeb/target/
 /DeliveryServiceAPI/target/
+/DeliveryServiceRestServer/target/
+/DeliveryServiceWeb/target/
+/DeliveryServiceRestClient/target/
