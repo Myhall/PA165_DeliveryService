@@ -10,9 +10,9 @@
     
     <modules>
         <module>DeliveryService</module>
-        <module>DeliverySystemWeb</module>
         <module>DeliveryServiceAPI</module>
-        <module>../DeliverySystemRestClient</module>
+        <module>DeliveryServiceRestServer</module>
+        <module>DeliveryServiceWeb</module>
     </modules>
     
     <build>
