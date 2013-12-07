@@ -55,8 +55,6 @@
                     <f:message key="courier.createMessage" />
                 </s:link>
             </div>
-
         </div>
-
     </s:layout-component>
 </s:layout-render>

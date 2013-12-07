@@ -11,14 +11,14 @@
 
             <!-- Three columns of text below the carousel -->
             <div class="row">
-                <div class="col-lg-4 text-center">
+                <div class="col-lg-3 text-center">
 
                     <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" class="btn btn-success btn-lg">
                         <span class="glyphicon glyphicon-globe"></span> <f:message key="courier.title"/>
                     </s:link>
 
                 </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4 text-center">
+                <div class="col-lg-3 text-center">
 
                                         
                     <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" class="btn btn-success btn-lg">
@@ -26,7 +26,7 @@
                     </s:link>
  
                 </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4 text-center">
+                <div class="col-lg-3 text-center">
 
                                         
                     <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" class="btn btn-success btn-lg">
@@ -34,7 +34,7 @@
                     </s:link>
  
                 </div><!-- /.col-lg-4 -->
-                <div class="col-lg-4 text-center">
+                <div class="col-lg-3 text-center">
                     <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" class="btn btn-success btn-lg">
                         <span class="glyphicon glyphicon-user"></span> <f:message key="customer.list.title"/>
                     </s:link>

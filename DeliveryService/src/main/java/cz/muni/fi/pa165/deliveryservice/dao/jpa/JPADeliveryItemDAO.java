@@ -4,7 +4,6 @@
  */
 package cz.muni.fi.pa165.deliveryservice.dao.jpa;
 
-import cz.muni.fi.pa165.deliveryservice.Customer;
 import cz.muni.fi.pa165.deliveryservice.DeliveryItem;
 import cz.muni.fi.pa165.deliveryservice.dao.DeliveryItemDAO;
 import java.util.List;

@@ -8,7 +8,7 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<s:layout-render name="/layout.jsp">
+<s:layout-render name="/layout.jsp" titlekey="delivery.list.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" var="actionBean"/>
 
@@ -37,11 +37,11 @@
                         </s:select>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="inputWarning"><s:label name="delivery.from"/></label>
+                        <label class="control-label" for="inputWarning"><s:label name="delivery.placeFrom"/></label>
                         <s:text name="delivery.placeFrom" class="form-control"/>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="inputWarning"><s:label name="delivery.to"/></label>
+                        <label class="control-label" for="inputWarning"><s:label name="delivery.placeTo"/></label>
                         <s:text name="delivery.placeTo" class="form-control"/>
                     </div>
                     <div class="form-group">
