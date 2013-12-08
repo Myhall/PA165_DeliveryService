@@ -16,7 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.sourceforge.stripes.integration.spring.SpringBean;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -25,7 +25,7 @@ import net.sourceforge.stripes.integration.spring.SpringBean;
 @WebServlet(urlPatterns = "/Rest/Customer/")
 public class RestCustomer extends HttpServlet {
 
-    @SpringBean
+    @Autowired
     private CustomerService customerService;
 
     protected void get(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

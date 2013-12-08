@@ -75,10 +75,9 @@ public class App {
 
     public static void main(String[] args) throws MalformedURLException, IOException {
         HttpURLConnection.setFollowRedirects(false);
-        String url = "http://localhost:4080/pa165/index.jsp/";
+        String url = "http://localhost:8080/pa165/";
         HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
         con.setRequestMethod("HEAD");
-
         try {
             String result = String.valueOf(con.getResponseCode() == HttpURLConnection.HTTP_OK);
             if (result.contains("false")) {

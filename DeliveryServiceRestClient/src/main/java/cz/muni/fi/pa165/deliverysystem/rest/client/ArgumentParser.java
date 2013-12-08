@@ -119,7 +119,7 @@ public class ArgumentParser {
     }
 
     public void parseCliUiCustomer() {
-        RestClientCustomerInterface rcci = new RestClientCustomerImpl("http://localhost:8080/pa165/index.jsp/Rest/Customer/?");
+        RestClientCustomerInterface rcci = new RestClientCustomerImpl("http://localhost:8080/pa165/Rest/Customer/?");
         restCustomer = rcci;
 
         switch (this.config.toString()) {
@@ -168,7 +168,7 @@ public class ArgumentParser {
     }
 
     public void parseCliUiCourier() {
-        RestClientCourierInterface rcc = new RestClientCourierImpl("http://localhost:8080/pa165/index.jsp/Rest/Courier/?");
+        RestClientCourierInterface rcc = new RestClientCourierImpl("http://localhost:8080/pa165/Rest/Courier/?");
         restCourier = rcc;
         switch (config.toString()) {
             case ("create"): {

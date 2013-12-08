@@ -16,16 +16,16 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.sourceforge.stripes.integration.spring.SpringBean;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author Bufo
  */
-@WebServlet(urlPatterns = "/Rest/Courier/*")
+@WebServlet(urlPatterns = "/Rest/Courier/")
 public class RestCourier extends HttpServlet {
 
-    @SpringBean
+    @Autowired
     private CourierService courierService;
 
     protected void get(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
