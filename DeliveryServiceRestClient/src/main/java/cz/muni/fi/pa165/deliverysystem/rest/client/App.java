@@ -82,13 +82,13 @@ public class App {
         try {
             String result = String.valueOf(con.getResponseCode() == HttpURLConnection.HTTP_OK);
             if (result.contains("false")) {
-                System.out.println("Server is offline :(");
+                System.out.println("Server is offline");
             } else {
                 System.out.println("Server is online");
                 cliUiStart(url);
             }
         } catch (IOException ex) {
-            System.out.println("Server is off :(");
+            System.out.println("Server is off");
         }
     }
 

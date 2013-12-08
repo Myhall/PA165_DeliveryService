@@ -11,7 +11,6 @@
     <modules>
         <module>DeliveryService</module>
         <module>DeliveryServiceAPI</module>
-        <module>DeliveryServiceRestServer</module>
         <module>DeliveryServiceWeb</module>
     </modules>
     
