@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package cz.muni.fi.pa165.deliveryservice.rest.server;
+import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;

@@ -4,7 +4,7 @@
  */
 package cz.muni.fi.pa165.deliverysystem.rest;
 
-import cz.muni.fi.pa165.deliveryservice.rest.server.CustomerDTO;
+import cz.muni.fi.pa165.deliveryservice.dto.CustomerDTO;
 import org.codehaus.jackson.JsonNode;
 import org.springframework.http.HttpEntity;
 

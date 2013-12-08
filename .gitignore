@@ -221,5 +221,9 @@ pip-log.txt
 /DeliverySystemWeb/target/
 /DeliveryServiceAPI/target/
 /DeliveryServiceRestServer/target/
+<<<<<<< HEAD
 /DeliveryServiceWeb/target/
 /DeliveryServiceRestClient/target/
+=======
+/DeliveryServiceWeb/target/
+>>>>>>> origin/master
