@@ -122,85 +122,63 @@ public class ArgumentParser {
         RestClientCustomerInterface rcci = new RestClientCustomerImpl("http://localhost:8080/pa165/Rest/Customer/?");
         restCustomer = rcci;
 
-        switch (this.config.toString()) {
-            case ("create"): {
-                CustomerDTO customer = new CustomerDTO();
-                customer.setFirstName(config.getString("firstName"));
-                customer.setLastName(config.getString("lastName"));
-                customer.setEmail(config.getString("email"));
-                customer.setCity(config.getString("city"));
-                customer.setStreet(config.getString("street"));
-                customer.setZipCode(config.getString("zipCode"));
-                customer.setCountry(config.getString("country"));
-                customer.setTelephoneNumber(config.getString("telephoneNumber"));
-                restCustomer.createCustomer(customer);
-                break;
-            }
+        if (config.getBoolean("create")) {
+            CustomerDTO customer = new CustomerDTO();
+            customer.setFirstName(config.getString("firstName"));
+            customer.setLastName(config.getString("lastName"));
+            customer.setEmail(config.getString("email"));
+            customer.setCity(config.getString("city"));
+            customer.setStreet(config.getString("street"));
+            customer.setZipCode(config.getString("zipCode"));
+            customer.setCountry(config.getString("country"));
+            customer.setTelephoneNumber(config.getString("telephoneNumber"));
+            restCustomer.createCustomer(customer);
 
-            case ("delete"): {
-                //restCustomer.deleteCustomer(customer));
-                break;
-            }
-            case ("update"): {
-                CustomerDTO customer = new CustomerDTO();
-                customer.setId(Long.valueOf(config.getString("update")));
-                customer.setFirstName(config.getString("firstName"));
-                customer.setLastName(config.getString("lastName"));
-                customer.setEmail(config.getString("email"));
-                customer.setCity(config.getString("city"));
-                customer.setStreet(config.getString("street"));
-                customer.setZipCode(config.getString("zipCode"));
-                customer.setCountry(config.getString("country"));
-                customer.setTelephoneNumber(config.getString("telephoneNumber"));
-                restCustomer.updateCustomer(customer);
-                break;
-            }
-            case ("find"): {
-                System.out.println("Find customer with ID: " + config.getString("find"));
-                System.out.println("Entry is: " + restCustomer.findCustomer(config.getString("find")));
-                break;
-            }
-            case ("getAllCustomers"): {
-                restCustomer.getAllCustomers();
-                break;
-            }
+        } else if (config.getString("delete") != null) {
+            //restCustomer.deleteCustomer(customer));
+        } else if (config.getString("update") != null) {
+            CustomerDTO customer = new CustomerDTO();
+            customer.setId(Long.valueOf(config.getString("update")));
+            customer.setFirstName(config.getString("firstName"));
+            customer.setLastName(config.getString("lastName"));
+            customer.setEmail(config.getString("email"));
+            customer.setCity(config.getString("city"));
+            customer.setStreet(config.getString("street"));
+            customer.setZipCode(config.getString("zipCode"));
+            customer.setCountry(config.getString("country"));
+            customer.setTelephoneNumber(config.getString("telephoneNumber"));
+            restCustomer.updateCustomer(customer);
+        } else if (config.getString("find") != null) {
+            System.out.println("Find customer with ID: " + config.getString("find"));
+            System.out.println("Entry is: " + restCustomer.findCustomer(config.getString("find")));
+        } else if (config.getBoolean("getAllCustomers")) {
+            restCustomer.getAllCustomers();
         }
     }
 
     public void parseCliUiCourier() {
         RestClientCourierInterface rcc = new RestClientCourierImpl("http://localhost:8080/pa165/Rest/Courier/?");
         restCourier = rcc;
-        switch (config.toString()) {
-            case ("create"): {
-                CourierDTO courier = new CourierDTO();
-                courier.setFirstName(config.getString("firstName"));
-                courier.setLastName(config.getString("lastName"));
-                courier.setEmail(config.getString("email"));
-                restCourier.createCourier(courier);
-                break;
-            }
-            case ("update"): {
-                CourierDTO courier = new CourierDTO();
-                courier.setId(Long.valueOf(config.getString("update")));
-                courier.setFirstName(config.getString("firstName"));
-                courier.setLastName(config.getString("lastName"));
-                courier.setEmail(config.getString("email"));
-                restCourier.createCourier(courier);
-                break;
-            }
-            case ("delete"): {
+        if (config.getBoolean("create")) {
+            CourierDTO courier = new CourierDTO();
+            courier.setFirstName(config.getString("firstName"));
+            courier.setLastName(config.getString("lastName"));
+            courier.setEmail(config.getString("email"));
+            restCourier.createCourier(courier);
+        } else if (config.getString("update") != null) {
+            CourierDTO courier = new CourierDTO();
+            courier.setId(Long.valueOf(config.getString("update")));
+            courier.setFirstName(config.getString("firstName"));
+            courier.setLastName(config.getString("lastName"));
+            courier.setEmail(config.getString("email"));
+            restCourier.createCourier(courier);
+        } else if (config.getString("delete") != null) {
             //restCourier.deleteCourier(config.getString("delete"));
-                break;
-            }
-            case ("find"): {
-                System.out.println("Find courier with ID: " + config.getString("find"));
-                System.out.println("Entry is: " + restCourier.findCourier(config.getString("find")));
-                break;
-            }
-            case ("getAllCouriers"): {
-                restCourier.getAllCouriers();
-                break;
-            }
+        } else if (config.getString("find") != null) {
+            System.out.println("Find courier with ID: " + config.getString("find"));
+            System.out.println("Entry is: " + restCourier.findCourier(config.getString("find")));
+        } else if (config.getBoolean("getAllCustomers")) {
+            restCourier.getAllCouriers();
         }
     }
 }

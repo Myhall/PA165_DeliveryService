@@ -27,6 +27,7 @@ public class ApplicationConfig extends Application {
      * given list with all resources defined in the project.
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(cz.muni.fi.pa165.deliveryservice.rest.server.RestCourierInterface.class);
         resources.add(cz.muni.fi.pa165.deliveryservice.rest.server.RestCustomerInterface.class);
     }
     
