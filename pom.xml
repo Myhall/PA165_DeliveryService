@@ -10,8 +10,8 @@
     
     <modules>
         <module>DeliveryService</module>
-        <module>DeliverySystemWeb</module>
         <module>DeliveryServiceAPI</module>
+        <module>DeliveryServiceWeb</module>
     </modules>
     
     <build>
