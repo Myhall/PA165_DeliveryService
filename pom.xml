@@ -12,6 +12,7 @@
         <module>DeliveryService</module>
         <module>DeliveryServiceAPI</module>
         <module>DeliveryServiceWeb</module>
+        <module>DeliveryServiceRestClient</module>
     </modules>
     
     <build>
