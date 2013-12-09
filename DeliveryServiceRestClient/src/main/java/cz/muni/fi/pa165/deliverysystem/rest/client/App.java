@@ -199,6 +199,7 @@ public class App {
                 entry = (new Scanner(System.in)).next();
                 map.put("telephoneNumber", entry);
                 post(new URL(customerUrl + "?create"), map);
+                break;
             }
             case 4: {
                 System.out.println("Enter id of customer to delete:");
