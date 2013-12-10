@@ -8,11 +8,13 @@ package cz.muni.fi.pa165.deliveryservice.dto;
 
 import java.util.List;
 import java.util.Objects;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author janvorcak
  */
+@XmlRootElement(name = "courier")
 public class CourierDTO {
     
     private Long id;
