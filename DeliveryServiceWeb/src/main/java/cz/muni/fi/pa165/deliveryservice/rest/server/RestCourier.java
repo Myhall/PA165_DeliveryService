@@ -4,22 +4,27 @@
  */
 package cz.muni.fi.pa165.deliveryservice.rest.server;
 
-import cz.muni.fi.pa165.deliveryservice.service.CourierServiceImpl;
+import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
+import cz.muni.fi.pa165.deliveryservice.service.CourierService;
+import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import net.sourceforge.stripes.integration.spring.SpringBean;
+import javax.ws.rs.core.MediaType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Jan Vorcak
  */
 
+@Component
 @Path("/couriers")
 public class RestCourier {
 
-    @SpringBean
-    public CourierServiceImpl courierService;
+    @Autowired
+    public CourierService courierService;
     
     @GET
     @Produces("text/plain")
@@ -30,12 +35,13 @@ public class RestCourier {
             return "Not null!";
     }
     
-    /*
+    
     @GET
+    @Path("all")
     @Produces(MediaType.APPLICATION_JSON)
     public List<CourierDTO> getAll() {
         return courierService.getAllCouriers();
     }
-    */
+    
 
 }
