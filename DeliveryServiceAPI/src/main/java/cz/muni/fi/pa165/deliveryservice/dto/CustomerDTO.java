@@ -6,11 +6,13 @@ package cz.muni.fi.pa165.deliveryservice.dto;
 
 import java.util.List;
 import java.util.Objects;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Tomas Frkan
  */
+@XmlRootElement(name = "customer")
 public class CustomerDTO {
 
     private Long id;
