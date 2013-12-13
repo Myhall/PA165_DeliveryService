@@ -10,8 +10,12 @@ package cz.muni.fi.pa165.deliveryservice.rest.client;
  */
 import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
 import cz.muni.fi.pa165.deliveryservice.rest.util.PropertyHelper;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
@@ -21,6 +25,11 @@ import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -65,13 +74,23 @@ public class CourierRestClientBean implements ActionBean {
     }
 
     public CourierDTO[] getAllCouriers() {
-        CourierDTO[] allCouriers = null;
+        List<CourierDTO> allCouriers = new ArrayList<>();
+        String xml = null;
+        SAXBuilder saxBuilder = new SAXBuilder();
         try {
-            allCouriers = rt.getForObject(getURL() + "/", CourierDTO[].class);
+            xml = rt.getForObject(getURL() + "/", String.class); 
+            Document doc = saxBuilder.build(new StringReader(xml));
+            for(Element e : (List<Element>) doc.getRootElement().getChildren()) {
+                allCouriers.add(rt.getForObject(getURL() + "/"+e.getChildText("id"), CourierDTO.class));
+            }            
         } catch (HttpClientErrorException e) {
             System.err.println("Chyba courier get");
+        } catch (JDOMException ex) {
+            System.err.println("Chyba JDOME courier get");
+        } catch (IOException ex) {
+            System.err.println("Chyba IO courier get");
         } 
-        return allCouriers;
+        return allCouriers.toArray(new CourierDTO[]{});
     }
 
     @Override
