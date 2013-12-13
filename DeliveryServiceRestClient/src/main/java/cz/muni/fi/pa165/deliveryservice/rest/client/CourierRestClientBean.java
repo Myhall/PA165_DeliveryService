@@ -10,6 +10,10 @@ package cz.muni.fi.pa165.deliveryservice.rest.client;
  */
 import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
 import cz.muni.fi.pa165.deliveryservice.rest.util.PropertyHelper;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.DefaultHandler;
@@ -18,6 +22,10 @@ import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -57,14 +65,23 @@ public class CourierRestClientBean implements ActionBean {
     }
 
     public CourierDTO[] getAllCouriers() {
-        CourierDTO[] allCouriers = null;
+        List<CourierDTO> allCouriers = new ArrayList<>();
+        String xml = null;
+        SAXBuilder saxBuilder = new SAXBuilder();
         try {
-            allCouriers = rt.getForObject(getURL() + "/", CourierDTO[].class);
-            return allCouriers;
+            xml = rt.getForObject(getURL() + "/", String.class); 
+            Document doc = saxBuilder.build(new StringReader(xml));
+            for(Element e : (List<Element>) doc.getRootElement().getChildren()) {
+                allCouriers.add(rt.getForObject(getURL() + "/"+e.getChildText("id"), CourierDTO.class));
+            }            
         } catch (HttpClientErrorException e) {
             System.err.println("Chyba courier get");
-        }
-        return allCouriers;
+        } catch (JDOMException ex) {
+            System.err.println("Chyba JDOME courier get");
+        } catch (IOException ex) {
+            System.err.println("Chyba IO courier get");
+        } 
+        return allCouriers.toArray(new CourierDTO[]{});
     }
 
     @Override
@@ -101,16 +118,19 @@ public class CourierRestClientBean implements ActionBean {
     }
 
     public Resolution update() {
+        System.out.println(getURL() + " UPDATE PUT");
         rt.put(getURL() + "/update/{id}", courierDto.getId(), courierDto);
         return new RedirectResolution(this.getClass(), "list");
     }
 
     public Resolution delete() {
+        System.out.println(getURL() + " DELETE DELETE");
         rt.delete(getURL() + "/delete/{id}", courierDto.getId());
         return new RedirectResolution(this.getClass(), "list");
     }
 
     public void loadCourierFromDatabase() {
+        System.out.println(getURL() + " DB DB DB");
         String id = context.getRequest().getParameter("courierDto.id");
         if (id != null) {
             courierDto = rt.getForObject(getURL() + "/", CourierDTO.class, id);

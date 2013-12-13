@@ -10,6 +10,10 @@ package cz.muni.fi.pa165.deliveryservice.rest.client;
  */
 import cz.muni.fi.pa165.deliveryservice.dto.CustomerDTO;
 import cz.muni.fi.pa165.deliveryservice.rest.util.PropertyHelper;
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
 import net.sourceforge.stripes.action.DefaultHandler;
@@ -18,6 +22,10 @@ import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.JDOMException;
+import org.jdom.input.SAXBuilder;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -30,7 +38,6 @@ public class CustomerRestClientBean implements ActionBean {
     @SpringBean
     private PropertyHelper ph;
     
-  
     private CustomerDTO customerDto;
 
     public CustomerDTO getCustomerDto() {
@@ -41,15 +48,24 @@ public class CustomerRestClientBean implements ActionBean {
         this.customerDto = customerDto;
     }
 
-    public CustomerDTO[] getAllCustomres() {
-        CustomerDTO[] allCouriers = null;
+    public CustomerDTO[] getAllCustomers() {
+        List<CustomerDTO> allCustomers = new ArrayList<>();
+        String xml = null;
+        SAXBuilder saxBuilder = new SAXBuilder();
         try {
-            allCouriers = rt.getForObject(getURL() + "/", CustomerDTO[].class);
-            return allCouriers;
+            xml = rt.getForObject(getURL() + "/", String.class); 
+            Document doc = saxBuilder.build(new StringReader(xml));
+            for(Element e : (List<Element>) doc.getRootElement().getChildren()) {
+                allCustomers.add(rt.getForObject(getURL() + "/"+e.getChildText("id"), CustomerDTO.class));
+            }            
         } catch (HttpClientErrorException e) {
-            System.err.println("Chyba customer get");
-        }
-        return allCouriers;
+            System.err.println("Chyba courier get");
+        } catch (JDOMException ex) {
+            System.err.println("Chyba JDOME courier get");
+        } catch (IOException ex) {
+            System.err.println("Chyba IO courier get");
+        } 
+        return allCustomers.toArray(new CustomerDTO[]{});
     }
 
     @Override
