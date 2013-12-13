@@ -10,20 +10,14 @@ package cz.muni.fi.pa165.deliveryservice.rest.client;
  */
 import cz.muni.fi.pa165.deliveryservice.dto.CustomerDTO;
 import cz.muni.fi.pa165.deliveryservice.rest.util.PropertyHelper;
-import javax.ws.rs.Produces;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
-import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
-import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
-import net.sourceforge.stripes.validation.EmailTypeConverter;
-import net.sourceforge.stripes.validation.Validate;
-import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -36,11 +30,7 @@ public class CustomerRestClientBean implements ActionBean {
     @SpringBean
     private PropertyHelper ph;
     
-  /*  @ValidateNestedProperties(value = {
-        @Validate(on = {"create", "save"}, field = "firstName", required = true, minlength = 3, maxlength = 255),
-        @Validate(on = {"create", "save"}, field = "lastName", required = true, minlength = 3, maxlength = 255),
-        @Validate(on = {"create", "save"}, field = "email", required = true, converter = EmailTypeConverter.class)
-    })*/
+  
     private CustomerDTO customerDto;
 
     public CustomerDTO getCustomerDto() {
@@ -51,15 +41,15 @@ public class CustomerRestClientBean implements ActionBean {
         this.customerDto = customerDto;
     }
 
-    public CustomerDTO[] getAllCustomers() {
-        CustomerDTO[] allCustomers = null;
+    public CustomerDTO[] getAllCustomres() {
+        CustomerDTO[] allCouriers = null;
         try {
-            allCustomers = rt.getForObject(getURL() + "/", CustomerDTO[].class);
-            return allCustomers;
+            allCouriers = rt.getForObject(getURL() + "/", CustomerDTO[].class);
+            return allCouriers;
         } catch (HttpClientErrorException e) {
             System.err.println("Chyba customer get");
         }
-        return allCustomers;
+        return allCouriers;
     }
 
     @Override
@@ -105,7 +95,6 @@ public class CustomerRestClientBean implements ActionBean {
         return new RedirectResolution(this.getClass(), "list");
     }
 
-   // @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "save"})
     public void loadCourierFromDatabase() {
         String id = context.getRequest().getParameter("customerDto.id");
         if (id != null) {
