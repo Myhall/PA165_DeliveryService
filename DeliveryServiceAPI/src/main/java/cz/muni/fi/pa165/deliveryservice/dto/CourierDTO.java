@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author janvorcak
  */
-@XmlRootElement(name = "courier")
+@XmlRootElement
 public class CourierDTO {
     
     private Long id;

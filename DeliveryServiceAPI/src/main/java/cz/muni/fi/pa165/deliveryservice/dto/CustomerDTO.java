@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author Tomas Frkan
  */
-@XmlRootElement(name = "customer")
+@XmlRootElement
 public class CustomerDTO {
 
     private Long id;
