@@ -34,6 +34,9 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li><s:link beanclass="cz.muni.fi.pa165.deliveryservice.rest.client.CourierRestClientBean" class="glyphicon glyphicon-globe">&nbsp;<f:message key="courier.title"/></s:link></li>
                             </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><s:link beanclass="cz.muni.fi.pa165.deliveryservice.rest.client.CustomerRestClientBean" class="glyphicon glyphicon-globe">&nbsp;<f:message key="customer.list.title"/></s:link></li>
+                            </ul>
                         </div>
                     </div>
                 <s:layout-component name="body"/>

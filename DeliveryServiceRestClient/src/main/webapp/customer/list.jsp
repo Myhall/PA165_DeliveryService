@@ -5,13 +5,14 @@
 
 <s:layout-render name="/layout.jsp" titlekey="customer.list.title">
     <s:layout-component name="body">
-        <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" var="actionBean"/>
+        <s:useActionBean beanclass="cz.muni.fi.pa165.deliveryservice.rest.client.CustomerRestClientBean" var="actionBean"/>
+
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title"><f:message key="customer.list.allitems" /></h3>
+                <h3 class="panel-title"><f:message key="customer.list.title" /></h3>
             </div>
             <div class="panel-body">
-                <table class="table table-striped table-bordered">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th><f:message key="customer.firstName"/></th>
@@ -26,8 +27,8 @@
                             <th><f:message key="buttons.delete"/></th>
                         </tr>
                     </thead>
-                    <c:forEach items="${actionBean.customerList}" var="customer">
-                        <tr>
+                      <c:forEach items="${actionBean.allCustomers}" var="customer">
+                         <tr>                             
                             <td><c:out value="${customer.firstName}"/></td>
                             <td><c:out value="${customer.lastName}"/></td>
                             <td><c:out value="${customer.email}"/></td>
@@ -37,26 +38,26 @@
                             <td><c:out value="${customer.country}"/></td>
                             <td><c:out value="${customer.telephoneNumber}"/></td>
                             <td>
-                                <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" 
-                                        event="edit" class="btn btn-xs btn-primary" >
-                                    <s:param name="customerDTO.id" value="${customer.id}" />
+                                <s:link beanclass="cz.muni.fi.pa165.deliveryservice.rest.client.CustomerRestClientBean" 
+                                        event="update" class="btn btn-xs btn-primary" >
+                                    <s:param name="customerDto.id" value="${customer.id}" />
                                     <f:message key="buttons.update" />
                                 </s:link>
                             </td>
                             <td>
-                                <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" 
+                                <s:link beanclass="cz.muni.fi.pa165.deliveryservice.rest.client.CustomerRestClientBean" 
                                         event="delete" class="btn btn-xs btn-danger" >
-                                    <s:param name="customerDTO.id" value="${customer.id}" />
+                                    <s:param name="id" value="${courier.id}" />
                                     <f:message key="buttons.delete" />
                                 </s:link>
                             </td>
                         </tr>
-                    </c:forEach>
+                     </c:forEach>
                 </table>
-                <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" event="edit" class="btn btn-primary">
+                <s:link beanclass="cz.muni.fi.pa165.deliveryservice.rest.client.CustomerRestClientBean" event="edit" class="btn btn-primary">
                     <f:message key="customer.create" />
                 </s:link>
             </div>
-        </div> 
+        </div>
     </s:layout-component>
 </s:layout-render>

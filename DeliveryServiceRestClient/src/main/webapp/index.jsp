@@ -14,6 +14,11 @@
                         <span class="glyphicon glyphicon-globe"></span> <f:message key="courier.title"/>
                     </s:link>
                 </div>
+                <div class="col-lg-5 text-center">
+                    <s:link beanclass="cz.muni.fi.pa165.deliveryservice.rest.client.CustomerRestClientBean" class="btn btn-success btn-lg">
+                        <span class="glyphicon glyphicon-home"></span> <f:message key="customer.list.title"/>
+                    </s:link>
+                </div>
             </div>
 
         </div>
