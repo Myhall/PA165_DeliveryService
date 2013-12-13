@@ -20,6 +20,5 @@
     <context:component-scan base-package="cz.muni.fi.pa165.deliveryservice.rest"/>
     <context:property-placeholder location="classpath:server.properties"/>
     <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
-    <bean id="propertyHelper" class="org.springframework.web.client.PropertyHelper"/>
     
 </beans>
