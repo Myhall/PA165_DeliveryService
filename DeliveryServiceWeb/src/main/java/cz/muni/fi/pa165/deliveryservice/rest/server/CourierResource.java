@@ -77,7 +77,7 @@ public class CourierResource {
         return courierNew;
     }
     
-    @POST
+    @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_XML)
     @Produces(MediaType.APPLICATION_XML)

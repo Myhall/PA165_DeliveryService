@@ -15,7 +15,6 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th></th>
                             <th><f:message key="courierDTO.firstName"/></th>
                             <th><f:message key="courierDTO.lastName"/></th>
                             <th><f:message key="courierDTO.email"/></th>
@@ -30,15 +29,15 @@
                             <td><c:out value="${courier.email}"/></td>                    
                             <td>
                                 <s:link beanclass="cz.muni.fi.pa165.deliveryservice.rest.client.CourierRestClientBean" 
-                                        event="update" class="btn btn-xs btn-primary" >
-                                    <s:param name="courierDTO.id" value="${courier.id}" />
+                                        event="edit" class="btn btn-xs btn-primary" >
+                                    <s:param name="courierDto.id" value="${courier.id}" />
                                     <f:message key="buttons.update" />
                                 </s:link>
                             </td>
                             <td>
                                 <s:link beanclass="cz.muni.fi.pa165.deliveryservice.rest.client.CourierRestClientBean" 
                                         event="delete" class="btn btn-xs btn-danger" >
-                                    <s:param name="id" value="${courier.id}" />
+                                    <s:param name="courierDto.id" value="${courier.id}" />
                                     <f:message key="buttons.delete" />
                                 </s:link>
                             </td>

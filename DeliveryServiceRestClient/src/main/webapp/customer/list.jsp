@@ -39,7 +39,7 @@
                             <td><c:out value="${customer.telephoneNumber}"/></td>
                             <td>
                                 <s:link beanclass="cz.muni.fi.pa165.deliveryservice.rest.client.CustomerRestClientBean" 
-                                        event="update" class="btn btn-xs btn-primary" >
+                                        event="edit" class="btn btn-xs btn-primary" >
                                     <s:param name="customerDto.id" value="${customer.id}" />
                                     <f:message key="buttons.update" />
                                 </s:link>
@@ -47,7 +47,7 @@
                             <td>
                                 <s:link beanclass="cz.muni.fi.pa165.deliveryservice.rest.client.CustomerRestClientBean" 
                                         event="delete" class="btn btn-xs btn-danger" >
-                                    <s:param name="id" value="${courier.id}" />
+                                    <s:param name="customerDto.id" value="${courier.id}" />
                                     <f:message key="buttons.delete" />
                                 </s:link>
                             </td>

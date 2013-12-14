@@ -16,11 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
+import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
+import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -100,16 +102,12 @@ public class CourierRestClientBean implements ActionBean {
 
     @DefaultHandler
     public Resolution list() {
+        
         return new ForwardResolution("/courier/list.jsp");
     }
 
     public Resolution edit() {
         return new ForwardResolution("/courier/edit.jsp");
-    }
-
-    public Resolution save() {
-        rt.put(getURL() + "/{id}", courierDto, courierDto.getId());
-        return new RedirectResolution(this.getClass(), "list");
     }
 
     public Resolution create() {
@@ -118,22 +116,20 @@ public class CourierRestClientBean implements ActionBean {
     }
 
     public Resolution update() {
-        System.out.println(getURL() + " UPDATE PUT");
-        rt.put(getURL() + "/update/{id}", courierDto.getId(), courierDto);
+        rt.put(getURL() + "/{id}", courierDto, courierDto.getId());
         return new RedirectResolution(this.getClass(), "list");
     }
 
     public Resolution delete() {
-        System.out.println(getURL() + " DELETE DELETE");
-        rt.delete(getURL() + "/delete/{id}", courierDto.getId());
+        rt.delete(getURL() + "/{id}", courierDto.getId());
         return new RedirectResolution(this.getClass(), "list");
     }
 
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "update"})
     public void loadCourierFromDatabase() {
-        System.out.println(getURL() + " DB DB DB");
         String id = context.getRequest().getParameter("courierDto.id");
         if (id != null) {
-            courierDto = rt.getForObject(getURL() + "/", CourierDTO.class, id);
+            courierDto = rt.getForObject(getURL() + "/{id}", CourierDTO.class, id);
         }
     }
 }
