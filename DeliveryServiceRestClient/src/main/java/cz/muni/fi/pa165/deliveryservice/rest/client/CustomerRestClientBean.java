@@ -6,7 +6,7 @@ package cz.muni.fi.pa165.deliveryservice.rest.client;
 
 /**
  *
- * @author Bufo
+ * @author Michal Sorentiny
  */
 import cz.muni.fi.pa165.deliveryservice.dto.CustomerDTO;
 import cz.muni.fi.pa165.deliveryservice.rest.util.PropertyHelper;
@@ -16,11 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
+import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
 import net.sourceforge.stripes.action.UrlBinding;
+import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
 import org.jdom.Document;
 import org.jdom.Element;
@@ -91,26 +93,22 @@ public class CustomerRestClientBean implements ActionBean {
         return new ForwardResolution("/customer/edit.jsp");
     }
 
-    public Resolution save() {
-        rt.put(getURL() + "/{id}", customerDto, customerDto.getId());
-        return new RedirectResolution(this.getClass(), "list");
-    }
-
     public Resolution create() {
         rt.put(getURL() + "/create", customerDto);
         return new RedirectResolution(this.getClass(), "list");
     }
 
     public Resolution update() {
-        rt.put(getURL() + "/update/{id}", customerDto.getId(), customerDto);
+        rt.put(getURL() + "/{id}", customerDto.getId(), customerDto);
         return new RedirectResolution(this.getClass(), "list");
     }
 
     public Resolution delete() {
-        rt.delete(getURL() + "/delete/{id}", customerDto.getId());
+        rt.delete(getURL() + "/{id}", customerDto.getId());
         return new RedirectResolution(this.getClass(), "list");
     }
-
+    
+    @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "update"})
     public void loadCourierFromDatabase() {
         String id = context.getRequest().getParameter("customerDto.id");
         if (id != null) {

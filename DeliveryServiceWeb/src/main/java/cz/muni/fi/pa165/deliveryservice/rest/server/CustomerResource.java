@@ -71,7 +71,7 @@ public class CustomerResource {
         return customerNew;
     }
     
-    @POST
+    @PUT
     @Path("{id}")
     @Consumes(MediaType.APPLICATION_XML)
     @Produces(MediaType.APPLICATION_XML)
