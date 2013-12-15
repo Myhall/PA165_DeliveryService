@@ -99,7 +99,7 @@ public class CustomerRestClientBean implements ActionBean {
     }
 
     public Resolution update() {
-        rt.put(getURL() + "/{id}", customerDto.getId(), customerDto);
+        rt.put(getURL() + "/{id}", customerDto, customerDto.getId());
         return new RedirectResolution(this.getClass(), "list");
     }
 
@@ -109,10 +109,10 @@ public class CustomerRestClientBean implements ActionBean {
     }
     
     @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "update"})
-    public void loadCourierFromDatabase() {
+    public void loadCustomerFromDatabase() {
         String id = context.getRequest().getParameter("customerDto.id");
         if (id != null) {
-            customerDto = rt.getForObject(getURL() + "/", CustomerDTO.class, id);
+            customerDto = rt.getForObject(getURL() + "/{id}", CustomerDTO.class, id);
         }
     }
 }
