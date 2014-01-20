@@ -32,4 +32,6 @@
     <bean id="deliveryDao" class="cz.muni.fi.pa165.deliveryservice.dao.jpa.JPADeliveryDAO" />
     <bean id="deliveryService" class="cz.muni.fi.pa165.deliveryservice.service.DeliveryServiceImpl" />
     
+    <bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" />
+    
 </beans>
