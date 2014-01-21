@@ -94,6 +94,19 @@ public class CourierServiceImpl implements CourierService {
         }
         return mapper.map(fromDB, CourierDTO.class);
     }
+    
+    @Override
+    public CourierDTO findByUsername(String username) {
+        if (username == null) {
+            throw new NullPointerException("null username");
+        }
+        if (username.trim().isEmpty()) {
+            throw new IllegalArgumentException("empty username");
+        }
+        Courier courier = courierDao.findByUsername(username);
+        CourierDTO courierFromDB = mapper.map(courier, CourierDTO.class);
+        return courierFromDB;
+    }
 
     public void setCourierDao(CourierDAO courierDao) {
         this.courierDao = courierDao;

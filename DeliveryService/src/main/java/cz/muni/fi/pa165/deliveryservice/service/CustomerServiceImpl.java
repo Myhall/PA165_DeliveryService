@@ -104,4 +104,17 @@ public class CustomerServiceImpl implements CustomerService {
         }
         return mapper.map(customerFromDB, CustomerDTO.class);
     }
+
+    @Override
+    public CustomerDTO findByUsername(String username) {
+        if (username == null) {
+            throw new NullPointerException("null username");
+        }
+        if (username.trim().isEmpty()) {
+            throw new IllegalArgumentException("empty username");
+        }
+        Customer customer = customerDao.findByUsername(username);
+        CustomerDTO customerFromDB = mapper.map(customer, CustomerDTO.class);
+        return customerFromDB;
+    }
 }

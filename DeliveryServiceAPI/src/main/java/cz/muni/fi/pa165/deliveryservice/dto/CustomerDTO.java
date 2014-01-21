@@ -25,6 +25,7 @@ public class CustomerDTO {
     private String country;
     private String telephoneNumber;
     private List<DeliveryDTO> deliveries;
+    private UserDTO user;
 
     public Long getId() {
         return id;
@@ -104,6 +105,14 @@ public class CustomerDTO {
 
     public void setDeliveries(List<DeliveryDTO> deliveries) {
         this.deliveries = deliveries;
+    }
+    
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 
     @Override

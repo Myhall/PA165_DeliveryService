@@ -36,7 +36,7 @@ public interface UserDAO {
      * @param id - unique identification Long number
      * @return user
      */
-    User get(Long id);
+    User findUser(Long id);
 
     /**
      *Find user with given username
@@ -44,7 +44,7 @@ public interface UserDAO {
      * @param username find user with given username
      * @return user with given username
      */
-    User getByUsername(String username);
+    User findByUsername(String username);
     
     /**
      * Find all users in database.

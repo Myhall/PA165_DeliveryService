@@ -68,7 +68,7 @@ public class JPAUserDAO implements UserDAO {
     }
 
     @Override
-    public User get(Long id) {
+    public User findUser(Long id) {
         if (id == null) {
             throw new NullPointerException("ID is null.");
         }
@@ -80,7 +80,7 @@ public class JPAUserDAO implements UserDAO {
     }
 
     @Override
-    public User getByUsername(String username) {
+    public User findByUsername(String username) {
         if (username == null) {
             throw new NullPointerException("username is null");
         }

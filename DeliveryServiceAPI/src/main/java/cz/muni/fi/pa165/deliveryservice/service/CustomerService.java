@@ -50,4 +50,12 @@ public interface CustomerService {
      * @return CustomerDTO with given id
      */
     CustomerDTO findCustomer(Long id);
+    
+    /**
+     * Returns customer with given username.
+     *
+     * @param username username of customer
+     * @return customer with given username
+     */
+    CustomerDTO findByUsername(String username);
 }

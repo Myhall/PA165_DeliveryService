@@ -4,6 +4,7 @@
  */
 package cz.muni.fi.pa165.deliveryservice.dao;
 import cz.muni.fi.pa165.deliveryservice.Customer;
+import cz.muni.fi.pa165.deliveryservice.User;
 import java.util.List;
 /**
  * DAO interface for Customer entity
@@ -42,4 +43,15 @@ public interface CustomerDAO {
      * @throws NullPointerException id is null
      */
     Customer findCustomer(Long id);
+    /**
+     * Returns associated User.
+     * @return User associated with given customer
+     */
+    User getUser(Customer customer);
+    /**
+     * Find customer by associated User username.
+     * @param username of customer
+     * @return customer with given username
+     */
+    Customer findByUsername(String username);
 }

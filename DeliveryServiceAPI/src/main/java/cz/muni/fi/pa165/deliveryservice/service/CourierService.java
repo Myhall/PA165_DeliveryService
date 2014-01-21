@@ -25,4 +25,6 @@ public interface CourierService {
     
     CourierDTO findCourier(Long id);
     
+    CourierDTO findByUsername(String username);
+    
 }

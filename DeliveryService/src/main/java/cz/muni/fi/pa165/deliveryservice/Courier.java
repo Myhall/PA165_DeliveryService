@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  * Courier entity class
@@ -22,6 +23,7 @@ public class Courier implements Serializable {
     private String lastName;
     private String email;
     private List<Delivery> deliveries;
+    private User user;
 
     public Courier() {
     }
@@ -30,6 +32,15 @@ public class Courier implements Serializable {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    @OneToOne
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getFirstName() {

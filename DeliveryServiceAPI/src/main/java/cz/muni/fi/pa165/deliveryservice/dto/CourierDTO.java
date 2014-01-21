@@ -22,6 +22,7 @@ public class CourierDTO {
     private String lastName;
     private String email;
     private List<DeliveryDTO> deliveries;
+    private UserDTO user;
 
     public CourierDTO() {
     }
@@ -70,6 +71,14 @@ public class CourierDTO {
 
     public void setDeliveries(List<DeliveryDTO> deliveries) {
         this.deliveries = deliveries;
+    }
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 
     @Override

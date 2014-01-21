@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.deliveryservice.dao.jpa;
 
 import cz.muni.fi.pa165.deliveryservice.Customer;
+import cz.muni.fi.pa165.deliveryservice.User;
 import cz.muni.fi.pa165.deliveryservice.dao.CustomerDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -73,5 +74,24 @@ public class JPACustomerDAO implements CustomerDAO {
             throw new NullPointerException("ID is null.");
         }
         return em.find(Customer.class, id);
+    }
+
+    @Override
+    public User getUser(Customer customer) {
+        Query query;
+        query = em.createQuery("SELECT u FROM User u WHERE u.id = :id ");
+        query.setParameter("id", customer.getUser().getId());
+
+        User user = (User) query.getSingleResult();
+        return user;
+    }
+
+    @Override
+    public Customer findByUsername(String username) {
+        Query query = em.createQuery("SELECT c FROM Customer c WHERE c.user.username = :username");
+        query.setParameter("username", username);
+
+        Customer customer = (Customer) query.getSingleResult();
+        return customer;
     }
 }

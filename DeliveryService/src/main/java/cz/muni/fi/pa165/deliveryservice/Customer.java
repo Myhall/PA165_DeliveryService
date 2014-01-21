@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 /**
  * Customer entity class
@@ -26,6 +27,7 @@ public class Customer implements Serializable {
     private String country;
     private String telephoneNumber;
     private Long id;
+    private User user;
 
     public Customer() {
     }
@@ -123,6 +125,15 @@ public class Customer implements Serializable {
 
     public void setDeliveries(List<Delivery> deliveries) {
         this.deliveries = deliveries;
+    }
+
+    @OneToOne
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
