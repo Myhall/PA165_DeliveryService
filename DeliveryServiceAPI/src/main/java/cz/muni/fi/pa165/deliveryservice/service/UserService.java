@@ -13,21 +13,21 @@ public interface UserService {
      * @param user User's DTO
      * @return UserDTO created user data transfer object.
      */
-    UserDTO create(UserDTO user);
+    UserDTO createUser(UserDTO user);
 
     /**
-     * Removes user.
+     * Deletes user.
      * 
      * @param user object to be removed
      */
-    void remove(UserDTO user);
+    void deleteUser(UserDTO user);
 
     /**
      *  Update user.
      * 
      * @param user object to be updated
      */
-    UserDTO update(UserDTO user);
+    UserDTO updateUser(UserDTO user);
 
     /**
      * Returns UserDTO object with given ID
@@ -35,7 +35,7 @@ public interface UserService {
      * @param id return UserDTO with given ID
      * @return UserDTO object
      */
-    UserDTO get(Long id);
+    UserDTO findUser(Long id);
 
     /**
      * Searches and returns UserDTO entity with
@@ -44,7 +44,7 @@ public interface UserService {
      * @param username find UserDTO with given username
      * @return UserDTO with given username
      */
-    UserDTO getByUsername(String username);
+    UserDTO findByUsername(String username);
 
     /**
      * Check for available username.
