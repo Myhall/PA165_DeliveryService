@@ -10,6 +10,7 @@ import cz.muni.fi.pa165.deliveryservice.dto.UserDTO;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,13 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class CourierUserFacadeImpl implements CourierUserFacade{
+public class CourierUserFacadeImpl implements CourierUserFacade {
 
     @Autowired
-    private CourierService cservice;   
+    private CourierService cservice;
     @Autowired
     private UserService uservice;
-    
+
     @Override
     public void create(CourierDTO courierDTO, UserDTO userDTO) {
         if (courierDTO == null) {
@@ -33,25 +34,26 @@ public class CourierUserFacadeImpl implements CourierUserFacade{
         }
         if (userDTO == null) {
             throw new IllegalArgumentException("user is null");
-        }                
+        }
         if (courierDTO.getId() != null) {
             throw new IllegalArgumentException("courierDTO.id is null");
         }
         if (userDTO.getId() != null) {
             throw new IllegalArgumentException("userDTO.id is null");
-        }        
-        
+        }
+
         uservice.createUser(userDTO);
         courierDTO.setUser(userDTO);
         cservice.createCourier(courierDTO);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public CourierUserDTO getByCourierId(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("id is null");
         }
-        
+
         CourierDTO courier = cservice.findCourier(id);
         UserDTO user = courier.getUser();
         return new CourierUserDTO(courier, user);
@@ -59,50 +61,55 @@ public class CourierUserFacadeImpl implements CourierUserFacade{
 
     @Override
     public CourierUserDTO getByUsername(String username) {
-        UserDTO userDTO = uservice.findByUsername(username);        
+        UserDTO userDTO = uservice.findByUsername(username);
         CourierDTO courierDTO = cservice.findByUsername(username);
-        
+
         return new CourierUserDTO(courierDTO, userDTO);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or "
+    + "(hasRole('ROLE_USER') and principal.username == #courierUserDTO.user.username)")
     @Override
     public void remove(CourierUserDTO courierUserDTO) {
         if (courierUserDTO == null) {
             throw new NullPointerException("courierUserDTO is null");
         }
-        
+
         if (courierUserDTO.getCourier().getId() == null) {
             throw new IllegalArgumentException("courier.id is null");
         }
         if (courierUserDTO.getUser().getId() == null) {
             throw new IllegalArgumentException("user.id is null");
         }
-        
+
         uservice.deleteUser(courierUserDTO.getUser());
-        cservice.deleteCourier(courierUserDTO.getCourier());        
+        cservice.deleteCourier(courierUserDTO.getCourier());
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or "
+    + "(hasRole('ROLE_USER') and principal.username == #courierUserDTO.user.username)")
     @Override
     public void update(CourierUserDTO courierUserDTO) {
         if (courierUserDTO == null) {
             throw new NullPointerException("courierUserDTO is null");
         }
-        
+
         if (courierUserDTO.getCourier().getId() == null) {
             throw new IllegalArgumentException("courier.id is null");
         }
         if (courierUserDTO.getUser().getId() == null) {
             throw new IllegalArgumentException("user.id is null");
         }
-        
-        UserDTO userDTO = courierUserDTO.getUser();        
-        CourierDTO courierDTO = courierUserDTO.getCourier();        
-        
-        courierDTO.setUser(userDTO);       
+
+        UserDTO userDTO = courierUserDTO.getUser();
+        CourierDTO courierDTO = courierUserDTO.getCourier();
+
+        courierDTO.setUser(userDTO);
         uservice.updateUser(userDTO);
         cservice.createCourier(courierDTO);
     }
 
+    @Transactional(readOnly=true)
     @Override
     public List<CourierUserDTO> findAll() {
         List<CourierDTO> courierDTOList = cservice.getAllCouriers();
@@ -112,5 +119,4 @@ public class CourierUserFacadeImpl implements CourierUserFacade{
         }
         return cuDTOList;
     }
-    
 }

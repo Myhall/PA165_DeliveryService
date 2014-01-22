@@ -10,6 +10,7 @@ import cz.muni.fi.pa165.deliveryservice.dto.UserDTO;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -46,6 +47,7 @@ public class CustomerUserFacadeImpl implements CustomerUserFacade {
         cservice.createCustomer(customerDTO);
     }
 
+    @Transactional(readOnly=true)
     @Override
     public CustomerUserDTO getByCustomerId(Long id) {
         if (id == null) {
@@ -65,6 +67,8 @@ public class CustomerUserFacadeImpl implements CustomerUserFacade {
         return new CustomerUserDTO(customerDTO, userDTO);
     }
 
+     @PreAuthorize("hasRole('ROLE_ADMIN') or "
+    + "(hasRole('ROLE_USER') and principal.username == #customerUserDTO.user.username)")
     @Override
     public void remove(CustomerUserDTO customerUserDTO) {
         if (customerUserDTO == null) {
@@ -82,6 +86,8 @@ public class CustomerUserFacadeImpl implements CustomerUserFacade {
         cservice.deleteCustomer(customerUserDTO.getCustomer());        
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or "
+    + "(hasRole('ROLE_USER') and principal.username == #customerUserDTO.user.username)")
     @Override
     public void update(CustomerUserDTO customerUserDTO) {
         if (customerUserDTO == null) {
@@ -103,6 +109,7 @@ public class CustomerUserFacadeImpl implements CustomerUserFacade {
         cservice.createCustomer(customerDTO);
     }
 
+    @Transactional(readOnly=true)
     @Override
     public List<CustomerUserDTO> findAll() {
         List<CustomerDTO> customerDTOList = cservice.getAllCustomers();

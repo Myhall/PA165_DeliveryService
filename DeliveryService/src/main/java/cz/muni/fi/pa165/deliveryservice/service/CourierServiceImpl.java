@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +31,7 @@ public class CourierServiceImpl implements CourierService {
     @Autowired
     private Mapper mapper;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Override
     public CourierDTO createCourier(CourierDTO courierDto) {
         if (courierDto == null) {
@@ -41,6 +43,7 @@ public class CourierServiceImpl implements CourierService {
         return mapper.map(courier, CourierDTO.class);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Override
     public void deleteCourier(CourierDTO courierDto) {
         if (courierDto == null) {
@@ -51,6 +54,7 @@ public class CourierServiceImpl implements CourierService {
         courierDao.deleteCourier(courier);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Override
     public CourierDTO updateCourier(final CourierDTO courierDto) {
         if (courierDto == null) {
@@ -61,18 +65,21 @@ public class CourierServiceImpl implements CourierService {
         courier.setEmail(courierDto.getEmail());
         courier.setFirstName(courierDto.getFirstName());
         courier.setLastName(courierDto.getLastName());
-        
-        List<Delivery> deliveries = new ArrayList<Delivery>(){{
-            for(DeliveryDTO deliveryDto : courierDto.getDeliveries()) {
-                add(mapper.map(deliveryDto, Delivery.class));
+
+        List<Delivery> deliveries = new ArrayList<Delivery>() {
+            {
+                for (DeliveryDTO deliveryDto : courierDto.getDeliveries()) {
+                    add(mapper.map(deliveryDto, Delivery.class));
+                }
             }
-        }};
-        
+        };
+
         courier.setDeliveries(deliveries);
-        
+
         return mapper.map(courierDao.updateCourier(courier), CourierDTO.class);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<CourierDTO> getAllCouriers() {
         List<CourierDTO> resultList = new ArrayList<>();
@@ -82,6 +89,7 @@ public class CourierServiceImpl implements CourierService {
         return resultList;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public CourierDTO findCourier(Long id) {
         if (id == null) {
@@ -89,12 +97,13 @@ public class CourierServiceImpl implements CourierService {
         }
 
         Courier fromDB = courierDao.findCourier(id);
-        if(fromDB == null) {
+        if (fromDB == null) {
             return null;
         }
         return mapper.map(fromDB, CourierDTO.class);
     }
-    
+
+    @Transactional(readOnly= true)
     @Override
     public CourierDTO findByUsername(String username) {
         if (username == null) {

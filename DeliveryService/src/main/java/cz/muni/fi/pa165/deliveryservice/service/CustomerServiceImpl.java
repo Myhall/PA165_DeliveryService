@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,6 +45,8 @@ public class CustomerServiceImpl implements CustomerService {
         return mapper.map(customer, CustomerDTO.class);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or "
+            + "(hasRole('ROLE_USER') and principal.customer.id == #customerDto.id)")
     @Override
     public void deleteCustomer(CustomerDTO customerDto) {
         if (customerDto == null) {
@@ -55,6 +59,8 @@ public class CustomerServiceImpl implements CustomerService {
         customerDao.deleteCustomer(customer);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or "
+            + "(hasRole('ROLE_USER') and principal.customer.id == #customerDto.id)")
     @Override
     public CustomerDTO updateCustomer(final CustomerDTO customerDto) {
         if (customerDto == null) {
@@ -84,6 +90,7 @@ public class CustomerServiceImpl implements CustomerService {
         return mapper.map(customerDao.updateCustomer(customer), CustomerDTO.class);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<CustomerDTO> getAllCustomers() {
         List<CustomerDTO> list = new ArrayList<>();
@@ -93,13 +100,16 @@ public class CustomerServiceImpl implements CustomerService {
         return list;
     }
 
+    @PostAuthorize("hasRole('ROLE_ADMIN') or "
+            + "(hasRole('ROLE_USER') and returnObject != null and principal.customer.id == returnObject.id)")
+    @Transactional(readOnly = true)
     @Override
     public CustomerDTO findCustomer(Long id) {
         if (id == null) {
             throw new NullPointerException("id");
         }
         Customer customerFromDB = customerDao.findCustomer(id);
-        if(customerFromDB == null) {
+        if (customerFromDB == null) {
             return null;
         }
         return mapper.map(customerFromDB, CustomerDTO.class);

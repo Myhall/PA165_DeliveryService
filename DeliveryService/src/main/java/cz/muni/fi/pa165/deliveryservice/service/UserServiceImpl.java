@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or "
-            + "(hasRole('ROLE_USER') and principal.username == #user.username)")
+            + "(hasRole('ROLE_USER') and principal.username == #userDto.username)")
     @Transactional
     @Override
     public void deleteUser(UserDTO userDto) {
@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
         dao.remove(user);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN') or " + "(hasRole('ROLE_USER') and principal.username == #user.username)")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or " + "(hasRole('ROLE_USER') and principal.username == #userDto.username)")
     @Transactional
     @Override
     public UserDTO updateUser(UserDTO userDto) {
@@ -128,5 +128,4 @@ public class UserServiceImpl implements UserService {
         User user2 = mapper.map(user, User.class);
         dao.makeAdmin(user2);
     }
-
 }

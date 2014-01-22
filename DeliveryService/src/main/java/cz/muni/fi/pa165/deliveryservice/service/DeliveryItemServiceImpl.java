@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +32,7 @@ public class DeliveryItemServiceImpl implements DeliveryItemService {
         this.deliveryItemDao = deliveryItemDao;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Override
     public DeliveryItemDTO createDeliveryItem(DeliveryItemDTO deliveryItemDTO) {
         if (deliveryItemDTO == null) {
@@ -42,6 +44,7 @@ public class DeliveryItemServiceImpl implements DeliveryItemService {
         return mapper.map(deliveryItem, DeliveryItemDTO.class);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Override
     public void deleteDeliveryItem(DeliveryItemDTO deliveryItemDTO) {
         if (deliveryItemDTO == null) {
@@ -52,6 +55,7 @@ public class DeliveryItemServiceImpl implements DeliveryItemService {
         deliveryItemDao.deleteDeliveryItem(deliveryItem);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Override
     public DeliveryItemDTO updateDeliveryItem(DeliveryItemDTO deliveryItemDTO) {
         if (deliveryItemDTO == null) {
@@ -67,6 +71,7 @@ public class DeliveryItemServiceImpl implements DeliveryItemService {
         return mapper.map(deliveryItemDao.updateDeliveryItem(deliveryItem), DeliveryItemDTO.class);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public DeliveryItemDTO findDeliveryItem(Long id) {
         if (id == null) {
@@ -79,6 +84,7 @@ public class DeliveryItemServiceImpl implements DeliveryItemService {
         return mapper.map(deliveryItem, DeliveryItemDTO.class);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<DeliveryItemDTO> getAllDeliveryItems() {
         List<DeliveryItemDTO> list = new ArrayList<>();

@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +30,8 @@ public class DeliveryServiceImpl implements DeliveryService {
     @Autowired
     private Mapper mapper;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or "
+            + "(hasRole('ROLE_USER') and principal.customer.id == #delivery.customer.id)")
     @Override
     public DeliveryDTO createDelivery(DeliveryDTO delivery) {
         if (delivery == null) {
@@ -35,12 +39,14 @@ public class DeliveryServiceImpl implements DeliveryService {
         }
 
         Delivery d = mapper.map(delivery, Delivery.class);
-        
+
         deliveryDAO.createDelivery(d);
-        
+
         return mapper.map(d, DeliveryDTO.class);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or "
+            + "(hasRole('ROLE_USER') and principal.customer.id == #delivery.customer.id ")
     @Override
     public void deleteDelivery(DeliveryDTO delivery) {
         if (delivery == null) {
@@ -51,6 +57,8 @@ public class DeliveryServiceImpl implements DeliveryService {
         deliveryDAO.deleteDelivery(d);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or "
+            + "(hasRole('ROLE_USER') and principal.customer.id == #delivery.customer.id ")
     @Override
     public DeliveryDTO updateDelivery(DeliveryDTO delivery) {
         if (delivery == null) {
@@ -58,10 +66,13 @@ public class DeliveryServiceImpl implements DeliveryService {
         }
 
         Delivery d = mapper.map(delivery, Delivery.class);
-        
+
         return mapper.map(deliveryDAO.updateDelivery(d), DeliveryDTO.class);
     }
 
+    @PostAuthorize("hasRole('ROLE_ADMIN') or "
+            + "(hasRole('ROLE_USER') and returnObject != null and principal.customer.id == returnObject.customer.id)")
+    @Transactional(readOnly = true)
     @Override
     public DeliveryDTO findDelivery(Long id) {
         if (id == null) {
@@ -72,6 +83,8 @@ public class DeliveryServiceImpl implements DeliveryService {
         return mapper.map(d, DeliveryDTO.class);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @Transactional(readOnly = true)
     @Override
     public List<DeliveryDTO> getAllDeliveries() {
         List<DeliveryDTO> returnMe = new ArrayList<>();
