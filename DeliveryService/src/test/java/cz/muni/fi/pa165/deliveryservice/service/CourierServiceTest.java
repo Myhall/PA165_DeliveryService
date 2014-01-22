@@ -5,19 +5,14 @@ import cz.muni.fi.pa165.deliveryservice.CourierTestBase;
 import cz.muni.fi.pa165.deliveryservice.dao.CourierDAO;
 import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
 import cz.muni.fi.pa165.deliveryservice.main.AbstractIntegrationTest;
-import java.sql.SQLException;
-import javax.persistence.PersistenceException;
 import org.dozer.DozerBeanMapper;
-import org.hibernate.HibernateException;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import static org.mockito.Mockito.*;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.dao.DataAccessException;
 import org.springframework.test.util.ReflectionTestUtils;
 
 /**
@@ -109,45 +104,5 @@ public class CourierServiceTest extends AbstractIntegrationTest {
     {
         courierService.getAllCouriers();
         verify(dao).getAllCouriers();
-    }
-    
-    @Test(expected = DataAccessException.class)
-    @Ignore
-    public void testFindAllCouriersPersistenceException()
-    {
-        when(dao.getAllCouriers()).thenThrow(SQLException.class);
-        courierService.getAllCouriers();
-    }
-    
-    @Test(expected = DataAccessException.class)
-    @Ignore
-    public void testUpdateCourierPersistenceException()
-    {
-        when(dao.updateCourier(courier)).thenThrow(SQLException.class);
-        courierService.updateCourier(courierDTO);
-    }
-    
-    @Test(expected = DataAccessException.class)
-    @Ignore
-    public void testCreateCourierPersistenceException()
-    {
-        doThrow(PersistenceException.class).when(dao).createCourier(courier);
-        courierService.createCourier(courierDTO);
-    }
-    
-    @Test(expected = DataAccessException.class)
-    @Ignore
-    public void testDeleteCourierPersistenceException()
-    {
-        doThrow(SQLException.class).when(dao).deleteCourier(courier);
-        courierService.deleteCourier(courierDTO);
-    }
-    
-    @Test(expected = DataAccessException.class)
-    @Ignore
-    public void testFindCourierPersistenceException()
-    {
-        when(dao.findCourier(courier.getId())).thenThrow(SQLException.class);
-        courierService.findCourier(courier.getId());
     }
 }
