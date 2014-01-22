@@ -19,6 +19,24 @@
     <context:annotation-config/>
     <context:component-scan base-package="cz.muni.fi.pa165.deliveryservice.rest"/>
     <context:property-placeholder location="classpath:server.properties"/>
-    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
+    <bean id="restTemplate" class="org.springframework.web.client.RestTemplate">
+        <constructor-arg ref="httpClientFactory"/>                
+    </bean>
     
+    <bean id="httpClient" class="org.apache.commons.httpclient.HttpClient">
+        <property name="state" ref="httpState"/>
+    </bean>
+    
+    <bean id="httpState" class="cz.muni.fi.pa165.deliveryservice.rest.util.CustomHttpState">
+        <property name="credentials" ref="credentials"/>
+    </bean>
+
+    <bean id="credentials" class="org.apache.commons.httpclient.UsernamePasswordCredentials">
+        <constructor-arg value="${rest.username}"/>
+        <constructor-arg value="${rest.password}"/>
+    </bean>
+
+    <bean id="httpClientFactory" class="org.springframework.http.client.CommonsClientHttpRequestFactory">
+        <constructor-arg ref="httpClient"/>
+    </bean>
 </beans>
