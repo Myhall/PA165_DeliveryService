@@ -41,7 +41,7 @@ public class CustomerUserFacadeImpl implements CustomerUserFacade {
             throw new IllegalArgumentException("userDTO.id is null");
         }        
         
-        uservice.create(userDTO);
+        uservice.createUser(userDTO);
         customerDTO.setUser(userDTO);
         cservice.createCustomer(customerDTO);
     }
@@ -59,7 +59,7 @@ public class CustomerUserFacadeImpl implements CustomerUserFacade {
 
     @Override
     public CustomerUserDTO getByUsername(String username) {
-        UserDTO userDTO = uservice.getByUsername(username);        
+        UserDTO userDTO = uservice.findByUsername(username);        
         CustomerDTO customerDTO = cservice.findByUsername(username);
         
         return new CustomerUserDTO(customerDTO, userDTO);
@@ -78,7 +78,7 @@ public class CustomerUserFacadeImpl implements CustomerUserFacade {
             throw new IllegalArgumentException("user.id is null");
         }
         
-        uservice.remove(customerUserDTO.getUser());
+        uservice.createUser(customerUserDTO.getUser());
         cservice.deleteCustomer(customerUserDTO.getCustomer());        
     }
 
@@ -99,7 +99,7 @@ public class CustomerUserFacadeImpl implements CustomerUserFacade {
         CustomerDTO customerDTO = customerUserDTO.getCustomer();        
         
         customerDTO.setUser(userDTO);       
-        uservice.update(userDTO);
+        uservice.updateUser(userDTO);
         cservice.createCustomer(customerDTO);
     }
 

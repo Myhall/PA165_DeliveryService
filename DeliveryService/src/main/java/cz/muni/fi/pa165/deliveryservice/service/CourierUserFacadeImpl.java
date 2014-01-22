@@ -41,7 +41,7 @@ public class CourierUserFacadeImpl implements CourierUserFacade{
             throw new IllegalArgumentException("userDTO.id is null");
         }        
         
-        uservice.create(userDTO);
+        uservice.createUser(userDTO);
         courierDTO.setUser(userDTO);
         cservice.createCourier(courierDTO);
     }
@@ -59,7 +59,7 @@ public class CourierUserFacadeImpl implements CourierUserFacade{
 
     @Override
     public CourierUserDTO getByUsername(String username) {
-        UserDTO userDTO = uservice.getByUsername(username);        
+        UserDTO userDTO = uservice.findByUsername(username);        
         CourierDTO courierDTO = cservice.findByUsername(username);
         
         return new CourierUserDTO(courierDTO, userDTO);
@@ -78,7 +78,7 @@ public class CourierUserFacadeImpl implements CourierUserFacade{
             throw new IllegalArgumentException("user.id is null");
         }
         
-        uservice.remove(courierUserDTO.getUser());
+        uservice.deleteUser(courierUserDTO.getUser());
         cservice.deleteCourier(courierUserDTO.getCourier());        
     }
 
@@ -99,7 +99,7 @@ public class CourierUserFacadeImpl implements CourierUserFacade{
         CourierDTO courierDTO = courierUserDTO.getCourier();        
         
         courierDTO.setUser(userDTO);       
-        uservice.update(userDTO);
+        uservice.updateUser(userDTO);
         cservice.createCourier(courierDTO);
     }
 
