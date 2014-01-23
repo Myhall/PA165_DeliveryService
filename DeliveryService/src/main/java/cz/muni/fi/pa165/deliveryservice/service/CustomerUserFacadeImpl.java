@@ -23,9 +23,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class CustomerUserFacadeImpl implements CustomerUserFacade {
 
     @Autowired
-    private CustomerService cservice;   
+    private CustomerService customerService;   
     @Autowired
-    private UserService uservice;
+    private UserService userService;
     
     @Override
     public void create(CustomerDTO customerDTO, UserDTO userDTO) {
@@ -42,9 +42,9 @@ public class CustomerUserFacadeImpl implements CustomerUserFacade {
             throw new IllegalArgumentException("userDTO.id is null");
         }        
         
-        uservice.createUser(userDTO);
+        userService.createUser(userDTO);
         customerDTO.setUser(userDTO);
-        cservice.createCustomer(customerDTO);
+        customerService.createCustomer(customerDTO);
     }
 
     @Transactional(readOnly=true)
@@ -54,15 +54,15 @@ public class CustomerUserFacadeImpl implements CustomerUserFacade {
             throw new IllegalArgumentException("id is null");
         }
         
-        CustomerDTO customer = cservice.findCustomer(id);
+        CustomerDTO customer = customerService.findCustomer(id);
         UserDTO user = customer.getUser();
         return new CustomerUserDTO(customer, user);
     }
 
     @Override
     public CustomerUserDTO getByUsername(String username) {
-        UserDTO userDTO = uservice.findByUsername(username);        
-        CustomerDTO customerDTO = cservice.findByUsername(username);
+        UserDTO userDTO = userService.findByUsername(username);        
+        CustomerDTO customerDTO = customerService.findByUsername(username);
         
         return new CustomerUserDTO(customerDTO, userDTO);
     }
@@ -82,8 +82,8 @@ public class CustomerUserFacadeImpl implements CustomerUserFacade {
             throw new IllegalArgumentException("user.id is null");
         }
         
-        uservice.createUser(customerUserDTO.getUser());
-        cservice.deleteCustomer(customerUserDTO.getCustomer());        
+        userService.createUser(customerUserDTO.getUser());
+        customerService.deleteCustomer(customerUserDTO.getCustomer());        
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or "
@@ -105,14 +105,14 @@ public class CustomerUserFacadeImpl implements CustomerUserFacade {
         CustomerDTO customerDTO = customerUserDTO.getCustomer();        
         
         customerDTO.setUser(userDTO);       
-        uservice.updateUser(userDTO);
-        cservice.createCustomer(customerDTO);
+        userService.updateUser(userDTO);
+        customerService.createCustomer(customerDTO);
     }
 
     @Transactional(readOnly=true)
     @Override
     public List<CustomerUserDTO> findAll() {
-        List<CustomerDTO> customerDTOList = cservice.getAllCustomers();
+        List<CustomerDTO> customerDTOList = customerService.getAllCustomers();
         List<CustomerUserDTO> cuDTOList = new ArrayList<>();
         for (CustomerDTO c : customerDTOList) {
             cuDTOList.add(new CustomerUserDTO(c, c.getUser()));

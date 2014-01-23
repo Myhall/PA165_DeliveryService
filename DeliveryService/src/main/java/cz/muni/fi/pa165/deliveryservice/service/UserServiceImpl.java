@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserDAO dao;
+    private UserDAO userDao;
     @Autowired
     private Mapper mapper;
 
@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
             throw new NullPointerException("user is null");
         }
         User user = mapper.map(userDto, User.class);
-        dao.create(user);
+        userDao.create(user);
         return mapper.map(user, UserDTO.class);
     }
 
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
         }
 
         User user = mapper.map(userDto, User.class);
-        dao.remove(user);
+        userDao.remove(user);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or " + "(hasRole('ROLE_USER') and principal.username == #userDto.username)")
@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
             throw new NullPointerException("user is null");
         }
         User user = mapper.map(userDto, User.class);
-        return mapper.map(dao.update(user), UserDTO.class);
+        return mapper.map(userDao.update(user), UserDTO.class);
     }
 
     @Transactional(readOnly = true)
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
         if (id == null) {
             throw new NullPointerException("id");
         }
-        User user = dao.findUser(id);
+        User user = userDao.findUser(id);
         if (user == null) {
             return null;
         }
@@ -83,7 +83,7 @@ public class UserServiceImpl implements UserService {
         if (username == null) {
             throw new IllegalArgumentException("username is null or empty");
         }
-        User user = dao.findByUsername(username);
+        User user = userDao.findByUsername(username);
 
         return mapper.map(user, UserDTO.class);
     }
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("username is empty");
         }
 
-        return dao.availableUsername(username);
+        return userDao.availableUsername(username);
     }
 
     @Transactional(readOnly = true)
@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService {
         }
         User user2 = mapper.map(user, User.class);
 
-        return dao.isAdmin(user2);
+        return userDao.isAdmin(user2);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -126,6 +126,6 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("user.id is null");
         }
         User user2 = mapper.map(user, User.class);
-        dao.makeAdmin(user2);
+        userDao.makeAdmin(user2);
     }
 }

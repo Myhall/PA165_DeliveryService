@@ -1,7 +1,10 @@
 package cz.muni.fi.pa165.deliverysystemweb;
 
 import cz.muni.fi.pa165.deliveryservice.dto.CustomerDTO;
+import cz.muni.fi.pa165.deliveryservice.dto.CustomerUserDTO;
+import cz.muni.fi.pa165.deliveryservice.dto.UserDTO;
 import cz.muni.fi.pa165.deliveryservice.service.CustomerService;
+import cz.muni.fi.pa165.deliveryservice.service.CustomerUserFacade;
 import java.util.List;
 import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
@@ -26,6 +29,8 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
 
     @SpringBean
     protected CustomerService customerService;
+    @SpringBean
+    protected CustomerUserFacade customerFacade;
     private List<CustomerDTO> customerList;
     
     @ValidateNestedProperties(value = {
@@ -34,6 +39,12 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
         @Validate(on = {"add", "save"}, field = "email", required = true, converter = EmailTypeConverter.class)
     })
     private CustomerDTO customerDTO;
+    @ValidateNestedProperties(value = {
+        @Validate(on = {"save"}, field = "password", required = true, minlength = 3)
+    })
+    private UserDTO userDTO;
+    @Validate(on = {"save"}, field = "password2", required = true, minlength = 3)
+    private String password2;
 
     @DefaultHandler
     public Resolution list() {
@@ -55,19 +66,37 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
         this.customerDTO = customerDTO;
     }
 
+    public UserDTO getUserDTO() {
+        return userDTO;
+    }
+
+    public void setUserDTO(UserDTO userDTO) {
+        this.userDTO = userDTO;
+    }
+
+    public String getPassword2() {
+        return password2;
+    }
+
+    public void setPassword2(String password2) {
+        this.password2 = password2;
+    }
+
     public List<CustomerDTO> getCustomerList() {
         return customerList;
     }
 
     public Resolution save() {
-        customerService.createCustomer(customerDTO);
+        if(userDTO.getPassword().equals(password2)) {
+            customerFacade.update(new CustomerUserDTO(customerDTO, userDTO));
+        }
         return new RedirectResolution(this.getClass(), "list");
 
     }
 
     public Resolution delete() {
-        customerDTO = customerService.findCustomer(customerDTO.getId());
-        customerService.deleteCustomer(customerDTO);
+        Long id = Long.parseLong(getContext().getRequest().getParameter("customerDTO.id"));
+        customerFacade.remove(customerFacade.getByCustomerId(id));
         return new RedirectResolution(this.getClass(), "list");
     }
 
@@ -77,7 +106,9 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
         if (ids == null) {
             return;
         }
-        customerDTO = customerService.findCustomer(Long.valueOf(ids));
+        CustomerUserDTO cudto = customerFacade.getByCustomerId(Long.valueOf(ids));
+        customerDTO = cudto.getCustomer();
+        userDTO = cudto.getUser();
     }
 
     public Resolution edit() {
@@ -85,7 +116,9 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
     }
 
     public Resolution update() {
-        customerService.updateCustomer(customerDTO);
+        if(userDTO.getPassword().equals(password2)) {
+            customerFacade.update(new CustomerUserDTO(customerDTO, userDTO));
+        }        
         return new RedirectResolution(this.getClass(), "list");
     }
 

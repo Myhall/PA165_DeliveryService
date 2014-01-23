@@ -34,4 +34,9 @@
     
     <bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.ShaPasswordEncoder" />
     
+    <bean id="customerFacade" class="cz.muni.fi.pa165.deliveryservice.service.CustomerUserFacadeImpl" />
+    
+    <bean id="userDao" class="cz.muni.fi.pa165.deliveryservice.dao.jpa.JPAUserDAO" />
+    <bean id="userService" class="cz.muni.fi.pa165.deliveryservice.service.UserServiceImpl" />
+    
 </beans>
