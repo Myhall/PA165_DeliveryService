@@ -52,7 +52,7 @@ public class JPAUserDAO implements UserDAO {
 
         User toRemove = em.find(User.class, user.getId());
         if (toRemove != null) {
-            em.remove(user);
+            em.remove(toRemove);
         }
     }
 

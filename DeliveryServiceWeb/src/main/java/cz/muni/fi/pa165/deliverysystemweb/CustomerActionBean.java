@@ -88,7 +88,7 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
 
     public Resolution save() {
         if(userDTO.getPassword().equals(password2)) {
-            customerFacade.update(new CustomerUserDTO(customerDTO, userDTO));
+            customerFacade.create(customerDTO, userDTO);
         }
         return new RedirectResolution(this.getClass(), "list");
 

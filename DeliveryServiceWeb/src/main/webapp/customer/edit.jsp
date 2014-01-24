@@ -51,6 +51,19 @@
                         <label class="control-label" for="inputWarning"><s:label name="customer.telephoneNumber"/></label>
                         <s:text name="customerDTO.telephoneNumber" class="form-control"/>
                     </div>
+                    <div class="form-group">
+                        <label class="control-label" for="inputWarning"><s:label name="user.username"/></label>
+                        <s:text name="userDTO.username" class="form-control"/>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputWarning"><s:label name="user.password"/></label>                                          
+                        <s:password name="userDTO.password" class="form-control"/>             
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputWarning"><s:label name="user.password2"/></label>                                          
+                        <s:password name="password2" class="form-control"/>             
+                    </div>
+
                     <c:choose>
                         <c:when test="${not empty actionBean.customerDTO.id}">
                             <s:submit name="update" class="btn btn-primary">

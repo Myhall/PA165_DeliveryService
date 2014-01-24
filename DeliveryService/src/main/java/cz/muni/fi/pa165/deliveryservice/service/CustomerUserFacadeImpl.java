@@ -34,16 +34,10 @@ public class CustomerUserFacadeImpl implements CustomerUserFacade {
         }
         if (userDTO == null) {
             throw new IllegalArgumentException("user is null");
-        }                
-        if (customerDTO.getId() != null) {
-            throw new IllegalArgumentException("customerDTO.id is null");
-        }
-        if (userDTO.getId() != null) {
-            throw new IllegalArgumentException("userDTO.id is null");
-        }        
+        }                       
         
-        userService.createUser(userDTO);
-        customerDTO.setUser(userDTO);
+        
+        customerDTO.setUser(userService.createUser(userDTO));
         customerService.createCustomer(customerDTO);
     }
 
@@ -82,7 +76,7 @@ public class CustomerUserFacadeImpl implements CustomerUserFacade {
             throw new IllegalArgumentException("user.id is null");
         }
         
-        userService.createUser(customerUserDTO.getUser());
+        userService.deleteUser(customerUserDTO.getUser());
         customerService.deleteCustomer(customerUserDTO.getCustomer());        
     }
 
@@ -106,7 +100,7 @@ public class CustomerUserFacadeImpl implements CustomerUserFacade {
         
         customerDTO.setUser(userDTO);       
         userService.updateUser(userDTO);
-        customerService.createCustomer(customerDTO);
+        customerService.updateCustomer(customerDTO);
     }
 
     @Transactional(readOnly=true)
