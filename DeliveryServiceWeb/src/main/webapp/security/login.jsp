@@ -7,8 +7,8 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <f:message key="login.title" var="msg"/>
-<s:layout-render name="/layout.jsp" title="${msg}">
-    <s:layout-component name="content">
+<s:layout-render name="/layout.jsp" title="${msg}" titlekey="login.title">
+    <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.SecurityActionBean" var="actionBean"/>
         <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.RegistrationActionBean" var="registrationActionBean"/>
 
@@ -43,8 +43,9 @@
                 </div>
             </div>
             <div class="control-group">
+                <br>
                 <div class="controls">
-                    <button type="submit" class="btn"><f:message key="login.button.login"/></button>
+                    <button type="submit" class="btn btn-primary"><f:message key="login.button.login"/></button>
                 </div>
             </div>
         </form>
