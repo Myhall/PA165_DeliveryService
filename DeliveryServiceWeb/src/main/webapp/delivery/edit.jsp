@@ -29,13 +29,15 @@
                             <s:options-collection collection="${actionBean.allCustomers}" value="id" label="email" />
                         </s:select>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label" for="inputSuccess"><s:label name="delivery.courier"/></label>
-                        <s:select name="delivery.courier.id" class="control-select" >
-                            <s:option value="" />
-                            <s:options-collection collection="${actionBean.allCouriers}" value="id" label="email" />
-                        </s:select>
-                    </div>
+                    <sec:authorize access="hasRole('ROLE_ADMIN')">
+                        <div class="form-group">
+                            <label class="control-label" for="inputSuccess"><s:label name="delivery.courier"/></label>
+                            <s:select name="delivery.courier.id" class="control-select" >
+                                <s:option value="" />
+                                <s:options-collection collection="${actionBean.allCouriers}" value="id" label="email" />
+                            </s:select>
+                        </div>
+                    </sec:authorize>
                     <div class="form-group">
                         <label class="control-label" for="inputWarning"><s:label name="delivery.placeFrom"/></label>
                         <s:text name="delivery.placeFrom" class="form-control"/>

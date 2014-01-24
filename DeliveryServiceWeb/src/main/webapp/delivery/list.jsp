@@ -26,7 +26,9 @@
                             <th><f:message key="delivery.courier"/></th>
                             <th><f:message key="delivery.status"/></th>
                             <th><f:message key="buttons.update"/></th>
+                    <sec:authorize access="hasRole('ROLE_ADMIN')">
                             <th><f:message key="buttons.delete"/></th>
+                            </sec:authorize>
                         </tr>
                     </thead>
                     <c:forEach items="${actionBean.deliveries}" var="del">
@@ -37,6 +39,8 @@
                             <td>${del.courier.email}</td>
                             <td>${del.status}</td>
 
+                            
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
                             <td>
                                 <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" 
                                         event="edit" class="btn btn-xs btn-primary" >
@@ -44,6 +48,7 @@
                                     <f:message key="buttons.update" />
                                 </s:link>
                             </td>
+                            </sec:authorize>
                             <td>
                                 <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" 
                                         event="delete" class="btn btn-xs btn-danger" >
