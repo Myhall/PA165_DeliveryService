@@ -10,6 +10,7 @@
             <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/bootstrap.css" />
             <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/main.css" />
+            <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/signin.css" />
             <meta charset="utf-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
