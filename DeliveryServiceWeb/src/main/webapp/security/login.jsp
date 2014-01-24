@@ -9,8 +9,8 @@
 <f:message key="login.title" var="msg"/>
 <s:layout-render name="/layout.jsp" title="${msg}">
     <s:layout-component name="content">
-        <s:useActionBean beanclass="cz.muni.fi.pa165.stis.web.SecurityActionBean" var="actionBean"/>
-        <s:useActionBean beanclass="cz.muni.fi.pa165.stis.web.RegistrationActionBean" var="registrationActionBean"/>
+        <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.SecurityActionBean" var="actionBean"/>
+        <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.RegistrationActionBean" var="registrationActionBean"/>
 
         <c:if test="${not empty actionBean.error}">
 		<div class="errorblock">
@@ -25,7 +25,7 @@
                     </font>
 		</div>
 	</c:if>
-                
+        
         <c:url value="/j_spring_security_check" var="checkUrl"/>
         <form class="form-horizontal" action="${checkUrl}" method="POST">
             <div class="control-group">

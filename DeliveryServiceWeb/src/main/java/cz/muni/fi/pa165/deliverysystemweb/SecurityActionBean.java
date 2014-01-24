@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.deliverysystemweb;
 
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
+import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ForwardResolution;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
@@ -17,6 +18,7 @@ public class SecurityActionBean implements ActionBean {
     private ActionBeanContext ctx;
     private String error;
     
+    @DefaultHandler
     public Resolution login() {
         error = getContext().getRequest().getParameter("error");
         return new ForwardResolution("/security/login.jsp");
