@@ -79,7 +79,7 @@ public class RegistrationActionBean implements ActionBean {
 
     public Resolution list() {
         logger.debug("list()");
-        return new RedirectResolution("/tyre/list");
+        return new RedirectResolution("/customer/list");
     }
 
     @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "save"})
@@ -108,7 +108,7 @@ public class RegistrationActionBean implements ActionBean {
         if (uto.getPassword().equals(password2)) {
             logger.debug("save() cto={} \nid={}", cto, cto.getUser());
             cuFacade.update(new CustomerUserDTO(cto, uto));            
-            return new RedirectResolution("/tyre/list");
+            return new RedirectResolution("/customer/list");
         }
         passwordError = "true";
         return new RedirectResolution("/registration/edit.jsp").addParameter("passwordError", passwordError).flash(this);
