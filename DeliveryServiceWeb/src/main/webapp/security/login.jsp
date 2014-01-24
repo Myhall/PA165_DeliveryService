@@ -7,7 +7,11 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <f:message key="login.title" var="msg"/>
+<<<<<<< HEAD
 <s:layout-render name="/layout.jsp" title="${msg}" titlekey="login.title">
+=======
+<s:layout-render name="/layout.jsp" title="${msg}">
+>>>>>>> origin/master
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.SecurityActionBean" var="actionBean"/>
         <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.RegistrationActionBean" var="registrationActionBean"/>
