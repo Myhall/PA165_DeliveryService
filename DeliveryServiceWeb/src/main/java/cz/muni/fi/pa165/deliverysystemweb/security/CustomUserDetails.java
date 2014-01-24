@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.deliverysysteweb.security;
+package cz.muni.fi.pa165.deliverysystemweb.security;
 
 import cz.muni.fi.pa165.deliveryservice.dto.CustomerDTO;
 import java.util.Collection;

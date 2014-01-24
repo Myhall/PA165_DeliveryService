@@ -12,6 +12,7 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:sec="http://www.springframework.org/schema/security"
 
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
@@ -23,6 +24,8 @@
           http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi-1.2.xsd
           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+          http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.2.xsd
+          http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
 ">
 
     <context:component-scan base-package="cz.muni.fi.pa165.deliveryservice.rest.server"/>
@@ -31,18 +34,18 @@
     
     <context:property-placeholder location="classpath:security.properties" ignore-unresolvable="true"/>
     
-    <http pattern="/resources/**" security="none" />
+    <sec:http pattern="/resources/**" security="none" />
     
-    <authentication-manager alias="authManager">
-        <authentication-provider user-service-ref="customUserService">
-            <password-encoder hash="sha">
-                <salt-source user-property="username"/>
-            </password-encoder>
-        </authentication-provider>
-    </authentication-manager>
+    <sec:authentication-manager alias="authManager">
+        <sec:authentication-provider user-service-ref="customUserDetailsService">
+            <sec:password-encoder hash="sha">
+                <sec:salt-source user-property="username"/>
+            </sec:password-encoder>
+        </sec:authentication-provider>
+    </sec:authentication-manager>
     
-    <beans:bean id="customUserService" class="cz.muni.fi.pa165.deliverysystemweb.security" />
-    
-    <global-method-security pre-post-annotations="enabled"/>
+    <bean id="customUserDetailsService" class="cz.muni.fi.pa165.deliverysystemweb.security.CustomUserDetailsService" />
+        
+    <sec:global-method-security pre-post-annotations="enabled"/>
  
 </beans>
