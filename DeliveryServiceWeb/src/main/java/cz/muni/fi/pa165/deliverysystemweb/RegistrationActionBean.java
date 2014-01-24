@@ -38,12 +38,12 @@ public class RegistrationActionBean implements ActionBean {
         @Validate(on = {"create", "save"}, field = "lastName", required = true),
         @Validate(on = {"create", "save"}, field = "address", required = true)
     })
-    private CustomerDTO cto;
+    private CustomerDTO customerDTO;
     @ValidateNestedProperties(value = {
         @Validate(on = {"create"}, field = "username", required = true),
         @Validate(on = {"create", "save"}, field = "password", required = true, minlength = 5)
     })
-    private UserDTO uto;
+    private UserDTO userDTO;
     @Validate(on = {"create", "save"}, field = "password2", required = true, minlength = 5)
     private String password2;
     @SpringBean
@@ -60,12 +60,12 @@ public class RegistrationActionBean implements ActionBean {
     }
 
     public Resolution create() {
-        logger.debug("newcustomer() cto={} uto]={}", cto, uto);
+        logger.debug("newcustomer() cto={} uto]={}", customerDTO, userDTO);
 
-        if (uto.getPassword().equals(password2)) {
-            if (uService.availableUsername(uto.getUsername())) {
-                uto.setRoleAdmin(false);
-                cuFacade.create(cto, uto);
+        if (userDTO.getPassword().equals(password2)) {
+            if (uService.availableUsername(userDTO.getUsername())) {
+                userDTO.setRoleAdmin(false);
+                cuFacade.create(customerDTO, userDTO);
                 regSucc = "true";
                 return new RedirectResolution("/security/login/").addParameter("regSucc", regSucc);
             }
@@ -89,12 +89,12 @@ public class RegistrationActionBean implements ActionBean {
         }
         Long id = Long.parseLong(getContext().getRequest().getParameter("id"));
         CustomerUserDTO cuto = cuFacade.getByCustomerId(id);
-        cto = cuto.getCustomer();
-        uto = cuto.getUser();
+        customerDTO = cuto.getCustomer();
+        userDTO = cuto.getUser();
 
-        this.setCto(cto);
-        this.setUto(uto);
-        logger.debug("load() \ncuto={} \ncto={} \nuto={}", cuto, cto, uto);
+        this.setCto(customerDTO);
+        this.setUto(userDTO);
+        logger.debug("load() \ncuto={} \ncto={} \nuto={}", cuto, customerDTO, userDTO);
     }
 
     public Resolution edit() {
@@ -104,10 +104,10 @@ public class RegistrationActionBean implements ActionBean {
 
     public Resolution save() {
         logger.debug("save() cto={} \nuto={}", this.getCto(), this.getUto());
-        logger.debug("save() cto={} \nuto={}", cto, uto);
-        if (uto.getPassword().equals(password2)) {
-            logger.debug("save() cto={} \nid={}", cto, cto.getUser());
-            cuFacade.update(new CustomerUserDTO(cto, uto));            
+        logger.debug("save() cto={} \nuto={}", customerDTO, userDTO);
+        if (userDTO.getPassword().equals(password2)) {
+            logger.debug("save() cto={} \nid={}", customerDTO, customerDTO.getUser());
+            cuFacade.update(new CustomerUserDTO(customerDTO, userDTO));            
             return new RedirectResolution("/customer/list");
         }
         passwordError = "true";
@@ -115,19 +115,19 @@ public class RegistrationActionBean implements ActionBean {
     }
 
     public CustomerDTO getCto() {
-        return cto;
+        return customerDTO;
     }
 
     public void setCto(CustomerDTO cto) {
-        this.cto = cto;
+        this.customerDTO = cto;
     }
 
     public UserDTO getUto() {
-        return uto;
+        return userDTO;
     }
 
     public void setUto(UserDTO uto) {
-        this.uto = uto;
+        this.userDTO = uto;
     }
 
     public String getPassword2() {

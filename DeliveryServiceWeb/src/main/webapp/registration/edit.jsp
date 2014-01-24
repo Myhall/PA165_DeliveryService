@@ -8,11 +8,11 @@
 
 <f:message key="registration.update" var="msg"/>
 <s:layout-render name="/layout.jsp" title="${msg}">
-    <s:layout-component name="content">
-        <s:useActionBean beanclass="cz.muni.fi.pa165.stis.web.RegistrationActionBean" var="actionBean"/>
+    <s:layout-component name="body">
+        <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.RegistrationActionBean" var="actionBean"/>
 
         <div id="createCustomer">
-            <s:form class="form-horizontal" beanclass="cz.muni.fi.pa165.stis.web.RegistrationActionBean">
+            <s:form class="form-horizontal" beanclass="cz.muni.fi.pa165.deliverysystemweb.RegistrationActionBean">
                 <s:hidden name="customerDTO.id"/>
                 <s:hidden name="userDTO.id"/>
                 <s:hidden name="userDTO.username"/>
@@ -30,7 +30,7 @@
                     <%@include file="/registration/form-update.jsp"%>    
                     <div class="form-actions">
                         <button type="submit" class="btn btn-primary" name="save"><i class="icon-plus"></i> <f:message key="button.edit"/></button>
-                        <s:link beanclass="cz.muni.fi.pa165.stis.web.RegistrationActionBean" class="btn" event="list"><i class="icon-ban-circle"></i> <f:message key="button.cancel"/></s:link>
+                        <s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.RegistrationActionBean" class="btn" event="list"><i class="icon-ban-circle"></i> <f:message key="button.cancel"/></s:link>
                     </div>
                 </fieldset>            
             </s:form>

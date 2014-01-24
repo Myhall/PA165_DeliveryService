@@ -41,6 +41,7 @@
                             <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" class="glyphicon glyphicon-briefcase">&nbsp;<f:message key="deliveryItem.list.title"/></s:link></li>
                             <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" class="glyphicon glyphicon-user">&nbsp;<f:message key="customer.list.title"/></s:link></li>
                             <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.SecurityActionBean" class="glyphicon glyphicon-user">&nbsp;<f:message key="login.title"/></s:link></li>
+                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.RegistrationActionBean" class="glyphicon glyphicon-user">&nbsp;<f:message key="register.title"/></s:link></li>
                         </ul>
                         
                     </div><!--/.nav-collapse -->
