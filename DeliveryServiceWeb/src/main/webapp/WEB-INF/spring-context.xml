@@ -45,7 +45,7 @@
         <sec:intercept-url pattern="/registration/form.jsp" access="permitAll" />
         <sec:intercept-url pattern="/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
 
-        <sec:form-login login-page="/security/login/" default-target-url="/customer/list/" authentication-failure-url="/security/login/?error=true"/>
+        <sec:form-login login-page="/security/login/" default-target-url="/delivery/list/" authentication-failure-url="/security/login/?error=true"/>
         <sec:logout logout-url="/security/logout/" />
     </sec:http>
     
