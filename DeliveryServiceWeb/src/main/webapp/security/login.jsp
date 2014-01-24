@@ -8,7 +8,7 @@
 
 <f:message key="login.title" var="msg"/>
 <s:layout-render name="/layout.jsp" title="${msg}">
-    <s:layout-component name="content">
+    <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.SecurityActionBean" var="actionBean"/>
         <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.RegistrationActionBean" var="registrationActionBean"/>
 
