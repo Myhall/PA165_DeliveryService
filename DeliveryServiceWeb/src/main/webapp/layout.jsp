@@ -1,8 +1,9 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <s:layout-definition>
-<!DOCTYPE html>
+    <!DOCTYPE html>
     <html lang="${pageContext.request.locale}">
         <head>
             <title>Delivery service - <f:message key="${titlekey}"/></title>
@@ -33,21 +34,37 @@
                         <a class="navbar-brand" href="${pageContext.request.contextPath}">Delivery service</a>
                     </div>
                     <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav navbar-right">
-                            <!--<li class="active"><a href="#">Link</a></li>-->
-                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" class="glyphicon glyphicon-globe">&nbsp;<f:message key="delivery.title"/></s:link></li>
-                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" class="glyphicon glyphicon-globe">&nbsp;<f:message key="courier.title"/></s:link></li>
-                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" class="glyphicon glyphicon-briefcase">&nbsp;<f:message key="deliveryItem.list.title"/></s:link></li>
-                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" class="glyphicon glyphicon-user">&nbsp;<f:message key="customer.list.title"/></s:link></li>
-                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.SecurityActionBean" class="glyphicon glyphicon-user">&nbsp;<f:message key="login.title"/></s:link></li>
-                            <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.RegistrationActionBean" class="glyphicon glyphicon-user">&nbsp;<f:message key="register.title"/></s:link></li>
-                        </ul>
-                        
+                        <sec:authorize access="hasRole('ROLE_ADMIN')">
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" class="glyphicon glyphicon-globe">&nbsp;<f:message key="delivery.title"/></s:link></li>
+                                <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" class="glyphicon glyphicon-globe">&nbsp;<f:message key="courier.title"/></s:link></li>
+                                <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" class="glyphicon glyphicon-briefcase">&nbsp;<f:message key="deliveryItem.list.title"/></s:link></li>
+                                <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" class="glyphicon glyphicon-user">&nbsp;<f:message key="customer.list.title"/></s:link></li>
+                                <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.SecurityActionBean" event="logout"><i class="icon-off"></i> <f:message key="login.logout"/></s:link></li>
+                                </ul>
+                        </sec:authorize>
+
+                        <sec:authorize access="hasRole('ROLE_USER')">
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" class="glyphicon glyphicon-globe">&nbsp;<f:message key="delivery.title"/></s:link></li>
+                                <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" class="glyphicon glyphicon-briefcase">&nbsp;<f:message key="deliveryItem.list.title"/></s:link></li>
+                                <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.SecurityActionBean" event="logout"><i class="icon-off"></i> <f:message key="login.logout"/></s:link></li>
+                                </ul>
+                        </sec:authorize>
+
+                        <sec:authorize access="not isAuthenticated()">
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.SecurityActionBean" class="glyphicon glyphicon-user">&nbsp;<f:message key="login.title"/></s:link></li>
+                                </ul>
+                        </sec:authorize>
                     </div><!--/.nav-collapse -->
                 </div>
 
-                        <s:layout-component name="body"/>
-                 
+                <s:layout-component name="body"/>
+
             </div> <!-- /container -->
 
 
