@@ -30,9 +30,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String string) throws UsernameNotFoundException {
-        ShaPasswordEncoder spe = new ShaPasswordEncoder();
-        System.out.println(spe.encodePassword("rest", "rest"));
-        //
+
         CustomUserDetails d = new CustomUserDetails();
         if (string.equals(adminUsername)) {
             d.setIsAdmin(Boolean.TRUE);

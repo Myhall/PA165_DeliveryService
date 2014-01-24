@@ -18,7 +18,7 @@
         <param-value>StripesResources</param-value>
     </context-param>
    
-   <!-- Spring Security -->
+    <!-- Spring Security -->
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
@@ -77,6 +77,11 @@
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error/404.jsp</location>
+    </error-page>
 
     <servlet>
         <servlet-name>jersey-serlvet</servlet-name>

@@ -36,6 +36,12 @@
     
     <sec:http pattern="/resources/**" security="none" />
     
+    <sec:http auto-config="false" create-session="never" realm="REST service" pattern="/api/**">
+        <sec:intercept-url pattern="/**" access="ROLE_ADMIN" />
+        <sec:http-basic />
+        <sec:logout />
+    </sec:http>
+    
     <sec:http auto-config="true" use-expressions="true">
         <sec:intercept-url pattern="/static/**" access="permitAll" />
         <sec:intercept-url pattern="/j_spring_security_check" access="permitAll" />
@@ -45,7 +51,7 @@
         <sec:intercept-url pattern="/registration/form.jsp" access="permitAll" />
         <sec:intercept-url pattern="/**" access="hasAnyRole('ROLE_USER', 'ROLE_ADMIN')" />
 
-        <sec:form-login login-page="/security/login/" default-target-url="/customer/list/" authentication-failure-url="/security/login/?error=true"/>
+        <sec:form-login login-page="/security/login/" default-target-url="/delivery/list/" authentication-failure-url="/security/login/?error=true"/>
         <sec:logout logout-url="/security/logout/" />
     </sec:http>
     
