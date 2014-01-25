@@ -35,30 +35,26 @@
                         <a class="navbar-brand" href="${pageContext.request.contextPath}">Delivery service</a>
                     </div>
                     <div class="navbar-collapse collapse">
-                        <sec:authorize access="hasRole('ROLE_ADMIN')">
-
-                            <ul class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav navbar-right">
+                            <sec:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')">
                                 <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" class="glyphicon glyphicon-globe">&nbsp;<f:message key="delivery.title"/></s:link></li>
+                                </sec:authorize>
+
+                            <sec:authorize access="hasRole('ROLE_ADMIN')">
                                 <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CourierActionBean" class="glyphicon glyphicon-globe">&nbsp;<f:message key="courier.title"/></s:link></li>
                                 <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" class="glyphicon glyphicon-briefcase">&nbsp;<f:message key="deliveryItem.list.title"/></s:link></li>
                                 <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.CustomerActionBean" class="glyphicon glyphicon-user">&nbsp;<f:message key="customer.list.title"/></s:link></li>
-                                <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.SecurityActionBean" event="logout"><i class="icon-off"></i> <f:message key="login.logout"/></s:link></li>
-                                </ul>
-                        </sec:authorize>
+                                </sec:authorize>
+                                <sec:authorize access="hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')">
+                                <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.SecurityActionBean" event="logout" class="glyphicon glyphicon-log-out">&nbsp;<f:message key="login.logout"/>(${pageContext.request.userPrincipal.name})</s:link></li>
+                                </sec:authorize>
 
-                        <sec:authorize access="hasRole('ROLE_USER')">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" class="glyphicon glyphicon-globe">&nbsp;<f:message key="delivery.title"/></s:link></li>
-                                <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.SecurityActionBean" event="logout"><i class="icon-off"></i> <f:message key="login.logout"/></s:link></li>
-                            </ul>
-                        </sec:authorize>
+                            <sec:authorize access="not isAuthenticated()">
+                                <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.SecurityActionBean" class="glyphicon glyphicon-log-in">&nbsp;<f:message key="login.title"/></s:link></li>
+                                </sec:authorize>
 
-                        <sec:authorize access="not isAuthenticated()">
+                        </ul>
 
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.SecurityActionBean" class="glyphicon glyphicon-user">&nbsp;<f:message key="login.title"/></s:link></li>
-                                </ul>
-                        </sec:authorize>
                     </div><!--/.nav-collapse -->
                 </div>
 
