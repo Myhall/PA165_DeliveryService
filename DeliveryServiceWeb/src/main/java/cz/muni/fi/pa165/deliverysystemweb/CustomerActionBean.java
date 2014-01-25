@@ -34,16 +34,17 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
     private List<CustomerDTO> customerList;
     
     @ValidateNestedProperties(value = {
-        @Validate(on = {"add", "save"}, field = "firstName", required = true, minlength = 1, maxlength = 255),
-        @Validate(on = {"add", "save"}, field = "lastName", required = true, minlength = 1, maxlength = 255),
-        @Validate(on = {"add", "save"}, field = "email", required = true, converter = EmailTypeConverter.class)
+        @Validate(on = {"save", "update"}, field = "firstName", required = true, minlength = 1, maxlength = 255),
+        @Validate(on = {"save", "update"}, field = "lastName", required = true, minlength = 1, maxlength = 255),
+        @Validate(on = {"save", "update"}, field = "email", required = true, converter = EmailTypeConverter.class)
     })
     private CustomerDTO customerDTO;
     @ValidateNestedProperties(value = {
-        @Validate(on = {"save"}, field = "password", required = true, minlength = 3)
+        @Validate(on = {"save", "update"}, field = "username", required = true, minlength = 3, maxlength = 255),
+        @Validate(on = {"save", "update"}, field = "password", required = true, minlength = 3)
     })
     private UserDTO userDTO;
-    @Validate(on = {"save"}, field = "password2", required = true, minlength = 3)
+    @Validate(on = {"save", "update"}, field = "password2", required = true, minlength = 3, expression="this == userDTO.password")
     private String password2;
 
     @DefaultHandler
