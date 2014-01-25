@@ -12,7 +12,7 @@
 <s:layout-render name="/layout.jsp" titlekey="deliveryItem.list.title">
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" var="actionBean"/>
-
+        <s:messages />
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title"><f:message key="deliveryItem.list.allitems" /></h3>

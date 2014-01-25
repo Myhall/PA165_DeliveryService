@@ -12,11 +12,15 @@ import net.sourceforge.stripes.action.Before;
 import net.sourceforge.stripes.action.DefaultHandler;
 import net.sourceforge.stripes.action.ErrorResolution;
 import net.sourceforge.stripes.action.ForwardResolution;
+import net.sourceforge.stripes.action.LocalizableMessage;
 import net.sourceforge.stripes.action.RedirectResolution;
 import net.sourceforge.stripes.action.Resolution;
+import net.sourceforge.stripes.action.SimpleMessage;
 import net.sourceforge.stripes.action.UrlBinding;
 import net.sourceforge.stripes.controller.LifecycleStage;
 import net.sourceforge.stripes.integration.spring.SpringBean;
+import net.sourceforge.stripes.validation.LocalizableError;
+import net.sourceforge.stripes.validation.SimpleError;
 import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
@@ -76,7 +80,8 @@ public class DeliveryItemActionBean extends BaseActionBean implements Validation
             deliveryItem = deliveryItemService.findDeliveryItem(deliveryItem.getId());
             deliveryItemService.deleteDeliveryItem(deliveryItem);
         } catch (DataAccessException ex) {
-            return new ErrorResolution(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            getContext().getMessages().add(new LocalizableError("deliveryItem.cantdeletedependency", deliveryItem));
+            //return new ErrorResolution(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }
         return new RedirectResolution(this.getClass(), "list");
     }
