@@ -47,7 +47,7 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
     })
     private UserDTO userDTO;
     
-    @Validate(on = {"save", "update"}, required = true, minlength = 3, expression="this == userDTO.password")
+    @Validate(on = {"save", "update"}, required = true, minlength = 3)
     private String password2;
 
     @DefaultHandler
