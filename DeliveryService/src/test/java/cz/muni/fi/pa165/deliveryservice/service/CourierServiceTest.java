@@ -72,7 +72,7 @@ public class CourierServiceTest extends AbstractIntegrationTest {
     public void testDeleteCourier()
     {
         courierService.deleteCourier(courierDTO);
-        verify(dao).deleteCourier(courier);
+        verify(dao).updateCourier(courier);
     }
     
     @Test(expected = NullPointerException.class)
@@ -103,6 +103,6 @@ public class CourierServiceTest extends AbstractIntegrationTest {
     public void testGetAllCouriers()
     {
         courierService.getAllCouriers();
-        verify(dao).getAllCouriers();
+        verify(dao).getAllCouriers(true);
     }
 }

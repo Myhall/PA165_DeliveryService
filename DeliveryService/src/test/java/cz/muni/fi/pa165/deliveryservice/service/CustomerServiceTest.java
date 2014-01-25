@@ -83,7 +83,7 @@ public class CustomerServiceTest {
     @Test
     public void testDelteCustomer() {
         customerService.deleteCustomer(customerDto);
-        verify(customerDao).deleteCustomer(customer);
+        verify(customerDao).updateCustomer(customer);
     }
 
     @Test(expected = NullPointerException.class)
@@ -100,7 +100,7 @@ public class CustomerServiceTest {
     @Test
     public void testGetAllCustomers() {
         customerService.getAllCustomers();
-        verify(customerDao).getAllCustomers();
+        verify(customerDao).getAllCustomers(true);
     }
 
     @Test
