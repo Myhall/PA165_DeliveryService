@@ -52,7 +52,7 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
 
     @DefaultHandler
     public Resolution list() {
-            customerList = customerService.getAllCustomers(false);
+        customerList = customerService.getAllCustomers(false);
         return new ForwardResolution("/customer/list.jsp");
     }
 
@@ -91,7 +91,7 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
     }
 
     public Resolution save() {
-        if(userDTO.getPassword().equals(password2)) {
+        if (userDTO.getPassword().equals(password2)) {
             customerFacade.create(customerDTO, userDTO);
         }
         return new RedirectResolution(this.getClass(), "list");
@@ -107,7 +107,7 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
     @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "update"})
     public void loadCustomerFromDatabase() {
         String ids = getContext().getRequest().getParameter("customerDTO.id");
-        
+
         if (ids == null) {
             return;
         }
