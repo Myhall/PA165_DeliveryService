@@ -14,6 +14,10 @@ import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,12 +35,14 @@ public class DeliveryServiceImpl implements DeliveryService {
     private Mapper mapper;
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or "
-            + "(hasRole('ROLE_USER') and principal.customer.id == #delivery.customer.id)")
+            + "(hasRole('ROLE_USER'))")
     @Override
     public DeliveryDTO createDelivery(DeliveryDTO delivery) {
         if (delivery == null) {
             throw new NullPointerException("delivery");
         }
+        
+        delivery.setStatus(DeliveryStatus.CREATED);
 
         Delivery d = mapper.map(delivery, Delivery.class);
 
@@ -46,7 +52,7 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or "
-            + "(hasRole('ROLE_USER') and principal.customer.id == #delivery.customer.id ")
+            + "(hasRole('ROLE_USER') and principal.customer.id == #delivery.customer.id)")
     @Override
     public void deleteDelivery(DeliveryDTO delivery) {
         if (delivery == null) {
@@ -58,7 +64,7 @@ public class DeliveryServiceImpl implements DeliveryService {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or "
-            + "(hasRole('ROLE_USER') and principal.customer.id == #delivery.customer.id ")
+            + "(hasRole('ROLE_USER') and principal.customer.id == #delivery.customer.id)")
     @Override
     public DeliveryDTO updateDelivery(DeliveryDTO delivery) {
         if (delivery == null) {

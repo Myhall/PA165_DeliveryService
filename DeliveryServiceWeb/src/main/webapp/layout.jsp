@@ -47,12 +47,10 @@
                         </sec:authorize>
 
                         <sec:authorize access="hasRole('ROLE_USER')">
-
                             <ul class="nav navbar-nav navbar-right">
                                 <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryActionBean" class="glyphicon glyphicon-globe">&nbsp;<f:message key="delivery.title"/></s:link></li>
-                                <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.DeliveryItemActionBean" class="glyphicon glyphicon-briefcase">&nbsp;<f:message key="deliveryItem.list.title"/></s:link></li>
                                 <li><s:link beanclass="cz.muni.fi.pa165.deliverysystemweb.SecurityActionBean" event="logout"><i class="icon-off"></i> <f:message key="login.logout"/></s:link></li>
-                                </ul>
+                            </ul>
                         </sec:authorize>
 
                         <sec:authorize access="not isAuthenticated()">

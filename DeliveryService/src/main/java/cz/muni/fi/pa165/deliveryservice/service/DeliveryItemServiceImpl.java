@@ -55,7 +55,8 @@ public class DeliveryItemServiceImpl implements DeliveryItemService {
         deliveryItemDao.deleteDeliveryItem(deliveryItem);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or "
+            + "(hasRole('ROLE_USER'))")
     @Override
     public DeliveryItemDTO updateDeliveryItem(DeliveryItemDTO deliveryItemDTO) {
         if (deliveryItemDTO == null) {

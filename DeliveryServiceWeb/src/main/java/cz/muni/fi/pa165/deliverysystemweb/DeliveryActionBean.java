@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.deliverysystemweb;
 
+import cz.muni.fi.pa165.deliveryservice.Customer;
+import cz.muni.fi.pa165.deliveryservice.Delivery;
 import cz.muni.fi.pa165.deliveryservice.dto.CourierDTO;
 import cz.muni.fi.pa165.deliveryservice.dto.CustomerDTO;
 import cz.muni.fi.pa165.deliveryservice.dto.DeliveryDTO;
@@ -9,6 +11,7 @@ import cz.muni.fi.pa165.deliveryservice.service.CourierService;
 import cz.muni.fi.pa165.deliveryservice.service.CustomerService;
 import cz.muni.fi.pa165.deliveryservice.service.DeliveryItemService;
 import cz.muni.fi.pa165.deliveryservice.service.DeliveryService;
+import cz.muni.fi.pa165.deliverysystemweb.security.CustomUserDetails;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +30,10 @@ import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
 import net.sourceforge.stripes.validation.ValidationErrors;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
  *
@@ -55,7 +62,15 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
 
     @DefaultHandler
     public Resolution list() {
-        deliveries = deliveryService.getAllDeliveries();
+
+        CustomerDTO customer = getLoggedCustomer();
+        
+        if (customer != null) {
+            deliveries = deliveryService.getDeliveriesByCustomer(customer);
+        } else {
+            deliveries = deliveryService.getAllDeliveries();
+        }
+
         return new ForwardResolution("/delivery/list.jsp");
     }
 
@@ -70,6 +85,10 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
                     }
                 }
                 delivery.setItems(didtos);
+            }
+            CustomerDTO customer = getLoggedCustomer();
+            if(customer != null) {
+                delivery.setCustomer(customer);
             }
             deliveryService.createDelivery(delivery);
         } catch (DataAccessException ex) {
@@ -108,6 +127,31 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
         return new RedirectResolution(this.getClass(), "list");
     }
 
+    private CustomerDTO getLoggedCustomer() {
+        // get security context from thread local
+        SecurityContext context = SecurityContextHolder.getContext();
+        if (context == null) {
+            return null;
+        }
+
+        Authentication authentication = context.getAuthentication();
+        if (authentication == null) {
+            return null;
+        }
+
+        for (GrantedAuthority auth : authentication.getAuthorities()) {
+            if ("ROLE_USER".equals(auth.getAuthority())) {
+                CustomUserDetails cud = (CustomUserDetails) authentication.getPrincipal();
+                if (cud != null) {
+                    return cud.getCustomer();
+                }
+                
+            }
+        }
+
+        return null;
+    }
+
     public List<DeliveryDTO> getDeliveries() {
         return deliveries;
     }
@@ -123,7 +167,7 @@ public class DeliveryActionBean extends BaseActionBean implements ValidationErro
     public void setDelivery(DeliveryWrapper delivery) {
         this.delivery = delivery;
     }
-    
+
     public List<DeliveryItemDTO> getAllDeliveryItems() {
         return deliveryItemService.getAllDeliveryItems();
     }

@@ -22,14 +22,18 @@
                     <h3 class="panel-title"><f:message key="delivery.createMessage" /></h3>
                 </div>
                 <div class="panel-body" style="width:60%">
+                    
+                     
                     <s:errors/>
-                    <div class="form-group">
+                    <div class="form-group<sec:authorize access="hasRole('ROLE_USER')"> hide</sec:authorize>">
                         <label class="control-label" for="inputSuccess"><s:label name="delivery.customer"/></label>
                         <s:select name="delivery.customer.id" class="control-select" >
 
                             <s:options-collection collection="${actionBean.allCustomers}" value="id" label="email" />
                         </s:select>
                     </div>
+                        
+                        
                     <sec:authorize access="hasRole('ROLE_ADMIN')">
                         <div class="form-group">
                             <label class="control-label" for="inputSuccess"><s:label name="delivery.courier"/></label>
@@ -47,12 +51,16 @@
                         <label class="control-label" for="inputWarning"><s:label name="delivery.placeTo"/></label>
                         <s:text name="delivery.placeTo" class="form-control"/>
                     </div>
+                    <sec:authorize access="hasRole('ROLE_ADMIN')">
+                    
                     <div class="form-group">
                         <label class="control-label" for="inputWarning"><s:label name="delivery.status"/></label>
                         <s:select name="delivery.status" class="control-select" >
                             <s:options-collection collection="${actionBean.allStatuses}" />
                         </s:select>
                     </div>
+                    </sec:authorize>
+                        
                     <div class="form-group">
                         <label class="control-label" for="inputWarning"><s:label name="delivery.additionalInformation"/></label>
                         <s:text name="delivery.additionalInformation" class="form-control"/>
