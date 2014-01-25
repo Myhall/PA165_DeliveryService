@@ -19,6 +19,7 @@ import net.sourceforge.stripes.validation.Validate;
 import net.sourceforge.stripes.validation.ValidateNestedProperties;
 import net.sourceforge.stripes.validation.ValidationErrorHandler;
 import net.sourceforge.stripes.validation.ValidationErrors;
+import org.springframework.validation.annotation.Validated;
 
 /**
  *
@@ -38,15 +39,15 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
         @Validate(on = {"save", "update"}, field = "lastName", required = true, minlength = 1, maxlength = 255),
         @Validate(on = {"save", "update"}, field = "email", required = true, converter = EmailTypeConverter.class)
     })
-    
-    
     private CustomerDTO customerDTO;
+    
     @ValidateNestedProperties(value = {
         @Validate(on = {"save", "update"}, field = "username", required = true, minlength = 3, maxlength = 255),
         @Validate(on = {"save", "update"}, field = "password", required = true, minlength = 3)
     })
     private UserDTO userDTO;
-    @Validate(on = {"save", "update"}, field = "password2", required = true, minlength = 3, expression="this == userDTO.password")
+    
+    @Validate(on = {"save", "update"}, required = true, minlength = 3, expression="this == userDTO.password")
     private String password2;
 
     @DefaultHandler
