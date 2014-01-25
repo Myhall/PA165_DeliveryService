@@ -37,7 +37,7 @@ public class CourierResource {
     @GET
     @Produces(MediaType.APPLICATION_XML)
     public List<CourierDTO> getAllCouriers() {
-        return courierService.getAllCouriers();
+        return courierService.getAllCouriers(false);
     }
     
     @GET

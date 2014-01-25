@@ -31,7 +31,7 @@ public class CustomerResource {
     @GET
     @Produces(MediaType.APPLICATION_XML)
     public List<CustomerDTO> getAllCustomers() {
-        return customerService.getAllCustomers();
+        return customerService.getAllCustomers(false);
     }
     
     @GET
