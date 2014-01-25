@@ -48,13 +48,13 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
 
     @DefaultHandler
     public Resolution list() {
-            customerList = customerService.getAllCustomers();
+            customerList = customerService.getAllCustomers(false);
         return new ForwardResolution("/customer/list.jsp");
     }
 
     @Override
     public Resolution handleValidationErrors(ValidationErrors errors) throws Exception {
-        customerList = customerService.getAllCustomers();
+        customerList = customerService.getAllCustomers(false);
         return null;
     }
 

@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
         }
 
         User user = mapper.map(userDto, User.class);
-        userDao.remove(user);
+        userDao.update(user);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or " + "(hasRole('ROLE_USER') and principal.username == #userDto.username)")

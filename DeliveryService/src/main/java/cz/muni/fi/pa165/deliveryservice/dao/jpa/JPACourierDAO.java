@@ -7,7 +7,6 @@
 package cz.muni.fi.pa165.deliveryservice.dao.jpa;
 
 import cz.muni.fi.pa165.deliveryservice.Courier;
-import cz.muni.fi.pa165.deliveryservice.Customer;
 import cz.muni.fi.pa165.deliveryservice.User;
 import cz.muni.fi.pa165.deliveryservice.dao.CourierDAO;
 import java.util.List;
@@ -16,6 +15,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -72,12 +72,19 @@ public class JPACourierDAO implements CourierDAO {
     }
 
     @Override
-    public List<Courier> getAllCouriers() {
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Courier> query = cb.createQuery(Courier.class);
-        query.from(Courier.class);
-        return em.createQuery(query).getResultList();
+    public List<Courier> getAllCouriers(boolean include_deleted) {
+        String q = "";
+        if(!include_deleted) {
+            q = " WHERE c.active = true";
+        }
+        Query query = em.createQuery("SELECT c FROM Courier c" + q);
+        return query.getResultList();
     }
+    
+    @Override
+    public List<Courier> getAllCouriers() {
+        return getAllCouriers(true);
+    }   
 
     @Override
     public Courier findCourier(Long id) {

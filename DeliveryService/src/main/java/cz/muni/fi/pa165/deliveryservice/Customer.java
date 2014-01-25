@@ -28,6 +28,7 @@ public class Customer implements Serializable {
     private String telephoneNumber;
     private Long id;
     private User user;
+    private Boolean active;
 
     public Customer() {
     }
@@ -136,6 +137,14 @@ public class Customer implements Serializable {
         this.user = user;
     }
 
+    public Boolean isActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;

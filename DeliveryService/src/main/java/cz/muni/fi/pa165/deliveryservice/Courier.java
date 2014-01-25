@@ -24,6 +24,7 @@ public class Courier implements Serializable {
     private String email;
     private List<Delivery> deliveries;
     private User user;
+    private Boolean active;
 
     public Courier() {
     }
@@ -67,6 +68,14 @@ public class Courier implements Serializable {
         this.email = email;
     }
 
+    public Boolean isActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {

@@ -21,6 +21,8 @@ public interface CourierService {
     
     CourierDTO updateCourier(CourierDTO courier);
     
+    List<CourierDTO> getAllCouriers(boolean include_deleted);
+    
     List<CourierDTO> getAllCouriers();
     
     CourierDTO findCourier(Long id);

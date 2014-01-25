@@ -42,6 +42,13 @@ public interface CustomerService {
      * @return List<CustomerDTO> list of all customers
      */
     List<CustomerDTO> getAllCustomers();
+    
+    /**
+     * Returns list of all customers.
+     *
+     * @return List<CustomerDTO> list of all customers
+     */
+    List<CustomerDTO> getAllCustomers(boolean includeDeleted);
 
     /**
      * Returns customer with given id.

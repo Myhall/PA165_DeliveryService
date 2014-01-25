@@ -36,6 +36,13 @@ public interface CustomerDAO {
      * @return List<Customer> list of all customers.
      */
     List<Customer> getAllCustomers();
+    
+    /*
+     * Returns list of all customers.
+     * @return List<Customer> list of all customers.
+     */
+    List<Customer> getAllCustomers(boolean include_deleted);
+    
     /*
      * Returns specific customer by given id from database.
      * @param id Customer's id

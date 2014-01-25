@@ -61,11 +61,13 @@ public class JPACustomerDAO implements CustomerDAO {
     }
 
     @Override
-    public List<Customer> getAllCustomers() {
-        Query query = em.createQuery("SELECT c FROM Customer c");
-        List<Customer> results = query.getResultList();
-
-        return results;
+    public List<Customer> getAllCustomers(boolean include_deleted) {
+         String q = "";
+        if(!include_deleted) {
+            q = " WHERE c.active = true";
+        }
+        Query query = em.createQuery("SELECT c FROM Customer c" + q);
+        return query.getResultList();
     }
 
     @Override
@@ -93,5 +95,10 @@ public class JPACustomerDAO implements CustomerDAO {
 
         Customer customer = (Customer) query.getSingleResult();
         return customer;
+    }
+
+    @Override
+    public List<Customer> getAllCustomers() {
+        return getAllCustomers(true);
     }
 }

@@ -47,7 +47,7 @@ public class CourierActionBean extends BaseActionBean implements ValidationError
     @DefaultHandler
     public Resolution list() {
         try {
-            courierDTOs = courierService.getAllCouriers();
+            courierDTOs = courierService.getAllCouriers(false);
         } catch (DataAccessException ex) {
             return new ErrorResolution(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         }

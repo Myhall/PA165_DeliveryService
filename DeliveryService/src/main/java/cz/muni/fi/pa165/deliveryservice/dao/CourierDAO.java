@@ -37,6 +37,13 @@ public interface CourierDAO {
 
     /**
      * Get all existing couriers
+     * @param include_deleted
+     * @return list of all courier objects
+     */
+    List<Courier> getAllCouriers(boolean include_deleted);
+
+    /**
+     * Get all existing couriers
      * @return list of all courier objects
      */
     List<Courier> getAllCouriers();

@@ -39,6 +39,7 @@ public class CourierServiceImpl implements CourierService {
         }
 
         Courier courier = mapper.map(courierDto, Courier.class);
+        courier.setActive(Boolean.TRUE);
         courierDao.createCourier(courier);
         return mapper.map(courier, CourierDTO.class);
     }
@@ -51,7 +52,8 @@ public class CourierServiceImpl implements CourierService {
         }
 
         Courier courier = courierDao.findCourier(courierDto.getId());
-        courierDao.deleteCourier(courier);
+        courier.setActive(Boolean.FALSE);
+        courierDao.updateCourier(courier);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -81,12 +83,17 @@ public class CourierServiceImpl implements CourierService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<CourierDTO> getAllCouriers() {
+    public List<CourierDTO> getAllCouriers(boolean include_deleted) {
         List<CourierDTO> resultList = new ArrayList<>();
-        for (Courier courier : courierDao.getAllCouriers()) {
+        for (Courier courier : courierDao.getAllCouriers(include_deleted)) {
             resultList.add(mapper.map(courier, CourierDTO.class));
         }
         return resultList;
+    }
+    
+    @Override
+    public List<CourierDTO> getAllCouriers() {
+       return getAllCouriers(true);
     }
 
     @Transactional(readOnly = true)

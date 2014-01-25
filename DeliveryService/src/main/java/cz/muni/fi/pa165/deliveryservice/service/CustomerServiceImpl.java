@@ -41,6 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
             throw new NullPointerException("customerDto");
         }
         Customer customer = mapper.map(customerDto, Customer.class);
+        customer.setActive(Boolean.TRUE);
         customerDao.createCustomer(customer);
         return mapper.map(customer, CustomerDTO.class);
     }
@@ -56,7 +57,8 @@ public class CustomerServiceImpl implements CustomerService {
             throw new IllegalArgumentException("Unable to remove CustomerDTO with null ID");
         }
         Customer customer = mapper.map(customerDto, Customer.class);
-        customerDao.deleteCustomer(customer);
+        customer.setActive(Boolean.FALSE);
+        customerDao.updateCustomer(customer);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN') or "
@@ -92,9 +94,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<CustomerDTO> getAllCustomers() {
+    public List<CustomerDTO> getAllCustomers(boolean includeDeleted) {
         List<CustomerDTO> list = new ArrayList<>();
-        for (Customer customer : customerDao.getAllCustomers()) {
+        for (Customer customer : customerDao.getAllCustomers(includeDeleted)) {
             list.add(mapper.map(customer, CustomerDTO.class));
         }
         return list;
@@ -126,5 +128,10 @@ public class CustomerServiceImpl implements CustomerService {
         Customer customer = customerDao.findByUsername(username);
         CustomerDTO customerFromDB = mapper.map(customer, CustomerDTO.class);
         return customerFromDB;
+    }
+
+    @Override
+    public List<CustomerDTO> getAllCustomers() {
+        return getAllCustomers(true);
     }
 }
