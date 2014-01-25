@@ -38,6 +38,8 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
         @Validate(on = {"save", "update"}, field = "lastName", required = true, minlength = 1, maxlength = 255),
         @Validate(on = {"save", "update"}, field = "email", required = true, converter = EmailTypeConverter.class)
     })
+    
+    
     private CustomerDTO customerDTO;
     @ValidateNestedProperties(value = {
         @Validate(on = {"save", "update"}, field = "username", required = true, minlength = 3, maxlength = 255),
@@ -104,6 +106,7 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
     @Before(stages = LifecycleStage.BindingAndValidation, on = {"edit", "update"})
     public void loadCustomerFromDatabase() {
         String ids = getContext().getRequest().getParameter("customerDTO.id");
+        
         if (ids == null) {
             return;
         }
@@ -117,9 +120,7 @@ public class CustomerActionBean extends BaseActionBean implements ValidationErro
     }
 
     public Resolution update() {
-        if(userDTO.getPassword().equals(password2)) {
-            customerFacade.update(new CustomerUserDTO(customerDTO, userDTO));
-        }        
+        customerFacade.update(new CustomerUserDTO(customerDTO, userDTO));
         return new RedirectResolution(this.getClass(), "list");
     }
 
