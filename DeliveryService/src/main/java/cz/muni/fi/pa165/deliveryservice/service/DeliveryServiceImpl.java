@@ -83,7 +83,7 @@ public class DeliveryServiceImpl implements DeliveryService {
         return mapper.map(d, DeliveryDTO.class);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("isAuthenticated()")
     @Transactional(readOnly = true)
     @Override
     public List<DeliveryDTO> getAllDeliveries() {

@@ -10,7 +10,6 @@
 
     <s:layout-component name="body">
         <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.SecurityActionBean" var="actionBean"/>
-        <s:useActionBean beanclass="cz.muni.fi.pa165.deliverysystemweb.RegistrationActionBean" var="registrationActionBean"/>
         <c:if test="${not empty actionBean.error}">
             <div class="alert alert-danger">
                 <f:message key="login.error" />
